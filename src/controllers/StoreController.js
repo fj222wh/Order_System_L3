@@ -2,6 +2,7 @@
  * The store controller.
  *
  * @author Filippa Johansson
+ * @version 1.0.0
  */
 export class StoreController {
   /**

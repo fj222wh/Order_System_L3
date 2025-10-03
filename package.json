@@ -1,7 +1,7 @@
 {
-  "name": "assignment-b1-crud",
-  "version": "3.0.0",
-  "description": "1DV026 - B1 - CRUD",
+  "name": "order-system-l3",
+  "version": "1.0.0",
+  "description": "Order System L3 - 1dv610",
   "type": "module",
   "main": "src/server.js",
   "engines": {
@@ -14,20 +14,16 @@
     "lint:fix": "npx eslint ./src --fix || exit 0"
   },
   "contributors": [
-    "Johan Leitet <johan.leitet@lnu.se>",
-    "Mats Loock <mats.loock@lnu.se>",
     "Filippa Johansson <fj222wh@student.lnu.se>"
   ],
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "bcrypt": "^5.1.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.3",
     "helmet": "^8.0.0",
-    "highlight.js": "^11.11.1",
     "mongoose": "^8.0.4",
     "morgan": "^1.10.0"
   },
