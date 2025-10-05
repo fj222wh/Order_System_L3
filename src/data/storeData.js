@@ -7,3 +7,5 @@ import { productsData } from './productData.js'
 
 export const store = new Store('Foodie')
 productsData.forEach(product => store.addProductToCatalog(product))
+
+export const allProductsFromCatalog = store.getAllProductsFromCatalog()

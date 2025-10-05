@@ -174,4 +174,19 @@ export class Product {
   toString () {
     return `${this.#name}, ${this.#price}, ${this.#description}`
   }
+
+  /**
+   * Converts a Product instance into a plain object for JSON serialization.
+   *
+   * @returns {JSON} Returns JSON
+   */
+  toJSON () {
+    return {
+      name: this.#name,
+      id: this.#id,
+      price: this.#price,
+      description: this.#description,
+      category: this.#category
+    }
+  }
 }

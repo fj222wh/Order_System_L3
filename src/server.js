@@ -59,6 +59,7 @@ try {
     }
 
     res.locals.baseURL = baseURL
+
     next()
   })
 

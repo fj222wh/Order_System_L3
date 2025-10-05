@@ -1,45 +1,50 @@
 /**
- * Product data - could be from database, API, or static data
- * This file contains the raw product data
+ * Creates data
  */
 
 import { Product } from '../logic/Product.js'
 
 const productData = [
   {
-    name: 'iPhone 15 Pro',
-    price: 1199,
-    description: 'Latest iPhone with advanced camera system and A17 Pro chip'
+    name: 'Classic Milk Tea',
+    price: 4.5,
+    description: 'Traditional black tea with creamy milk and tapioca pearls',
+    category: 'drink'
   },
   {
-    name: 'Samsung Galaxy S24',
-    price: 899,
-    description: 'Premium Android phone with AI-powered features'
+    name: 'Taro Milk Tea',
+    price: 5.0,
+    description: 'Sweet taro-flavored milk tea with chewy boba',
+    category: 'drink'
   },
   {
-    name: 'MacBook Air M3',
-    price: 1299,
-    description: 'Ultra-thin laptop with M3 chip and all-day battery life'
+    name: 'Matcha Latte',
+    price: 5.5,
+    description: 'Rich matcha green tea with milk and optional pearls',
+    category: 'drink'
   },
   {
-    name: 'AirPods Pro',
-    price: 249,
-    description: 'Wireless earbuds with active noise cancellation'
+    name: 'Brown Sugar Boba Milk',
+    price: 6.0,
+    description: 'Caramelized brown sugar syrup with fresh milk and boba',
+    category: 'drink'
   },
   {
-    name: 'iPad Pro 12.9"',
-    price: 1099,
-    description: 'Professional tablet with M2 chip and Liquid Retina display'
+    name: 'Mango Smoothie',
+    price: 5.0,
+    description: 'Refreshing mango smoothie with fruit jelly',
+    category: 'drink'
   },
   {
-    name: 'Apple Watch Series 9',
-    price: 399,
-    description: 'Advanced smartwatch with health monitoring features'
+    name: 'Strawberry Yogurt Tea',
+    price: 5.5,
+    description: 'Strawberry-flavored tea with creamy yogurt topping',
+    category: 'drink'
   }
 ]
 
 export const productsData = []
 productData.forEach(product => {
-  const newProduct = new Product(product.name, product.price, product.description)
+  const newProduct = new Product(product.name, product.price, product.description, product.category)
   productsData.push(newProduct)
 })

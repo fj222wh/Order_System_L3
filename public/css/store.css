@@ -1,0 +1,69 @@
+#storeWrapper {
+    display: flex;
+}
+
+#productsContainer {
+    border: 5px solid black;
+    background-color: rgb(116, 133, 133);
+    width: 80%;
+    margin: auto;
+    height: 80vh;
+    display: grid;
+    grid-template-columns: repeat(5, 100px);
+    grid-template-rows: repeat(10, 100px);
+    gap: 10px;
+    padding: 10px;
+    overflow: scroll;
+}
+
+#orderContainer {
+    height: 80vh;
+    border: solid 5px red;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#orderTotal {
+    background-color: rgb(185, 237, 154);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#orderButtons {
+    background-color: blueviolet;
+    display: flex;
+}
+
+#orderButtons button {
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#orderDisplay {
+    border: solid pink 2px;
+}
+
+.product {
+    padding: 10px;
+    background-color: rgb(209, 230, 145);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.product:hover {
+    background-color: rgb(144, 144, 233);
+}
+
+.orderItem {
+    display: flex;
+    gap: 20px;
+    background-color: aqua;
+    margin: 10px;
+    padding: 10px;
+    justify-content: space-evenly;
+}
