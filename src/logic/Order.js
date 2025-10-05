@@ -4,6 +4,7 @@
 
 import { Product } from './Product.js'
 import { Invoice } from './Invoice.js'
+import { order } from '../data/storeData.js'
 
 /**
  *
@@ -230,5 +231,28 @@ export class Order {
   createInvoice (name, email, currency) {
     const invoice = new Invoice(this, name, email, currency)
     return invoice.createInvoice()
+  }
+
+  /**
+   * Returns the object into JSON.
+   *
+   * @returns {JSON} JSON Data
+   */
+  toJSON () {
+    const orderData = []
+
+    this.#orderItemsInCart.forEach(orderItem => {
+      const data = {
+        name: orderItem.product.getName(),
+        price: orderItem.product.getPrice(),
+        id: orderItem.product.getID(),
+        quantity: orderItem.quantity
+
+      }
+
+      orderData.push(data)
+    })
+
+    return orderData
   }
 }

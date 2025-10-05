@@ -65,6 +65,12 @@
     height: fit-content;
 }
 
+#orderContainerBtns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .product {
     padding: 10px;
     background-color: rgb(209, 230, 145);

@@ -14,7 +14,10 @@ export class ApiController {
    * @param res
    */
   getProducts (req, res) {
-    res.json(allProductsFromCatalog)
+    res.json({
+      products: allProductsFromCatalog,
+      orderNumber: order.getOrderNumber()
+    })
   }
 
   /**
@@ -37,8 +40,11 @@ export class ApiController {
     }
 
     const data = {
-      orderTotalPrice: order.calculateTotalPrice()
+      orderTotalPrice: order.calculateTotalPrice(),
+      orderItems: order.toJSON()
     }
+
+    console.log(data)
     res.json(data)
   }
 

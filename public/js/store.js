@@ -4,21 +4,27 @@
  * @author Filippa Johansson
  */
 
+// TODO: Organize the functions
+// TODO: Create classes. SOC
+
 const productsContainer = document.querySelector('#productsContainer')
 const orderContainer = document.querySelector('#orderContainer')
 const orderDisplay = document.querySelector('#orderDisplay')
 const orderTotalPriceDisplay = document.querySelector('#orderTotalPrice')
 
-console.log('Hi from the store.script')
+// console.log('Hi from the store.script')
 
 /**
  * Fetches data from the backend.
  */
-async function loadProducts () {
+async function start () {
   const res = await fetch('/api/products')
   const data = await res.json()
   console.log(data)
-  renderProducts(data)
+  renderProducts(data.products)
+
+  console.log(data.orderNumber)
+  updateOrderNumber(data.orderNumber)
 }
 
 /**
@@ -46,11 +52,46 @@ function renderProducts (products) {
 /**
  *
  * @param data
+ * @param orderItems
  */
-function updateCart (data) {
-  const orderItem = document.createElement('div')
-  orderItem.classList.add('orderItem')
-  orderDisplay.appendChild(orderItem)
+function updateCart (orderItems) {
+  clearOrderDisplay()
+  console.log(orderItems)
+
+  orderItems.forEach(orderItem => {
+    const orderItemElement = document.createElement('div')
+    orderItemElement.classList.add('orderItem')
+    const productName = document.createElement('p')
+    productName.textContent = orderItem.name
+    const productPrice = document.createElement('p')
+    productPrice.textContent = orderItem.price
+    const productQuantity = document.createElement('p')
+    productQuantity.textContent = orderItem.quantity
+
+    orderItemElement.appendChild(productName)
+    orderItemElement.appendChild(productPrice)
+    orderItemElement.appendChild(productQuantity)
+    orderDisplay.appendChild(orderItemElement)
+  })
+}
+
+/**
+ *
+ * @param orderNumber
+ */
+function updateOrderNumber (orderNumber) {
+  const orderNumber = document.querySelector('#orderNumber')
+orderNumber.textContent = orderNumber
+}
+
+/**
+ *
+ */
+function clearOrderDisplay () {
+  const parent = document.getElementById('orderDisplay')
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild)
+  }
 }
 
 /**
@@ -67,7 +108,7 @@ async function addProductToOrder (product) {
 
   const data = await res.json()
   console.log('addProductToOrder response from the server:', data)
-  updateCart(data)
+  updateCart(data.orderItems)
   updateTotalPrice(data.orderTotalPrice)
 }
 
@@ -92,7 +133,7 @@ function updateTotalPrice (newPrice) {
   orderTotalPriceDisplay.textContent = newPrice
 }
 
-loadProducts()
+start()
 
 productsContainer.addEventListener('click', (e) => {
   const productElement = e.target.closest('.product')
