@@ -18,11 +18,15 @@
 
 #orderContainer {
     height: 80vh;
+    overflow: hidden;
+    max-height: 80vh;
     border: solid 5px red;
     width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    /* allow flex children to shrink so inner scroll works */
+    min-height: 0;
 }
 
 #orderTotalContainer {
@@ -30,6 +34,7 @@
     padding: 10px;
     display: flex;
     justify-content: space-between;
+    height: 100%;
 }
 
 #orderButtons {
@@ -43,8 +48,21 @@
     cursor: pointer;
 }
 
+#orderContainer > div:first-child {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
 #orderDisplay {
+    flex: 1 1 auto;
     border: solid pink 2px;
+    overflow: scroll;
+}
+
+#orderTotalContainer {
+    height: fit-content;
 }
 
 .product {

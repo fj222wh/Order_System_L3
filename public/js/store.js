@@ -7,7 +7,7 @@
 const productsContainer = document.querySelector('#productsContainer')
 const orderContainer = document.querySelector('#orderContainer')
 const orderDisplay = document.querySelector('#orderDisplay')
-const orderTotalDisplay = document.querySelector('#orderTotal')
+const orderTotalPriceDisplay = document.querySelector('#orderTotalPrice')
 
 console.log('Hi from the store.script')
 
@@ -89,7 +89,7 @@ function createProductObject (productElement) {
  */
 function updateTotalPrice (newPrice) {
   console.log('setting new price')
-  orderTotalDisplay.textContent = newPrice
+  orderTotalPriceDisplay.textContent = newPrice
 }
 
 loadProducts()

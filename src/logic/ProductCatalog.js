@@ -94,4 +94,16 @@ export class ProductCatalog {
       return product.getCategory() === category.toLowerCase()
     })
   }
+
+  /**
+   *
+   */
+  toJSON () {
+    const jsonFormat = []
+    this.#catalog.forEach(product => {
+      jsonFormat.push(product.toJSON())
+    })
+
+    return jsonFormat
+  }
 }
