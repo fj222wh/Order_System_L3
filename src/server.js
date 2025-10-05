@@ -39,6 +39,8 @@ try {
   app.set('layout', join(directoryFullName, 'views', 'layouts', 'default'))
 
   app.use(express.urlencoded({ extended: false }))
+  // Parse JSON bodies sent by fetch()/XHR
+  app.use(express.json())
 
   // Serve the static files
   app.use(express.static(join(directoryFullName, '..', 'public')))
