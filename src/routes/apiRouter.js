@@ -11,6 +11,6 @@ import { ApiController } from '../controllers/ApiController.js'
 export const router = express.Router()
 const controller = new ApiController()
 
-router.get('/products', (req, res) => controller.getProducts(req, res))
-router.get('/add/:id', (req, res) => controller.addProduct(req, res))
-router.post('/add', (req, res) => controller.addProductPost(req, res))
+router.get('/products', (req, res) => controller.getData(req, res))
+router.post('/order/add', (req, res) => controller.addProductPost(req, res))
+router.put('/order/empty', (req, res) => controller.emptyCartPut(req, res))

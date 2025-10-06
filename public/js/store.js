@@ -6,13 +6,14 @@
 
 // TODO: Organize the functions
 // TODO: Create classes. SOC
+// TODO: I should only be able to update if the order has any orderitems, children in orderDisplay else should it not send a req to the server.
 
 const productsContainer = document.querySelector('#productsContainer')
-const orderContainer = document.querySelector('#orderContainer')
+// const orderContainer = document.querySelector('#orderContainer')
 const orderDisplay = document.querySelector('#orderDisplay')
 const orderTotalPriceDisplay = document.querySelector('#orderTotalPrice')
-
-// console.log('Hi from the store.script')
+const orderNumber = document.querySelector('#orderNumber')
+const resetOrderBtn = document.querySelector('#resetButton')
 
 /**
  * Fetches data from the backend.
@@ -50,57 +51,69 @@ function renderProducts (products) {
 }
 
 /**
+ * Updates the displayed orderItems in cart.
  *
- * @param data
- * @param orderItems
+ * @param {Array} orderItems An array containing all order items.
  */
 function updateCart (orderItems) {
   clearOrderDisplay()
   console.log(orderItems)
 
   orderItems.forEach(orderItem => {
-    const orderItemElement = document.createElement('div')
-    orderItemElement.classList.add('orderItem')
-    const productName = document.createElement('p')
-    productName.textContent = orderItem.name
-    const productPrice = document.createElement('p')
-    productPrice.textContent = orderItem.price
-    const productQuantity = document.createElement('p')
-    productQuantity.textContent = orderItem.quantity
-
-    orderItemElement.appendChild(productName)
-    orderItemElement.appendChild(productPrice)
-    orderItemElement.appendChild(productQuantity)
+    const orderItemElement = createOrderItem(orderItem)
     orderDisplay.appendChild(orderItemElement)
   })
 }
 
 /**
+ * Creates the order item HTML-element.
  *
- * @param orderNumber
+ * @param {object } orderItem Information about the order item
+ * @returns {HTMLElement} Returns the HTML-element for the orderItem
  */
-function updateOrderNumber (orderNumber) {
-  const orderNumber = document.querySelector('#orderNumber')
-orderNumber.textContent = orderNumber
+function createOrderItem (orderItem) {
+  const orderItemElement = document.createElement('div')
+  orderItemElement.classList.add('orderItem')
+  const productName = document.createElement('p')
+  productName.textContent = orderItem.name
+  const productPrice = document.createElement('p')
+  productPrice.textContent = orderItem.price
+  const productQuantity = document.createElement('p')
+  productQuantity.textContent = orderItem.quantity
+
+  orderItemElement.appendChild(productName)
+  orderItemElement.appendChild(productPrice)
+  orderItemElement.appendChild(productQuantity)
+
+  return orderItemElement
 }
 
 /**
+ * Updates the order number.
  *
+ * @param {number} number The order number.
+ */
+function updateOrderNumber (number) {
+  orderNumber.textContent = '#' + number
+}
+
+/**
+ * Clear the order display.
  */
 function clearOrderDisplay () {
-  const parent = document.getElementById('orderDisplay')
+  const parent = document.querySelector('#orderDisplay')
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild)
   }
 }
 
 /**
+ * Adds product to order.
  *
- * @param id
- * @param product
+ * @param {object} product The product and its information
  */
 async function addProductToOrder (product) {
-  const res = await fetch('/api/add', {
+  const res = await fetch('/api/order/add', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(product)
@@ -113,8 +126,10 @@ async function addProductToOrder (product) {
 }
 
 /**
+ * Creates the object.
  *
- * @param productElement
+ * @param {HTMLElement } productElement The element for the product
+ * @returns {object} Returns an object with information about the product
  */
 function createProductObject (productElement) {
   return {
@@ -125,11 +140,11 @@ function createProductObject (productElement) {
 }
 
 /**
+ * Updates the new price.
  *
- * @param newPrice
+ * @param {number} newPrice - New Price
  */
 function updateTotalPrice (newPrice) {
-  console.log('setting new price')
   orderTotalPriceDisplay.textContent = newPrice
 }
 
@@ -140,8 +155,24 @@ productsContainer.addEventListener('click', (e) => {
   if (productElement) {
     console.log(productElement)
 
-    // Fix the object, send it to the add product order
     const product = createProductObject(productElement)
     addProductToOrder(product)
   }
 })
+
+resetOrderBtn.addEventListener('click', () => {
+  emptyCart()
+  clearOrderDisplay()
+  updateTotalPrice(0)
+})
+
+/**
+ * Empties the cart.
+ */
+async function emptyCart () {
+  await fetch('/api/order/empty', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: 'Empty cart' })
+  })
+}

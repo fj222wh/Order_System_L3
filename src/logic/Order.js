@@ -4,7 +4,6 @@
 
 import { Product } from './Product.js'
 import { Invoice } from './Invoice.js'
-import { order } from '../data/storeData.js'
 
 /**
  *
@@ -205,6 +204,10 @@ export class Order {
    */
   calculateTotalPrice () {
     let totalPrice = 0
+
+    if (this.#orderItemsInCart.length === 0) {
+      return 0
+    }
 
     this.#orderItemsInCart.forEach((orderItem) => {
       totalPrice += orderItem.product.getPrice() * orderItem.quantity

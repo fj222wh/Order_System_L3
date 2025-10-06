@@ -9,11 +9,12 @@ import { allProductsFromCatalog, order } from '../data/storeData.js'
  */
 export class ApiController {
   /**
+   * Returns information about products and totalPrice.
    *
-   * @param req
-   * @param res
+   * @param {object} req The request object.
+   * @param {object} res The response object.
    */
-  getProducts (req, res) {
+  getData (req, res) {
     res.json({
       products: allProductsFromCatalog,
       orderNumber: order.getOrderNumber()
@@ -21,10 +22,10 @@ export class ApiController {
   }
 
   /**
-   * Handle POST /add - expects JSON body with product information.
+   * Adds a product to the order.
    *
-   * @param {object} req - Express request
-   * @param {object} res - Express response
+   * @param {object} req The request object.
+   * @param {object} res The response object.
    */
   addProductPost (req, res) {
     const body = req.body
@@ -49,4 +50,15 @@ export class ApiController {
   }
 
   // TODO: Add function to update products? Send that data...we need it for add, delete, update quantity etc...
+
+  /**
+   * Empty cart.
+   *
+   * @param {object} req The request object.
+   * @param {object} res The response object.
+   */
+  emptyCartPut (req, res) {
+    order.clearCart()
+    res.json('EMPTY CART')
+  }
 }

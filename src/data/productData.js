@@ -1,5 +1,5 @@
 /**
- * Creates data
+ * Creates data for the
  */
 
 import { Product } from '../logic/Product.js'
@@ -39,6 +39,12 @@ const productData = [
     name: 'Strawberry Yogurt Tea',
     price: 5.5,
     description: 'Strawberry-flavored tea with creamy yogurt topping',
+    category: 'drink'
+  },
+  {
+    name: 'Caramel Bubble Deluxe',
+    price: 7.5,
+    description: 'Caramel-flavored tea with creamy yogurt topping',
     category: 'drink'
   }
 ]

@@ -96,7 +96,9 @@ export class ProductCatalog {
   }
 
   /**
+   * Converts the products catalog as information in JSON.
    *
+   * @returns {JSON} The data about the products
    */
   toJSON () {
     const jsonFormat = []

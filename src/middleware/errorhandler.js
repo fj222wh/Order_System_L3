@@ -36,6 +36,7 @@ export function errorHandler (err, req, res, next) {
   }
 
   // If we are in development we want to show the error.
+  console.error(err)
   res
     .status(err.status || 500)
     .render('errors/error', { error: err })
