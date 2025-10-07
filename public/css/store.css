@@ -8,8 +8,18 @@
     padding: 0;
 }
 
-#categoryContainer {
+#categoryList {
     padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: auto;
+}
+
+#categoryList button {
+    padding: 20px;
+    border-radius: 10px;
+    border: none;
 }
 
 #resetButton img {

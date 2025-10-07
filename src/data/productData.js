@@ -27,7 +27,7 @@ const productData = [
     name: 'Brown Sugar Boba Milk',
     price: 6.0,
     description: 'Caramelized brown sugar syrup with fresh milk and boba',
-    category: 'drink'
+    category: 'food'
   },
   {
     name: 'Mango Smoothie',

@@ -19,7 +19,8 @@ export class ApiController {
       products: allProductsFromCatalog,
       orderNumber: order.getOrderNumber(),
       orderTotalPrice: order.calculateTotalPrice(),
-      orderItems: order.toJSON()
+      orderItems: order.toJSON(),
+      categories: allProductsFromCatalog.getCategories()
     })
   }
 

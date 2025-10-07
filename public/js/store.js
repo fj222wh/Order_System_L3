@@ -16,6 +16,7 @@ const orderNumber = document.querySelector('#orderNumber')
 const resetOrderBtn = document.querySelector('#resetButton')
 const createInvoiceBtn = document.querySelector('#createInvoiceBtn')
 const payBtn = document.querySelector('#payBtn')
+const categoryList = document.querySelector('#categoryList')
 
 /**
  * Fetches data from the backend.
@@ -28,8 +29,20 @@ async function start () {
   updateCart(data.orderItems)
   updateOrderNumber(data.orderNumber)
   updateTotalPrice(data.orderTotalPrice)
+  renderCategories(data.categories)
 }
 
+/**
+ *
+ * @param categories
+ */
+function renderCategories (categories) {
+  categories.forEach(category => {
+    const categoryBtn = document.createElement('button')
+    categoryBtn.textContent = category.charAt(0).toUpperCase() + category.split('').slice(1).join('')
+    categoryList.appendChild(categoryBtn)
+  })
+}
 /**
  * Renders the products.
  *
