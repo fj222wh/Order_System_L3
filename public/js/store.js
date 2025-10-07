@@ -75,6 +75,11 @@ function updateCart (orderItems) {
  */
 function createOrderItem (orderItem) {
   const orderItemElement = document.createElement('div')
+  orderItemElement.setAttribute('data-name', orderItem.name)
+  orderItemElement.setAttribute('data-id', orderItem.id)
+  orderItemElement.setAttribute('data-price', orderItem.price)
+  orderItemElement.setAttribute('data-quantity', orderItem.quantity)
+
   orderItemElement.classList.add('orderItem')
   const productName = document.createElement('p')
   productName.classList.add('orderItem-product-name')
