@@ -121,6 +121,7 @@ function updateCart (orderItems) {
   orderItems.forEach(orderItem => {
     const orderItemElement = createOrderItem(orderItem)
     orderDisplay.appendChild(orderItemElement)
+    orderDisplay.scrollTop = orderDisplay.scrollHeight
     orderItemElement.addEventListener('click', (e) => {
       // TODO: Kontrollera om det är edit knappen...,
       // om dedt är delete/uppdatera antal
@@ -216,9 +217,9 @@ async function addProductToOrder (product) {
   })
 
   const data = await res.json()
-  console.log('addProductToOrder response from the server:', data)
+  // console.log('addProductToOrder response from the server:', data)
   updateCart(data.orderItems)
-  updateTotalPrice(data.orderTotalPrice)
+  updateTotalPrice(data.orderTotalPrice.toFixed(2))
 }
 
 /**
