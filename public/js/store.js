@@ -64,9 +64,33 @@ function updateCart (orderItems) {
   orderItems.forEach(orderItem => {
     const orderItemElement = createOrderItem(orderItem)
     orderDisplay.appendChild(orderItemElement)
+    orderItemElement.addEventListener('click', (e) => {
+      // TODO: Kontrollera om det är edit knappen...,
+      // om dedt är delete/uppdatera antal
+    })
   })
 }
 
+/**
+ *
+ */
+function displayEditOptions () {
+  // TODO: Display the dit box
+}
+
+/**
+ *
+ */
+function deleteOrderItem () {
+  // TODO: Delete a specific orderItem
+}
+
+/**
+ *
+ */
+function updateQuantity () {
+  // TODO: Update the quantity
+}
 /**
  * Creates the order item HTML-element.
  *
@@ -90,10 +114,15 @@ function createOrderItem (orderItem) {
   const productQuantity = document.createElement('p')
   productQuantity.classList.add('orderItem-product-quantity')
   productQuantity.textContent = 'x' + orderItem.quantity
+  const editIcon = document.createElement('img')
+  editIcon.setAttribute('alt', 'Edit icon')
+  editIcon.setAttribute('src', '/assets/order_icons/orderItem-options.png')
+  editIcon.classList.add('orderItem-edit-icon')
 
   orderItemElement.appendChild(productName)
   orderItemElement.appendChild(productPrice)
   orderItemElement.appendChild(productQuantity)
+  orderItemElement.appendChild(editIcon)
 
   return orderItemElement
 }
@@ -104,7 +133,7 @@ function createOrderItem (orderItem) {
  * @param {number} number The order number.
  */
 function updateOrderNumber (number) {
-  orderNumber.textContent = '#' + number
+  orderNumber.textContent = 'Order number: #' + number
 }
 
 /**

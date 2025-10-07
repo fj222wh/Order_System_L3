@@ -8,6 +8,25 @@
     padding: 0;
 }
 
+#categoryContainer {
+    padding: 30px;
+}
+
+#resetButton img {
+    max-width: 20px;
+    border: 0;
+    display: block;
+}
+
+#resetButton {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+    cursor: pointer;
+}
+
 
 #storeWrapper {
     display: flex;
@@ -17,7 +36,6 @@
 
 #productsContainer {
     flex: 3;
-
     background-color: rgb(243, 243, 243);
     height: 100%;
     width: 100%;
@@ -55,6 +73,7 @@
 
 #orderButtons {
     display: flex;
+    gap: 0.5px;
 }
 
 #orderButtons button {
@@ -112,11 +131,12 @@
 
 .orderItem {
     display: flex;
-    background-color: rgb(243, 243, 243);
+    background-color: rgb(246, 246, 246);
     margin: 10px;
-    padding: 10px;
+    padding: 20px;
     justify-content: space-between;
     cursor: pointer;
+    border-radius: 10px;
 }
 
 .orderItem-product-name {
@@ -133,4 +153,9 @@
 .orderItem-product-quantity {
     width: 10%;
 
+}
+
+.orderItem-edit-icon {
+    height: 15px;
+    width: 15px;
 }

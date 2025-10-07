@@ -96,6 +96,20 @@ export class ProductCatalog {
   }
 
   /**
+   * Returns all categories from the product catalog.
+   *
+   * @returns {Array} Returns an array with all the categories.
+   */
+  getCategories () {
+    const categories = new Set()
+    this.#catalog.forEach(product => {
+      categories.add(product.getCategory())
+    })
+
+    return Array.from(categories)
+  }
+
+  /**
    * Converts the products catalog as information in JSON.
    *
    * @returns {JSON} The data about the products
