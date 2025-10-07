@@ -64,4 +64,16 @@ export class ApiController {
     order.clearCart()
     res.json('EMPTY CART')
   }
+
+  /**
+   *
+   * @param req
+   * @param res
+   */
+  getProductsFromCategory (req, res) {
+    const category = req.params.category
+    const productsFromCategory = allProductsFromCatalog.getProductsFromCategory(category)
+
+    res.json(productsFromCategory)
+  }
 }

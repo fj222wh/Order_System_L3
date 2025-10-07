@@ -17,6 +17,7 @@ const resetOrderBtn = document.querySelector('#resetButton')
 const createInvoiceBtn = document.querySelector('#createInvoiceBtn')
 const payBtn = document.querySelector('#payBtn')
 const categoryList = document.querySelector('#categoryList')
+const categoryBtnAll = document.querySelector('#category-all')
 
 /**
  * Fetches data from the backend.
@@ -29,19 +30,60 @@ async function start () {
   updateCart(data.orderItems)
   updateOrderNumber(data.orderNumber)
   updateTotalPrice(data.orderTotalPrice)
-  renderCategories(data.categories)
+  createAndRenderCateories(data.categories)
 }
 
+/**
+ * Returns the data for all products, categories etc.
+ */
+async function getCurrentData () {
+  const res = await fetch('/api/products')
+  const data = await res.json()
+
+  return await data
+}
 /**
  *
  * @param categories
  */
-function renderCategories (categories) {
+function createAndRenderCateories (categories) {
   categories.forEach(category => {
     const categoryBtn = document.createElement('button')
     categoryBtn.textContent = category.charAt(0).toUpperCase() + category.split('').slice(1).join('')
+    categoryBtn.setAttribute('data-category', category)
+
+    categoryBtn.addEventListener('click', (e) => {
+      console.log('Yoou chose this category: ' + e.target.getAttribute('data-category'))
+      selectCategory(category)
+    })
+
     categoryList.appendChild(categoryBtn)
   })
+}
+
+/**
+ *
+ * @param category
+ */
+async function selectCategory (category) {
+  const res = await fetch(`/api/products/${encodeURIComponent(category)}`)
+  const data = await res.json()
+  console.log('THIS IS THE DATA FROM SELECTED CATEGORY_ ' + category)
+  console.log(data)
+  console.log('DET ÄR EN ARRAY?')
+  console.log(Array.isArray(data))
+  // TODO: MAKEA FETCH TO THE SERVER ASK FOR PRODUCTS FROM A CHOSE CATEGORY
+  clearDisplayedProducts()
+  renderProducts(data)
+}
+
+/**
+ *
+ */
+function clearDisplayedProducts () {
+  while (productsContainer.firstChild) {
+    productsContainer.removeChild(productsContainer.firstChild)
+  }
 }
 /**
  * Renders the products.
@@ -49,6 +91,8 @@ function renderCategories (categories) {
  * @param {object}products The products
  */
 function renderProducts (products) {
+  console.log('THIS ARE PRODUCTS WE GOT IN RENDER PRODUCTS')
+  console.log(products)
   products.forEach(product => {
     const productDiv = document.createElement('div')
     productDiv.setAttribute('data-id', product.id)
@@ -239,5 +283,11 @@ createInvoiceBtn.addEventListener('click', (e) => {
 
 payBtn.addEventListener('click', (e) => {
   alert('Pay function not implemented')
+})
+
+categoryBtnAll.addEventListener('click', async (e) => {
+  const data = await getCurrentData()
+  clearDisplayedProducts()
+  renderProducts(await data.products)
 })
 start()
