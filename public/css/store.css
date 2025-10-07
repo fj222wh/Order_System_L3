@@ -177,3 +177,7 @@
     height: 15px;
     width: 15px;
 }
+
+.selectedCategory {
+    background-color: rgb(219, 236, 203) !important;
+}

@@ -15,8 +15,10 @@ export class ApiController {
    * @param {object} res The response object.
    */
   getData (req, res) {
+    const firstCategory = allProductsFromCatalog.getCategories()[0]
     res.json({
-      products: allProductsFromCatalog,
+      // products: allProductsFromCatalog,
+      products: allProductsFromCatalog.getProductsFromCategory(firstCategory),
       orderNumber: order.getOrderNumber(),
       orderTotalPrice: order.calculateTotalPrice(),
       orderItems: order.toJSON(),

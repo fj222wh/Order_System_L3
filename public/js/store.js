@@ -17,14 +17,12 @@ const resetOrderBtn = document.querySelector('#resetButton')
 const createInvoiceBtn = document.querySelector('#createInvoiceBtn')
 const payBtn = document.querySelector('#payBtn')
 const categoryList = document.querySelector('#categoryList')
-const categoryBtnAll = document.querySelector('#category-all')
 
 /**
  * Fetches data from the backend.
  */
 async function start () {
-  const res = await fetch('/api/products')
-  const data = await res.json()
+  const data = await getCurrentData()
 
   renderProducts(data.products)
   updateCart(data.orderItems)
@@ -39,7 +37,6 @@ async function start () {
 async function getCurrentData () {
   const res = await fetch('/api/products')
   const data = await res.json()
-
   return await data
 }
 /**
@@ -47,18 +44,35 @@ async function getCurrentData () {
  * @param categories
  */
 function createAndRenderCateories (categories) {
-  categories.forEach(category => {
+  categories.forEach((category, index) => {
     const categoryBtn = document.createElement('button')
     categoryBtn.textContent = category.charAt(0).toUpperCase() + category.split('').slice(1).join('')
     categoryBtn.setAttribute('data-category', category)
+    categoryBtn.classList.add('categoryBtn')
 
     categoryBtn.addEventListener('click', (e) => {
       console.log('Yoou chose this category: ' + e.target.getAttribute('data-category'))
+      updateCategoryStatus(e.target)
       selectCategory(category)
     })
 
     categoryList.appendChild(categoryBtn)
+
+    if (index === 0) {
+      categoryBtn.classList.add('selectedCategory')
+    }
   })
+}
+
+/**
+ * Updates background color of
+ *
+ * @param activeCategoryElement
+ */
+function updateCategoryStatus (activeCategoryElement) {
+  const categoryButtons = document.querySelectorAll('.categoryBtn')
+  categoryButtons.forEach(btn => btn.classList.remove('selectedCategory'))
+  activeCategoryElement.classList.add('selectedCategory')
 }
 
 /**
@@ -286,9 +300,4 @@ payBtn.addEventListener('click', (e) => {
   alert('Pay function not implemented')
 })
 
-categoryBtnAll.addEventListener('click', async (e) => {
-  const data = await getCurrentData()
-  clearDisplayedProducts()
-  renderProducts(await data.products)
-})
 start()
