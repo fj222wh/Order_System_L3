@@ -17,7 +17,9 @@ export class ApiController {
   getData (req, res) {
     res.json({
       products: allProductsFromCatalog,
-      orderNumber: order.getOrderNumber()
+      orderNumber: order.getOrderNumber(),
+      orderTotalPrice: order.calculateTotalPrice(),
+      orderItems: order.toJSON()
     })
   }
 

@@ -14,6 +14,8 @@ const orderDisplay = document.querySelector('#orderDisplay')
 const orderTotalPriceDisplay = document.querySelector('#orderTotalPrice')
 const orderNumber = document.querySelector('#orderNumber')
 const resetOrderBtn = document.querySelector('#resetButton')
+const createInvoiceBtn = document.querySelector('#createInvoiceBtn')
+const payBtn = document.querySelector('#payBtn')
 
 /**
  * Fetches data from the backend.
@@ -21,11 +23,11 @@ const resetOrderBtn = document.querySelector('#resetButton')
 async function start () {
   const res = await fetch('/api/products')
   const data = await res.json()
-  console.log(data)
-  renderProducts(data.products)
 
-  console.log(data.orderNumber)
+  renderProducts(data.products)
+  updateCart(data.orderItems)
   updateOrderNumber(data.orderNumber)
+  updateTotalPrice(data.orderTotalPrice)
 }
 
 /**
@@ -75,11 +77,14 @@ function createOrderItem (orderItem) {
   const orderItemElement = document.createElement('div')
   orderItemElement.classList.add('orderItem')
   const productName = document.createElement('p')
+  productName.classList.add('orderItem-product-name')
   productName.textContent = orderItem.name
   const productPrice = document.createElement('p')
-  productPrice.textContent = orderItem.price
+  productPrice.classList.add('orderItem-product-price')
+  productPrice.textContent = orderItem.price + '€'
   const productQuantity = document.createElement('p')
-  productQuantity.textContent = orderItem.quantity
+  productQuantity.classList.add('orderItem-product-quantity')
+  productQuantity.textContent = 'x' + orderItem.quantity
 
   orderItemElement.appendChild(productName)
   orderItemElement.appendChild(productPrice)
@@ -148,7 +153,18 @@ function updateTotalPrice (newPrice) {
   orderTotalPriceDisplay.textContent = newPrice
 }
 
-start()
+/**
+ * Empties the cart.
+ */
+async function emptyCart () {
+  await fetch('/api/order/empty', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: 'Empty cart' })
+  })
+}
+
+// EVENT LISTENERS
 
 productsContainer.addEventListener('click', (e) => {
   const productElement = e.target.closest('.product')
@@ -166,13 +182,15 @@ resetOrderBtn.addEventListener('click', () => {
   updateTotalPrice(0)
 })
 
-/**
- * Empties the cart.
- */
-async function emptyCart () {
-  await fetch('/api/order/empty', {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message: 'Empty cart' })
-  })
-}
+createInvoiceBtn.addEventListener('click', (e) => {
+  alert('create invoice')
+
+  // Skicka get hämta invoice?
+  // Skapa så den kan laddas ner av användare
+  // Rensa order, skapa en ny order
+})
+
+payBtn.addEventListener('click', (e) => {
+  alert('Pay function not implemented')
+})
+start()
