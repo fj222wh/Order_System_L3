@@ -8,14 +8,16 @@
 import express from 'express'
 import { router as homeRouter } from './homeRouter.js'
 import { router as storeRouter } from './storeRouter.js'
-import { router as ApiRouter } from './apiRouter.js'
+import { router as apiRouter } from './apiRouter.js'
+import { router as adminRouter } from './adminRouter.js'
 
 export const router = express.Router()
 
 // The home router controls the routing on the '/' path.
 router.use('/', homeRouter)
 router.use('/store', storeRouter)
-router.use('/api', ApiRouter)
+router.use('/api', apiRouter)
+router.use('/admin', adminRouter)
 
 // General catch all errors.
 router.use('*', (req, res, next) => {
