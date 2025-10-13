@@ -10,9 +10,10 @@ import mongoose from 'mongoose'
  * Establishes a connection to a database.
  *
  * @param {string} connectionString - The connection string.
+ * @param {object} [options] - Optional mongoose connect options (for example { dbName: 'store' }).
  * @returns {Promise<mongoose.Mongoose>} Resolves to a Mongoose instance if connection succeeded.
  */
-export const connectToDatabase = async (connectionString) => {
+export const connectToDatabase = async (connectionString, options = {}) => {
   const { connection } = mongoose
 
   // Will cause errors to be produced instead of dropping the bad data.
@@ -37,7 +38,9 @@ export const connectToDatabase = async (connectionString) => {
     })
   }
 
-  // Connect to the server.
+  // Connect to the server. Forward any provided options (e.g. dbName) so the
+  // caller can override the database used when the connection string does
+  // not include an explicit database segment.
   console.log('Mongoose connecting to MongoDB.')
-  return mongoose.connect(connectionString)
+  return mongoose.connect(connectionString, options)
 }
