@@ -4,12 +4,7 @@
  * @author Filippa Johansson
  */
 
-// TODO: Organize the functions
-// TODO: Create classes. SOC
-// TODO: I should only be able to update if the order has any orderitems, children in orderDisplay else should it not send a req to the server.
-
 const productsContainer = document.querySelector('#productsContainer')
-// const orderContainer = document.querySelector('#orderContainer')
 const orderDisplay = document.querySelector('#orderDisplay')
 const orderTotalPriceDisplay = document.querySelector('#orderTotalPrice')
 const orderNumber = document.querySelector('#orderNumber')
@@ -23,7 +18,6 @@ const categoryList = document.querySelector('#categoryList')
  */
 async function start () {
   const data = await getCurrentData()
-
   renderProducts(data.products)
   updateCart(data.orderItems)
   updateOrderNumber(data.orderNumber)
@@ -32,7 +26,9 @@ async function start () {
 }
 
 /**
- * Returns the data for all products, categories etc.
+ * Returns the data for all products, categories, products in cart etc.
+ *
+ * @returns {object} Returns the data about the current state and data of the store.
  */
 async function getCurrentData () {
   const res = await fetch('/api/products')
@@ -40,8 +36,9 @@ async function getCurrentData () {
   return await data
 }
 /**
+ * Creates and renders the HTML element for each category.
  *
- * @param categories
+ * @param {object} categories The categories and it's products within each category.
  */
 function createAndRenderCateories (categories) {
   categories.forEach((category, index) => {
@@ -65,9 +62,9 @@ function createAndRenderCateories (categories) {
 }
 
 /**
- * Updates background color of
+ * Updates background color of the category element to simulate it being the active category.
  *
- * @param activeCategoryElement
+ * @param {HTMLElement} activeCategoryElement The HTML element for the category
  */
 function updateCategoryStatus (activeCategoryElement) {
   const categoryButtons = document.querySelectorAll('.categoryBtn')
@@ -76,23 +73,19 @@ function updateCategoryStatus (activeCategoryElement) {
 }
 
 /**
+ * Select a category, fetch data to get only the products from the chosen category.
  *
- * @param category
+ * @param {string} category The name of the category
  */
 async function selectCategory (category) {
   const res = await fetch(`/api/products/${encodeURIComponent(category)}`)
   const data = await res.json()
-  console.log('THIS IS THE DATA FROM SELECTED CATEGORY_ ' + category)
-  console.log(data)
-  console.log('DET ÄR EN ARRAY?')
-  console.log(Array.isArray(data))
-  // TODO: MAKEA FETCH TO THE SERVER ASK FOR PRODUCTS FROM A CHOSE CATEGORY
   clearDisplayedProducts()
   renderProducts(data)
 }
 
 /**
- *
+ * Clear the displayed products.
  */
 function clearDisplayedProducts () {
   while (productsContainer.firstChild) {
@@ -144,39 +137,22 @@ function updateCart (orderItems) {
 }
 
 /**
+ * Delete an order item.
  *
- */
-function displayEditOptions () {
-  // TODO: Display the dit box
-}
-
-/**
- *
- * @param orderItemToDelete
+ * @param {HTMLElement} orderItemToDelete The
  */
 async function deleteOrderItem (orderItemToDelete) {
   orderItemToDelete.remove()
-
-  // TODO: Delete a specific orderItem
   const id = orderItemToDelete.getAttribute('data-id')
-  console.log('SEND DELETE WITH THIS ID!' + id)
-  // TO DO: Update new total price!!
   const res = await fetch(`/api/order/remove/${encodeURIComponent(id)}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' }
   })
 
   const data = await res.json()
-  console.log(data)
   updateTotalPrice(data.totalPrice)
 }
 
-/**
- *
- */
-function updateQuantity () {
-  // TODO: Update the quantity
-}
 /**
  * Creates the order item HTML-element.
  *
@@ -227,7 +203,9 @@ function createOrderItem (orderItem) {
 }
 
 /**
+ * Creates the option for the orderItem.
  *
+ * @returns {HTMLElement} Returns the options for the order item.
  */
 function createOrderItemOptionsDiv () {
   const options = document.createElement('div')
@@ -283,7 +261,6 @@ async function addProductToOrder (product) {
   })
 
   const data = await res.json()
-  // console.log('addProductToOrder response from the server:', data)
   updateCart(data.orderItems)
   updateTotalPrice(data.orderTotalPrice.toFixed(2))
 }
@@ -358,33 +335,36 @@ createInvoiceBtn.addEventListener('click', (e) => {
 })
 payBtn.addEventListener('click', async (e) => {
   pay()
+  createNewOrder()
 })
 
 /**
- *
+ * Payment method. Only simulating payment
  */
 function pay () {
   if (cartIsEmpty() === true) {
     console.log('Failed to pay due to empty cart ')
   } else {
     alert('SIMULATE PAYING')
-    createNewOrder()
   }
 }
 
 /**
- *
+ * Creates a new order.
  */
 async function createNewOrder () {
-  // alert('REAL METHOD FOR PAYING IS MISSING - THIS IS ONLY A SIMULATION ')
-  const res = await fetch('/api/order/create')
+  const res = await fetch('/api/order/create', {
+    method: 'POST'
+  })
   const data = await res.json()
-  console.log(data)
-  reset(data)
+
+  resetStateOfSystem(data)
 }
 
 /**
+ * Checks if the cart if empty.
  *
+ * @returns {boolean} Returns true if the cart is empty, false if the cart is not empty.
  */
 function cartIsEmpty () {
   if (orderDisplay.children.length === 0) {
@@ -395,10 +375,11 @@ function cartIsEmpty () {
 }
 
 /**
+ * Rests the state of the ordersystem as it was reseted.
  *
  * @param data
  */
-function reset (data) {
+function resetStateOfSystem (data) {
   updateTotalPrice(0)
   updateOrderNumber(data.orderNumber)
   updateCart()

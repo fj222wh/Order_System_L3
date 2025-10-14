@@ -16,5 +16,5 @@ router.get('/products/:category', (req, res) => controller.getProductsFromCatego
 router.post('/order/add', (req, res) => controller.addProductPost(req, res))
 router.put('/order/empty', (req, res) => controller.emptyCart(req, res))
 
-router.put('/order/create', (req, res) => controller.createNewOrder(req, res))
+router.post('/order/create', (req, res) => controller.createNewOrder(req, res))
 router.put('/order/remove/:orderItemId', (req, res) => controller.removeOrderItem(req, res))
