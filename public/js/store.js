@@ -305,24 +305,30 @@ createInvoiceBtn.addEventListener('click', (e) => {
   // Rensa order, skapa en ny order
 })
 payBtn.addEventListener('click', async (e) => {
-  createNewOrder()
+  pay()
 })
 
 /**
  *
  */
-async function createNewOrder () {
+function pay () {
   if (cartIsEmpty() === true) {
     console.log('Failed to pay due to empty cart ')
   } else {
-  // alert('REAL METHOD FOR PAYING IS MISSING - THIS IS ONLY A SIMULATION ')
-    const res = await fetch('/api/order/create')
-    const data = await res.json()
-    console.log(data)
-    updateTotalPrice(0)
-    updateOrderNumber(data.orderNumber)
-    updateCart()
+    alert('SIMULATE PAYING')
+    createNewOrder()
   }
+}
+
+/**
+ *
+ */
+async function createNewOrder () {
+  // alert('REAL METHOD FOR PAYING IS MISSING - THIS IS ONLY A SIMULATION ')
+  const res = await fetch('/api/order/create')
+  const data = await res.json()
+  console.log(data)
+  reset(data)
 }
 
 /**
@@ -334,6 +340,16 @@ function cartIsEmpty () {
   } else {
     return false
   }
+}
+
+/**
+ *
+ * @param data
+ */
+function reset (data) {
+  updateTotalPrice(0)
+  updateOrderNumber(data.orderNumber)
+  updateCart()
 }
 
 start()
