@@ -152,9 +152,22 @@ function displayEditOptions () {
 
 /**
  *
+ * @param orderItemToDelete
  */
-function deleteOrderItem () {
+async function deleteOrderItem (orderItemToDelete) {
+  orderItemToDelete.remove()
+
   // TODO: Delete a specific orderItem
+  const id = orderItemToDelete.getAttribute('data-id')
+  console.log('SEND DELETE WITH THIS ID!' + id)
+  // TO DO: Update new total price!!
+  const res = await fetch(`/api/order/remove/${encodeURIComponent(id)}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' }
+  })
+
+  const data = await res.json()
+  console.log(data)
 }
 
 /**
@@ -388,5 +401,14 @@ function reset (data) {
   updateOrderNumber(data.orderNumber)
   updateCart()
 }
+
+orderDisplay.addEventListener('click', (e) => {
+  if (event.target.classList.contains('orderItem-options-delete-icon')) {
+    console.log('hej')
+    console.log(e.target.parentElement.parentElement.parentElement)
+    const orderItemToRemove = e.target.parentElement.parentElement.parentElement
+    deleteOrderItem(orderItemToRemove)
+  }
+})
 
 start()
