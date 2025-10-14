@@ -14,6 +14,7 @@ const payBtn = document.querySelector('#payBtn')
 const categoryList = document.querySelector('#categoryList')
 const invoiceForm = document.querySelector('#createInvoice')
 const orderButtonsContainer = document.querySelector('#orderButtons')
+const sendInvoiceToServerBtn = document.querySelector('#createInvoicePostBtn')
 
 // TODO: Custom events?
 // TODO: Clean up the code, SOC...seperate
@@ -400,6 +401,15 @@ orderDisplay.addEventListener('click', (e) => {
     const orderItemToRemove = deleteBtn.parentElement.parentElement
     deleteOrderItem(orderItemToRemove)
   }
+})
+
+sendInvoiceToServerBtn.addEventListener('click', (e) => {
+  // TODO: Send data with information about the customer to the server
+  const fullname = document.querySelector('#createInvoiceFullname').textContent
+  const email = document.querySelector('#createInvoiceEmail').textContent
+
+  console.log(fullname)
+  console.log(email)
 })
 
 start()

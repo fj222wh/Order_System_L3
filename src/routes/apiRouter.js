@@ -18,3 +18,4 @@ router.put('/order/empty', (req, res) => controller.emptyCart(req, res))
 
 router.post('/order/create', (req, res) => controller.createNewOrder(req, res))
 router.put('/order/remove/:orderItemId', (req, res) => controller.removeOrderItem(req, res))
+router.post('/order/invoice', (req, res) => controller.createInvoice(req, res))

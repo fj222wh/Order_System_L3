@@ -132,4 +132,15 @@ export class ApiController {
       totalPrice: order.calculateTotalPrice()
     })
   }
+
+  /**
+   *
+   * @param req
+   * @param res
+   */
+  createInvoice (req, res) {
+    console.log('CREATING THE ')
+
+    res.json('ok')
+  }
 }

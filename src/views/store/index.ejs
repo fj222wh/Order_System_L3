@@ -32,15 +32,15 @@
                 <div id="createInvoice" class="hidden">
                     <h2>Create invoice</h2>
 
-                    <form action="/api/order/invoice" method="POST">
+                    <form>
                         <label for="fullname">
-                            <input type="text" placeholder="Full name">
+                            <input type="text" placeholder="Full name" id="createInvoiceFullname">
                         </label>
                         <label for="email">
-                            <input type="email" placeholder="E-mail">
+                            <input type="email" placeholder="E-mail" id="createInvoiceEmail">
                         </label>
 
-                        <button>Create invoice</button>
+                        <button id="createInvoicePostBtn" type="button">Create invoice</button>
                     </form>
                 </div>
             </div>
