@@ -148,13 +148,17 @@
 }
 
 .orderItem {
-    display: flex;
     background-color: rgb(246, 246, 246);
     margin: 10px;
     padding: 20px;
-    justify-content: space-between;
-    cursor: pointer;
+    display: flex;
+    flex-direction: column;
     border-radius: 10px;
+}
+
+.orderItem-product {
+    display: flex;
+    justify-content: space-between;
 }
 
 .orderItem-product-name {
@@ -177,6 +181,34 @@
     height: 15px;
     width: 15px;
 }
+
+.orderItem-options {
+    background-color: rgb(227, 160, 219);
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.orderItem-options button {
+    padding: 2px 10px;
+}
+
+.orderItem-options-delete-icon {
+    width: 15px;
+    background-color: transparent !important;
+    border: none;
+    display: block;
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+    cursor: pointer
+}
+
+.hidden {
+    display: none;
+}
+
+
 
 .selectedCategory {
     background-color: rgb(219, 236, 203) !important;

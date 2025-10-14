@@ -170,13 +170,17 @@ function updateQuantity () {
  * @returns {HTMLElement} Returns the HTML-element for the orderItem
  */
 function createOrderItem (orderItem) {
-  const orderItemElement = document.createElement('div')
-  orderItemElement.setAttribute('data-name', orderItem.name)
-  orderItemElement.setAttribute('data-id', orderItem.id)
-  orderItemElement.setAttribute('data-price', orderItem.price)
-  orderItemElement.setAttribute('data-quantity', orderItem.quantity)
+  const orderItemContainerElement = document.createElement('div')
+  orderItemContainerElement.setAttribute('data-name', orderItem.name)
+  orderItemContainerElement.setAttribute('data-id', orderItem.id)
+  orderItemContainerElement.setAttribute('data-price', orderItem.price)
+  orderItemContainerElement.setAttribute('data-quantity', orderItem.quantity)
 
-  orderItemElement.classList.add('orderItem')
+  orderItemContainerElement.classList.add('orderItem')
+
+  const orderItemProductElement = document.createElement('div')
+  orderItemProductElement.classList.add('orderItem-product')
+
   const productName = document.createElement('p')
   productName.classList.add('orderItem-product-name')
   productName.textContent = orderItem.name
@@ -186,17 +190,50 @@ function createOrderItem (orderItem) {
   const productQuantity = document.createElement('p')
   productQuantity.classList.add('orderItem-product-quantity')
   productQuantity.textContent = 'x' + orderItem.quantity
-  const editIcon = document.createElement('img')
-  editIcon.setAttribute('alt', 'Edit icon')
-  editIcon.setAttribute('src', '/assets/order_icons/orderItem-options.png')
-  editIcon.classList.add('orderItem-edit-icon')
+  const optionBtn = document.createElement('img')
+  optionBtn.setAttribute('alt', 'Edit icon')
+  optionBtn.setAttribute('src', '/assets/order_icons/orderItem-options.png')
+  optionBtn.classList.add('orderItem-edit-icon')
 
-  orderItemElement.appendChild(productName)
-  orderItemElement.appendChild(productPrice)
-  orderItemElement.appendChild(productQuantity)
-  orderItemElement.appendChild(editIcon)
+  orderItemProductElement.appendChild(productName)
+  orderItemProductElement.appendChild(productPrice)
+  orderItemProductElement.appendChild(productQuantity)
+  orderItemProductElement.appendChild(optionBtn)
 
-  return orderItemElement
+  const optionsDiv = createOrderItemOptionsDiv()
+
+  orderItemContainerElement.appendChild(orderItemProductElement)
+  orderItemContainerElement.appendChild(optionsDiv)
+
+  optionBtn.addEventListener('click', (e) => {
+    optionsDiv.classList.toggle('hidden')
+  })
+
+  return orderItemContainerElement
+}
+
+/**
+ *
+ */
+function createOrderItemOptionsDiv () {
+  const options = document.createElement('div')
+  options.classList.add('hidden')
+  options.classList.add('orderItem-options')
+  const increaseBtn = document.createElement('button')
+  increaseBtn.textContent = '+'
+  const decreaseBtn = document.createElement('button')
+  decreaseBtn.textContent = '-'
+  const deleteBtn = document.createElement('button')
+  const deleteIcon = document.createElement('img')
+  deleteIcon.setAttribute('src', './assets/order_icons/delete.png')
+  deleteIcon.classList.add('orderItem-options-delete-icon')
+  deleteBtn.appendChild(deleteIcon)
+
+  options.appendChild(increaseBtn)
+  options.appendChild(decreaseBtn)
+  options.appendChild(deleteBtn)
+
+  return options
 }
 
 /**
