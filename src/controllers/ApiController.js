@@ -1,17 +1,22 @@
 /**
+ * The controller for the API handling the logic between front end and back end.
  *
+ * @author Filippa Johansson
+ * @version 1.0.0
  */
 
 import { allProductsFromCatalog, store } from '../data/storeData.js'
+import { Order } from '../logic/Order.js'
 
 /**
  *
  */
 export class ApiController {
   /**
-   * Gets the order from a session
+   * Returns the order from a session.
    *
-   * @param req
+   * @param {object} req The request object.
+   * @returns {Order} Returns an order
    */
   #getOrderFromSession (req) {
     if (!req.session.orderNumber) {
@@ -35,7 +40,6 @@ export class ApiController {
 
     const firstCategory = allProductsFromCatalog.getCategories()[0]
     res.json({
-      // products: allProductsFromCatalog,
       products: allProductsFromCatalog.getProductsFromCategory(firstCategory),
       orderNumber: order.getOrderNumber(),
       orderTotalPrice: order.calculateTotalPrice(),
@@ -52,16 +56,15 @@ export class ApiController {
    */
   addProductPost (req, res) {
     const order = this.#getOrderFromSession(req)
-
     const body = req.body
-    // console.log('addProduct POST body:', body)
     // TODO: add the product to the session/order storage
 
     const id = Number(body.id)
-
     const product = allProductsFromCatalog.findProduct(id)
     if (product) {
       order.addOrderItem(product)
+    } else {
+      throw new Error('Failed to add the item to the order')
     }
 
     const data = {
@@ -69,11 +72,8 @@ export class ApiController {
       orderItems: order.toJSON()
     }
 
-    // console.log(data)
     res.json(data)
   }
-
-  // TODO: Add function to update products? Send that data...we need it for add, delete, update quantity etc...
 
   /**
    * Empty cart.
@@ -88,9 +88,10 @@ export class ApiController {
   }
 
   /**
+   * Get all products from a category
    *
-   * @param req
-   * @param res
+   * @param {object} req The request object.
+   * @param {object} res The response object.
    */
   getProductsFromCategory (req, res) {
     const category = req.params.category
@@ -100,9 +101,10 @@ export class ApiController {
   }
 
   /**
+   * Creates a new order.
    *
-   * @param req
-   * @param res
+   * @param {object} req The request object.
+   * @param {object} res The response object.
    */
   createNewOrder (req, res) {
     delete req.session.orderNumber
@@ -115,27 +117,19 @@ export class ApiController {
   }
 
   /**
+   * Removes an order item from the order
    *
-   * @param req
-   * @param res
+   * @param {object} req The request object.
+   * @param {object} res The response object.
    */
   removeOrderItem (req, res) {
     const id = Number(req.params.orderItemId)
-
     const order = this.#getOrderFromSession(req)
-
-    console.log(order.getOrderItemsInCart())
-    console.log('ID TO REMOVE ' + id)
-    console.log(order.findIndex(id))
     order.removeOrderItem(id)
-    // order.removeOrderItem(id)
 
-    const totalPrice = order.calculateTotalPrice()
-
-    // TO DO: SEND NEW PRICE
     res.json({
-      message: 'DELETED AND UJPDATEPRICE',
-      totalPrice
+      message: 'The order item has been removed from the order',
+      totalPrice: order.calculateTotalPrice()
     })
   }
 }

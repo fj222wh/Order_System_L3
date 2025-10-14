@@ -17,6 +17,8 @@ import { errorHandler } from './middleware/errorhandler.js'
 import { helmetCSP } from './middleware/helmetCSP.js'
 
 try {
+  // await connectToDatabase(process.env.DB_CONNECTION_STRING, { dbName: process.env.DB_NAME })
+
   // Create the express application.
   const app = express()
 
