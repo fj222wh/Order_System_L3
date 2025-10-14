@@ -28,6 +28,21 @@
                     <button id="payBtn">Pay</button>
                     <button id="createInvoiceBtn">Create Invoice</button>
                 </div>
+
+                <div id="createInvoice" class="hidden">
+                    <h2>Create invoice</h2>
+
+                    <form action="/api/order/invoice" method="POST">
+                        <label for="fullname">
+                            <input type="text" placeholder="Full name">
+                        </label>
+                        <label for="email">
+                            <input type="email" placeholder="E-mail">
+                        </label>
+
+                        <button>Create invoice</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

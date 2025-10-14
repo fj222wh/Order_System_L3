@@ -6,6 +6,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    user-select: none;
 }
 
 #categoryList {
@@ -62,7 +63,6 @@
     overflow: auto;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));grid-auto-rows: 100px;
-
 }
 
 #orderContainerBtns {
@@ -201,15 +201,28 @@
     padding: 0;
     margin: 0;
     line-height: 0;
-    cursor: pointer
+    cursor: pointer;
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 
 
 .selectedCategory {
     background-color: rgb(219, 236, 203) !important;
+}
+
+#createInvoice {
+    margin: auto;
+    padding: 20px;
+    height: 200px;
+    background-color: aquamarine;
+    z-index: 10000;
+}
+
+#createInvoice table {
+    display: flex;
+    flex-direction: column;
 }

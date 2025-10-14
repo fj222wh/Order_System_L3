@@ -12,6 +12,11 @@ const resetOrderBtn = document.querySelector('#resetButton')
 const createInvoiceBtn = document.querySelector('#createInvoiceBtn')
 const payBtn = document.querySelector('#payBtn')
 const categoryList = document.querySelector('#categoryList')
+const invoiceForm = document.querySelector('#createInvoice')
+const orderButtonsContainer = document.querySelector('#orderButtons')
+
+// TODO: Custom events?
+// TODO: Clean up the code, SOC...seperate
 
 /**
  * Fetches data from the backend.
@@ -262,7 +267,7 @@ async function addProductToOrder (product) {
 
   const data = await res.json()
   updateCart(data.orderItems)
-  updateTotalPrice(data.orderTotalPrice.toFixed(2))
+  updateTotalPrice(data.orderTotalPrice)
 }
 
 /**
@@ -285,7 +290,7 @@ function createProductObject (productElement) {
  * @param {number} newPrice - New Price
  */
 function updateTotalPrice (newPrice) {
-  orderTotalPriceDisplay.textContent = newPrice
+  orderTotalPriceDisplay.textContent = newPrice.toFixed(2)
 }
 
 /**
@@ -327,19 +332,22 @@ resetOrderBtn.addEventListener('click', () => {
 })
 
 createInvoiceBtn.addEventListener('click', (e) => {
-  alert('create invoice')
-
   // Skicka get hämta invoice?
   // Skapa så den kan laddas ner av användare
   // Rensa order, skapa en ny order
+
+  orderButtonsContainer.classList.add('hidden')
+  console.log(orderButtonsContainer)
+  invoiceForm.classList.toggle('hidden')
 })
+
 payBtn.addEventListener('click', async (e) => {
   pay()
   createNewOrder()
 })
 
 /**
- * Payment method. Only simulating payment
+ * Payment method. Only simulating payment.
  */
 function pay () {
   if (cartIsEmpty() === true) {
@@ -377,7 +385,7 @@ function cartIsEmpty () {
 /**
  * Rests the state of the ordersystem as it was reseted.
  *
- * @param data
+ * @param {object} data The current data
  */
 function resetStateOfSystem (data) {
   updateTotalPrice(0)

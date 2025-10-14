@@ -56,7 +56,6 @@ try {
   app.use(session(sessionOptions))
 
   app.use((req, res, next) => {
-    console.log(req.session.orderNumber)
     // Flash messages - survives only a round trip.
     if (req.session.flash) {
       res.locals.flash = req.session.flash
