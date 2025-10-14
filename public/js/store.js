@@ -263,11 +263,14 @@ function updateTotalPrice (newPrice) {
  * Empties the cart.
  */
 async function emptyCart () {
-  await fetch('/api/order/empty', {
+  const res = await fetch('/api/order/empty', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message: 'Empty cart' })
+    body: JSON.stringify({ message: 'empty cart' })
   })
+
+  const data = await res.json()
+  console.log(data) // CONTROLL LINE
 }
 
 // EVENT LISTENERS
@@ -283,6 +286,12 @@ productsContainer.addEventListener('click', (e) => {
 })
 
 resetOrderBtn.addEventListener('click', () => {
+  console.log(orderDisplay.children)
+  if (orderDisplay.children.length === 0) {
+    console.log(orderDisplay.children + 'NOLL')
+    return
+  }
+
   emptyCart()
   clearOrderDisplay()
   updateTotalPrice(0)
@@ -295,9 +304,36 @@ createInvoiceBtn.addEventListener('click', (e) => {
   // Skapa så den kan laddas ner av användare
   // Rensa order, skapa en ny order
 })
-
-payBtn.addEventListener('click', (e) => {
-  alert('Pay function not implemented')
+payBtn.addEventListener('click', async (e) => {
+  createNewOrder()
 })
+
+/**
+ *
+ */
+async function createNewOrder () {
+  if (cartIsEmpty() === true) {
+    console.log('Failed to pay due to empty cart ')
+  } else {
+  // alert('REAL METHOD FOR PAYING IS MISSING - THIS IS ONLY A SIMULATION ')
+    const res = await fetch('/api/order/create')
+    const data = await res.json()
+    console.log(data)
+    updateTotalPrice(0)
+    updateOrderNumber(data.orderNumber)
+    updateCart()
+  }
+}
+
+/**
+ *
+ */
+function cartIsEmpty () {
+  if (orderDisplay.children.length === 0) {
+    return true
+  } else {
+    return false
+  }
+}
 
 start()

@@ -2,12 +2,28 @@
  *
  */
 
-import { allProductsFromCatalog, order } from '../data/storeData.js'
+import { allProductsFromCatalog, store } from '../data/storeData.js'
 
 /**
  *
  */
 export class ApiController {
+  /**
+   * Gets the order from a session
+   *
+   * @param req
+   */
+  #getOrderFromSession (req) {
+    if (!req.session.orderNumber) {
+      const order = store.createOrder()
+      req.session.orderNumber = order.getOrderNumber()
+
+      return order
+    } else {
+      return store.findOrder(Number(req.session.orderNumber))
+    }
+  }
+
   /**
    * Returns information about products and totalPrice.
    *
@@ -15,6 +31,8 @@ export class ApiController {
    * @param {object} res The response object.
    */
   getData (req, res) {
+    const order = this.#getOrderFromSession(req)
+
     const firstCategory = allProductsFromCatalog.getCategories()[0]
     res.json({
       // products: allProductsFromCatalog,
@@ -33,12 +51,13 @@ export class ApiController {
    * @param {object} res The response object.
    */
   addProductPost (req, res) {
+    const order = this.#getOrderFromSession(req)
+
     const body = req.body
-    console.log('addProduct POST body:', body)
+    // console.log('addProduct POST body:', body)
     // TODO: add the product to the session/order storage
 
     const id = Number(body.id)
-    console.log(id)
 
     const product = allProductsFromCatalog.findProduct(id)
     if (product) {
@@ -50,7 +69,7 @@ export class ApiController {
       orderItems: order.toJSON()
     }
 
-    console.log(data)
+    // console.log(data)
     res.json(data)
   }
 
@@ -62,9 +81,10 @@ export class ApiController {
    * @param {object} req The request object.
    * @param {object} res The response object.
    */
-  emptyCartPut (req, res) {
+  emptyCart (req, res) {
+    const order = this.#getOrderFromSession(req)
     order.clearCart()
-    res.json('EMPTY CART')
+    res.json('Cart has been cleared')
   }
 
   /**
@@ -77,5 +97,20 @@ export class ApiController {
     const productsFromCategory = allProductsFromCatalog.getProductsFromCategory(category)
 
     res.json(productsFromCategory)
+  }
+
+  /**
+   *
+   * @param req
+   * @param res
+   */
+  createNewOrder (req, res) {
+    delete req.session.orderNumber
+    const order = this.#getOrderFromSession(req)
+    const newOrderNumber = order.getOrderNumber()
+
+    res.json({
+      orderNumber: newOrderNumber
+    })
   }
 }
