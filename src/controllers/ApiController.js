@@ -120,13 +120,14 @@ export class ApiController {
    * @param res
    */
   removeOrderItem (req, res) {
-    const id = req.params.orderItemId
+    const id = Number(req.params.orderItemId)
 
     const order = this.#getOrderFromSession(req)
 
     console.log(order.getOrderItemsInCart())
     console.log('ID TO REMOVE ' + id)
     console.log(order.findIndex(id))
+    order.removeOrderItem(id)
     // order.removeOrderItem(id)
 
     const totalPrice = order.calculateTotalPrice()

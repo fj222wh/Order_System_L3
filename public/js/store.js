@@ -168,6 +168,7 @@ async function deleteOrderItem (orderItemToDelete) {
 
   const data = await res.json()
   console.log(data)
+  updateTotalPrice(data.totalPrice)
 }
 
 /**
@@ -239,6 +240,7 @@ function createOrderItemOptionsDiv () {
   const deleteBtn = document.createElement('button')
   const deleteIcon = document.createElement('img')
   deleteIcon.setAttribute('src', './assets/order_icons/delete.png')
+  deleteBtn.classList.add('orderItem-options-delete-btn')
   deleteIcon.classList.add('orderItem-options-delete-icon')
   deleteBtn.appendChild(deleteIcon)
 
@@ -403,10 +405,10 @@ function reset (data) {
 }
 
 orderDisplay.addEventListener('click', (e) => {
-  if (event.target.classList.contains('orderItem-options-delete-icon')) {
-    console.log('hej')
-    console.log(e.target.parentElement.parentElement.parentElement)
-    const orderItemToRemove = e.target.parentElement.parentElement.parentElement
+  const deleteBtn = e.target.closest('.orderItem-options-delete-btn')
+
+  if (deleteBtn) {
+    const orderItemToRemove = deleteBtn.parentElement.parentElement
     deleteOrderItem(orderItemToRemove)
   }
 })

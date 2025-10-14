@@ -15,11 +15,8 @@ import session from 'express-session'
 import { sessionOptions } from './config/sessionOptions.js'
 import { errorHandler } from './middleware/errorhandler.js'
 import { helmetCSP } from './middleware/helmetCSP.js'
-import { connectToDatabase } from './config/mongoose.js'
 
 try {
-  await connectToDatabase(process.env.MONGODB_URI, { dbName: process.env.DB_NAME })
-
   // Create the express application.
   const app = express()
 
