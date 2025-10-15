@@ -110,12 +110,12 @@ function renderProducts (products) {
     const productDiv = document.createElement('div')
     productDiv.setAttribute('data-id', product.id)
     productDiv.setAttribute('data-name', product.name)
-    productDiv.setAttribute('data-price', product.price)
+    productDiv.setAttribute('data-price', product.price.toFixed(2))
     productDiv.classList.add('product')
     const name = document.createElement('p')
     name.textContent = product.name
     const price = document.createElement('p')
-    price.textContent = product.price + '€'
+    price.textContent = product.price.toFixed(2) + '€'
     productDiv.appendChild(name)
     productDiv.appendChild(price)
     productsContainer.appendChild(productDiv)
@@ -169,7 +169,7 @@ function createOrderItem (orderItem) {
   const orderItemContainerElement = document.createElement('div')
   orderItemContainerElement.setAttribute('data-name', orderItem.name)
   orderItemContainerElement.setAttribute('data-id', orderItem.id)
-  orderItemContainerElement.setAttribute('data-price', orderItem.price)
+  orderItemContainerElement.setAttribute('data-price', orderItem.price.toFixed(2))
   orderItemContainerElement.setAttribute('data-quantity', orderItem.quantity)
 
   orderItemContainerElement.classList.add('orderItem')
@@ -182,7 +182,7 @@ function createOrderItem (orderItem) {
   productName.textContent = orderItem.name
   const productPrice = document.createElement('p')
   productPrice.classList.add('orderItem-product-price')
-  productPrice.textContent = orderItem.price + '€'
+  productPrice.textContent = orderItem.price.toFixed(2) + ' €'
   const productQuantity = document.createElement('p')
   productQuantity.classList.add('orderItem-product-quantity')
   productQuantity.textContent = 'x' + orderItem.quantity
@@ -336,6 +336,9 @@ createInvoiceBtn.addEventListener('click', (e) => {
   // Skicka get hämta invoice?
   // Skapa så den kan laddas ner av användare
   // Rensa order, skapa en ny order
+  if (cartIsEmpty()) {
+    return
+  }
 
   orderButtonsContainer.classList.add('hidden')
   console.log(orderButtonsContainer)
@@ -343,20 +346,14 @@ createInvoiceBtn.addEventListener('click', (e) => {
 })
 
 payBtn.addEventListener('click', async (e) => {
-  pay()
-  createNewOrder()
-})
-
-/**
- * Payment method. Only simulating payment.
- */
-function pay () {
-  if (cartIsEmpty() === true) {
-    console.log('Failed to pay due to empty cart ')
-  } else {
-    alert('SIMULATE PAYING')
+  if (cartIsEmpty()) {
+    return
   }
-}
+
+  const event = new CustomEvent('paid')
+  document.dispatchEvent(event)
+  alert('SIMULATE PAYING')
+})
 
 /**
  * Creates a new order.
@@ -389,6 +386,8 @@ function cartIsEmpty () {
  * @param {object} data The current data
  */
 function resetStateOfSystem (data) {
+  invoiceForm.classList.add('hidden')
+  orderButtonsContainer.classList.remove('hidden')
   updateTotalPrice(0)
   updateOrderNumber(data.orderNumber)
   updateCart()
@@ -403,13 +402,43 @@ orderDisplay.addEventListener('click', (e) => {
   }
 })
 
-sendInvoiceToServerBtn.addEventListener('click', (e) => {
+sendInvoiceToServerBtn.addEventListener('click', async (e) => {
   // TODO: Send data with information about the customer to the server
-  const fullname = document.querySelector('#createInvoiceFullname').textContent
-  const email = document.querySelector('#createInvoiceEmail').textContent
+  const fullname = document.querySelector('#createInvoiceFullname').value
+  const email = document.querySelector('#createInvoiceEmail').value
 
-  console.log(fullname)
-  console.log(email)
+  if (!fullname.trim() || !email.trim()) {
+    return
+  }
+
+  const data = {
+    fullname, email
+  }
+
+  const res = await fetch('/api/order/invoice', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+
+  const content = await res.json()
+  const encoded = encodeURIComponent(content)
+
+  const linkToDownload = document.createElement('a')
+  linkToDownload.href = 'data:text/html;charset=utf-8,' + encoded
+  linkToDownload.download = 'invoice.html'
+  linkToDownload.click()
+
+  const event = new CustomEvent('paid')
+  document.dispatchEvent(event)
+})
+
+document.addEventListener('paid', async (e) => {
+  setTimeout(async () => {
+    const data = await getCurrentData()
+    createNewOrder()
+    resetStateOfSystem(data)
+  }, 100)
 })
 
 start()

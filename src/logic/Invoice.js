@@ -276,7 +276,7 @@ export class Invoice {
       <tr>
           <td>${product.product.getName()}</td>
           <td class="td-quantity">${product.quantity}</td>
-          <td>${product.product.getPrice()}</td>
+          <td>${product.product.getPrice().toFixed(2)}</td>
       </tr>
     `
       html += td

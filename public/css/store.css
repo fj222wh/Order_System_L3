@@ -217,7 +217,7 @@
 #createInvoice {
     margin: auto;
     padding: 20px;
-    height: 200px;
+    height: 50vh;
     background-color: aquamarine;
     z-index: 10000;
 }

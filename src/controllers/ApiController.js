@@ -139,8 +139,9 @@ export class ApiController {
    * @param res
    */
   createInvoice (req, res) {
-    console.log('CREATING THE ')
+    const order = this.#getOrderFromSession(req)
+    const invoiceHTML = order.createInvoice(req.body.fullname, req.body.email, '€')
 
-    res.json('ok')
+    res.json(invoiceHTML)
   }
 }
