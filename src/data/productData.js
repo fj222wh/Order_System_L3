@@ -5,96 +5,102 @@
 import { Product } from '../logic/Product.js'
 
 const productData = [
-  // 🧋 Drinks
+  // 🧋 drinkss
   {
     name: 'Classic Milk Tea',
     price: 4.5,
     description: 'Traditional black tea with creamy milk and tapioca pearls',
-    category: 'drink'
+    category: 'drinks'
+  },
+  {
+    name: 'Strawberry',
+    price: 4.5,
+    description: 'Traditional black tea with creamy milk and tapioca pearls',
+    category: 'fruit'
   },
   {
     name: 'Taro Milk Tea',
     price: 5.0,
     description: 'Sweet taro-flavored milk tea with chewy boba',
-    category: 'drink'
+    category: 'drinks'
   },
   {
     name: 'Matcha Latte',
     price: 5.5,
     description: 'Rich matcha green tea blended with silky milk and optional pearls',
-    category: 'drink'
+    category: 'drinks'
   },
   {
     name: 'Brown Sugar Boba Milk',
     price: 6.0,
     description: 'Caramelized brown sugar syrup swirled through fresh milk and golden boba',
-    category: 'drink'
+    category: 'drinks'
   },
   {
     name: 'Mango Smoothie',
     price: 5.0,
     description: 'Refreshing tropical mango smoothie with fruit jelly',
-    category: 'drink'
+    category: 'drinks'
   },
   {
     name: 'Strawberry Yogurt Tea',
     price: 5.5,
     description: 'Sweet strawberry tea topped with creamy yogurt foam',
-    category: 'drink'
+    category: 'drinks'
   },
   {
     name: 'Caramel Bubble Deluxe',
     price: 7.5,
     description: 'Velvety caramel milk tea topped with whipped cream and pearls',
-    category: 'drink'
+    category: 'drinks'
   },
   {
     name: 'Wintermelon Iced Tea',
     price: 4.8,
     description: 'Fragrant wintermelon tea served icy cold, light and refreshing',
-    category: 'drink'
+    category: 'drinks'
   },
   {
     name: 'Oolong Milk Foam Tea',
     price: 5.2,
     description: 'Roasted oolong tea beneath a thick layer of salted cheese foam',
-    category: 'drink'
+    category: 'drinks'
   },
   {
     name: 'Honey Lemon Green Tea',
     price: 4.6,
     description: 'Zesty lemon and sweet honey over chilled green tea',
-    category: 'drink'
+    category: 'drinks'
   },
   {
     name: 'Coffee Jelly Latte',
     price: 5.8,
     description: 'Espresso milk tea with chewy cubes of coffee jelly',
-    category: 'drink'
+    category: 'drinks'
   },
   {
     name: 'Thai Iced Milk Tea',
     price: 5.2,
     description: 'Classic Thai-style black tea with condensed milk and crushed ice',
-    category: 'drink'
+    category: 'drinks'
   },
   {
     name: 'Rose Milk Tea',
     price: 5.4,
     description: 'Aromatic rose-infused milk tea with floral undertones',
-    category: 'drink'
+    category: 'drinks'
   },
   {
     name: 'Lychee Sparkling Tea',
     price: 5.6,
     description: 'Effervescent lychee tea with popping boba and fizz',
-    category: 'drink'
+    category: 'drinks'
   },
   {
     name: 'Peach Green Tea',
     price: 4.9,
     description: 'Crisp green tea with juicy peach flavor and aloe bits',
-    category: 'drink'
+    category: 'drinks'
   },
 
   // 🍜 Food
