@@ -8,3 +8,5 @@ export const router = new Router()
 const controller = new AdminController()
 
 router.get('/', (req, res) => controller.index(req, res))
+
+router.get('/productcatalog', (req, res) => controller.getProductcatalog(req, res))

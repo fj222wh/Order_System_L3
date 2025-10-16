@@ -6,7 +6,6 @@
  */
 
 import express from 'express'
-import { router as homeRouter } from './homeRouter.js'
 import { router as storeRouter } from './storeRouter.js'
 import { router as apiRouter } from './apiRouter.js'
 import { router as adminRouter } from './adminRouter.js'
@@ -14,8 +13,7 @@ import { router as adminRouter } from './adminRouter.js'
 export const router = express.Router()
 
 // The home router controls the routing on the '/' path.
-router.use('/', homeRouter)
-router.use('/store', storeRouter)
+router.use('/', storeRouter)
 router.use('/api', apiRouter)
 router.use('/admin', adminRouter)
 

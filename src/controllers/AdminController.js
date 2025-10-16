@@ -15,4 +15,14 @@ export class AdminController {
   index (req, res, next) {
     res.render('admin/index')
   }
+
+  /**
+   *
+   * @param req
+   * @param res
+   * @param next
+   */
+  getProductcatalog (req, res, next) {
+    res.render('admin/productcatalog')
+  }
 }
