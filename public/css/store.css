@@ -4,12 +4,15 @@
     --primary-color-product-hover: #48A6A7;
     --primary-color-product-active: #7acdcf;
     --bg-category: #F2EFE7;
+    --bg-category-hover: #7acdcf;
     --bg-order-display: #F2EFE7;
     --bg-product-container: #f0f0f099;
     --bg-total-price: rgb(243, 243, 243);
-    --bg-invoice-form: pink;
+    --bg-invoice-form: #bcdce0;
     --bg-order-item: #aee2e879;
     --bg-order-display: #ffffff;
+    --primary-text: #fff;
+
 }
 
 * {
@@ -33,10 +36,14 @@
     border: none;
     transition: all ease 0.2s;
     cursor: pointer;
+    font-family: 'Poppins';
+    font-weight: 500;
+    text-transform: uppercase;
 }
 
 #categoryList button:hover {
-    background-color: var(--bg-category);
+    color: white;
+    background-color: var(--bg-category-hover);
 }
 
 
@@ -82,6 +89,8 @@
 }
 
 #orderContainer {
+    font-family: 'Poppins';
+    font-size: 0.9rem;
     flex: 2;
     overflow: hidden;
     width: 100%;
@@ -141,6 +150,8 @@
 }
 
 .product {
+    font-family: 'Poppins';
+    font-size: 0.8rem;
     flex: 0 0 auto;
     padding: 10px;
     background-color: var(--primary-color-product);
@@ -148,6 +159,10 @@
     cursor: pointer;
     border-radius: 10px;
     box-shadow: 3px 3px 3px rgba(187, 187, 187, 0.54);
+    color: var(--primary-text);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .product:hover {
@@ -175,6 +190,7 @@
 .orderItem-product-name {
     max-width: 40%;
     flex: auto;
+    overflow: auto;
 
 }
 
@@ -197,6 +213,10 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.589);
+    padding: 10px;
+    border-radius: 10px;
+    
 }
 
 .orderItem-options button {
@@ -220,6 +240,7 @@
 
 .selectedCategory {
     background-color: var(--selected-category);
+    color: white;
 }
 
 #createInvoice {
@@ -242,7 +263,7 @@
     padding: 5px;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 800px) {
     #storeWrapper {
         display: flex;
         flex-direction: column;

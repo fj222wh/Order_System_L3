@@ -10,7 +10,9 @@ export const helmetCSP = helmet.contentSecurityPolicy({
       "'self'"
     ],
     'style-src': [
-      "'self'"
+      "'self'",
+      'https://fonts.googleapis.com',
+      'https://fonts.gstatic.com'
     ],
     'font-src': [
       "'self'",
