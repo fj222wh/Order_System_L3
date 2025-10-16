@@ -323,7 +323,6 @@ productsContainer.addEventListener('click', (e) => {
 resetOrderBtn.addEventListener('click', () => {
   console.log(orderDisplay.children)
   if (orderDisplay.children.length === 0) {
-    console.log(orderDisplay.children + 'NOLL')
     return
   }
 
@@ -341,7 +340,6 @@ createInvoiceBtn.addEventListener('click', (e) => {
   }
 
   orderButtonsContainer.classList.add('hidden')
-  console.log(orderButtonsContainer)
   invoiceForm.classList.toggle('hidden')
 })
 
@@ -403,6 +401,10 @@ orderDisplay.addEventListener('click', (e) => {
 })
 
 sendInvoiceToServerBtn.addEventListener('click', async (e) => {
+  if (orderDisplay.childElementCount === 0) {
+    alert('Failed because the order is empty.')
+    return
+  }
   // TODO: Send data with information about the customer to the server
   const fullname = document.querySelector('#createInvoiceFullname').value
   const email = document.querySelector('#createInvoiceEmail').value
