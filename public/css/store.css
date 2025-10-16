@@ -1,5 +1,15 @@
 :root {
-    
+    --selected-category: #006A71;
+    --primary-color-product: #9ACBD0;
+    --primary-color-product-hover: #48A6A7;
+    --primary-color-product-active: #7acdcf;
+    --bg-category: #F2EFE7;
+    --bg-order-display: #F2EFE7;
+    --bg-product-container: #f0f0f099;
+    --bg-total-price: rgb(243, 243, 243);
+    --bg-invoice-form: pink;
+    --bg-order-item: #aee2e879;
+    --bg-order-display: #ffffff;
 }
 
 * {
@@ -26,7 +36,7 @@
 }
 
 #categoryList button:hover {
-    background-color: rgb(213, 213, 213);
+    background-color: var(--bg-category);
 }
 
 
@@ -55,7 +65,7 @@
 
 #productsContainer {
     flex: 3;
-    background-color: rgb(243, 243, 243);
+    background-color: var(--bg-product-container);
     height: 100%;
     width: 100%;
     padding: 20px;
@@ -82,7 +92,7 @@
 }
 
 #orderTotalContainer {
-    background-color: #f4f4f4;
+    background-color: var(--bg-total-price);
     padding: 15px;
     display: flex;
     justify-content: space-between;
@@ -99,7 +109,7 @@
     padding: 20px;
     cursor: pointer;
     border: none;
-    background-color: rgb(153, 153, 153);
+    background-color: rgb(220, 220, 220);
     transition: all 0.2s ease;
 }
 
@@ -115,6 +125,7 @@
 }
 
 #orderDisplay {
+    background-color: var(--bg-order-display);
     flex: 1 1 auto;
     overflow: scroll;
 }
@@ -132,7 +143,7 @@
 .product {
     flex: 0 0 auto;
     padding: 10px;
-    background-color: rgb(209, 230, 145);
+    background-color: var(--primary-color-product);
     transition: all 0.2s ease;
     cursor: pointer;
     border-radius: 10px;
@@ -140,15 +151,15 @@
 }
 
 .product:hover {
-    background-color: rgb(189, 213, 118);
+    background-color: var(--primary-color-product-hover);
 }
 
 .product:active {
-    background-color: rgb(237, 247, 206);
+    background-color: var(--primary-color-product-active);
 }
 
 .orderItem {
-    background-color: rgb(246, 246, 246);
+    background-color: var(--bg-order-item);
     margin: 10px;
     padding: 20px;
     display: flex;
@@ -183,7 +194,6 @@
 }
 
 .orderItem-options {
-    background-color: rgb(227, 160, 219);
     display: flex;
     justify-content: flex-end;
     margin-top: 10px;
@@ -208,17 +218,15 @@
     display: none !important;
 }
 
-
-
 .selectedCategory {
-    background-color: rgb(219, 236, 203) !important;
+    background-color: var(--selected-category);
 }
 
 #createInvoice {
     margin: auto;
     padding: 20px;
     height: 50vh;
-    background-color: aquamarine;
+    background-color: var(--bg-invoice-form);
     z-index: 10000;
 }
 
@@ -236,19 +244,18 @@
 
 @media screen and (max-width: 850px) {
     #storeWrapper {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
     }
 
     #categoryList {
-    padding: 30px;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    overflow: auto;
+        padding: 10px 20px;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        overflow: auto;
     }
-
 
     #orderContainer {
         flex: 4;
@@ -259,7 +266,4 @@
         justify-content: space-between;
         min-height: 0;
     }
-
-
-    
 }

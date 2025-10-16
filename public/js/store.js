@@ -217,10 +217,10 @@ function createOrderItemOptionsDiv () {
   const options = document.createElement('div')
   options.classList.add('hidden')
   options.classList.add('orderItem-options')
-  const increaseBtn = document.createElement('button')
-  increaseBtn.textContent = '+'
-  const decreaseBtn = document.createElement('button')
-  decreaseBtn.textContent = '-'
+  // const increaseBtn = document.createElement('button')
+  // increaseBtn.textContent = '+'
+  // const decreaseBtn = document.createElement('button')
+  // decreaseBtn.textContent = '-'
   const deleteBtn = document.createElement('button')
   const deleteIcon = document.createElement('img')
   deleteIcon.setAttribute('src', './assets/order_icons/delete.png')
@@ -228,8 +228,8 @@ function createOrderItemOptionsDiv () {
   deleteIcon.classList.add('orderItem-options-delete-icon')
   deleteBtn.appendChild(deleteIcon)
 
-  options.appendChild(increaseBtn)
-  options.appendChild(decreaseBtn)
+  // options.appendChild(increaseBtn)
+  // options.appendChild(decreaseBtn)
   options.appendChild(deleteBtn)
 
   return options
