@@ -1,11 +1,11 @@
 /**
- * Creates data for the
+ * Hardcoded data for the products.
+ *
+ * @author Filippa Johansson
+ * @version 1.0.0
  */
 
-import { Product } from '../logic/Product.js'
-
-const productData = [
-  // 🧋 drinkss
+export const productData = [
   {
     name: 'Classic Milk Tea',
     price: 4.5,
@@ -102,8 +102,6 @@ const productData = [
     description: 'Crisp green tea with juicy peach flavor and aloe bits',
     category: 'drinks'
   },
-
-  // 🍜 Food
   {
     name: 'Crispy Chicken Bites',
     price: 6.5,
@@ -164,8 +162,6 @@ const productData = [
     description: 'Succulent shrimp sautéed with garlic butter and herbs',
     category: 'food'
   },
-
-  // 🍰 Desserts
   {
     name: 'Matcha Cheesecake',
     price: 6.5,
@@ -257,9 +253,3 @@ const productData = [
     category: 'dessert'
   }
 ]
-
-export const productsData = []
-productData.forEach(product => {
-  const newProduct = new Product(product.name, product.price, product.description, product.category)
-  productsData.push(newProduct)
-})

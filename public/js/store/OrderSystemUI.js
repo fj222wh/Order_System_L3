@@ -1,5 +1,5 @@
 /**
- * The class handling the ordersystem UI.
+ * The class handling the UI of the Order System
  *
  * @author Filippa Johansson
  * @version 1.0.0

@@ -12,7 +12,6 @@ import { router as adminRouter } from './adminRouter.js'
 
 export const router = express.Router()
 
-// The home router controls the routing on the '/' path.
 router.use('/', storeRouter)
 router.use('/api', apiRouter)
 router.use('/admin', adminRouter)

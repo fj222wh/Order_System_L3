@@ -1,11 +1,14 @@
 # Order_System_L3
 This project has been created as an assigment for the course 1dv610 at LNU.
 
+## Functionality
+- 
+
 
 
 ## Start the application
 
-### ENV-Variables
+####  ENV-Variables
 You need to create a `.env`-file to start the application. Declare the following variables with your chosen values.
 ```js
 PORT=3000 // The port the server should run on
@@ -14,6 +17,12 @@ NODE_ENV = 'production' // Enviroment
 SESSION_NAME='session'
 SESSION_SECRET='secret'
 ```
+
+## License
+MIT license is used for this project. More info can be found [here](/LICENSE)
+
+## Developer
+Any contributions to this project are welcome. If you are interested in becoming a developer to this project read more [here](./docs/developer.md)
 
 ## Attributions
 The icons used in this project are from Flaticon.

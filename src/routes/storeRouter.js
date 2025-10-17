@@ -1,5 +1,5 @@
 /**
- * The home router.
+ * The store router.
  *
  * @author Filippa Johansson
  * @version 1.0.0
