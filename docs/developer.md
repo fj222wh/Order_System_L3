@@ -6,4 +6,6 @@ This project is under the MIT license.
 ## Improvements
 - code quality
 - Create web components
+    - The foundation already exists
 - Database (not hard coded)
+    - Models have been created but didn't have time to finish it

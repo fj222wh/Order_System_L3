@@ -37,7 +37,7 @@ async function start () {
  * @returns {object} Returns the data about the current state and data of the store.
  */
 async function getCurrentData () {
-  const res = await fetch('/api/products')
+  const res = await fetch('/api/data')
   const data = await res.json()
   return await data
 }
