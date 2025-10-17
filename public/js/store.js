@@ -4,6 +4,8 @@
  * @author Filippa Johansson
  */
 
+import { ApiMediator } from './store/ApiMediator.js'
+
 const productsContainer = document.querySelector('#productsContainer')
 const orderDisplay = document.querySelector('#orderDisplay')
 const orderTotalPriceDisplay = document.querySelector('#orderTotalPrice')
@@ -16,6 +18,8 @@ const invoiceForm = document.querySelector('#createInvoice')
 const orderButtonsContainer = document.querySelector('#orderButtons')
 const sendInvoiceToServerBtn = document.querySelector('#createInvoicePostBtn')
 
+const apiMediator = new ApiMediator()
+
 // TODO: Custom events?
 // TODO: Clean up the code, SOC...seperate
 
@@ -23,7 +27,7 @@ const sendInvoiceToServerBtn = document.querySelector('#createInvoicePostBtn')
  * Fetches data from the backend.
  */
 async function start () {
-  const data = await getCurrentData()
+  const data = await apiMediator.getCurrentData('/api/data')
   renderProducts(data.products)
   updateCart(data.orderItems)
   updateOrderNumber(data.orderNumber)
@@ -31,16 +35,16 @@ async function start () {
   createAndRenderCateories(data.categories)
 }
 
-/**
- * Returns the data for all products, categories, products in cart etc.
- *
- * @returns {object} Returns the data about the current state and data of the store.
- */
-async function getCurrentData () {
-  const res = await fetch('/api/data')
-  const data = await res.json()
-  return await data
-}
+// /**
+//  * Returns the data for all products, categories, products in cart etc.
+//  *
+//  * @returns {object} Returns the data about the current state and data of the store.
+//  */
+// async function getCurrentData () {
+//   const res = await fetch('/api/products')
+//   const data = await res.json()
+//   return await data
+// }
 /**
  * Creates and renders the HTML element for each category.
  *
@@ -217,10 +221,10 @@ function createOrderItemOptionsDiv () {
   const options = document.createElement('div')
   options.classList.add('hidden')
   options.classList.add('orderItem-options')
-  // const increaseBtn = document.createElement('button')
-  // increaseBtn.textContent = '+'
-  // const decreaseBtn = document.createElement('button')
-  // decreaseBtn.textContent = '-'
+  const increaseBtn = document.createElement('button')
+  increaseBtn.textContent = '+'
+  const decreaseBtn = document.createElement('button')
+  decreaseBtn.textContent = '-'
   const deleteBtn = document.createElement('button')
   const deleteIcon = document.createElement('img')
   deleteIcon.setAttribute('src', './assets/order_icons/delete.png')
@@ -228,8 +232,8 @@ function createOrderItemOptionsDiv () {
   deleteIcon.classList.add('orderItem-options-delete-icon')
   deleteBtn.appendChild(deleteIcon)
 
-  // options.appendChild(increaseBtn)
-  // options.appendChild(decreaseBtn)
+  options.appendChild(increaseBtn)
+  options.appendChild(decreaseBtn)
   options.appendChild(deleteBtn)
 
   return options
@@ -323,6 +327,7 @@ productsContainer.addEventListener('click', (e) => {
 resetOrderBtn.addEventListener('click', () => {
   console.log(orderDisplay.children)
   if (orderDisplay.children.length === 0) {
+    console.log(orderDisplay.children + 'NOLL')
     return
   }
 
@@ -340,6 +345,7 @@ createInvoiceBtn.addEventListener('click', (e) => {
   }
 
   orderButtonsContainer.classList.add('hidden')
+  console.log(orderButtonsContainer)
   invoiceForm.classList.toggle('hidden')
 })
 
@@ -401,10 +407,6 @@ orderDisplay.addEventListener('click', (e) => {
 })
 
 sendInvoiceToServerBtn.addEventListener('click', async (e) => {
-  if (orderDisplay.childElementCount === 0) {
-    alert('Failed because the order is empty.')
-    return
-  }
   // TODO: Send data with information about the customer to the server
   const fullname = document.querySelector('#createInvoiceFullname').value
   const email = document.querySelector('#createInvoiceEmail').value
