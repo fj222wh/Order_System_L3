@@ -2,9 +2,11 @@
  * The script for the store.
  *
  * @author Filippa Johansson
+ * @version 1.0.0
  */
 
 import { ApiMediator } from './store/ApiMediator.js'
+import { OrderSystemUI } from './store/OrderSystemUI.js'
 
 const productsContainer = document.querySelector('#productsContainer')
 const orderDisplay = document.querySelector('#orderDisplay')
@@ -19,56 +21,19 @@ const orderButtonsContainer = document.querySelector('#orderButtons')
 const sendInvoiceToServerBtn = document.querySelector('#createInvoicePostBtn')
 
 const apiMediator = new ApiMediator()
-
-// TODO: Custom events?
-// TODO: Clean up the code, SOC...seperate
+const ui = new OrderSystemUI()
 
 /**
  * Fetches data from the backend.
  */
 async function start () {
   const data = await apiMediator.getCurrentData('/api/data')
-  renderProducts(data.products)
-  updateCart(data.orderItems)
-  updateOrderNumber(data.orderNumber)
-  updateTotalPrice(data.orderTotalPrice)
-  createAndRenderCateories(data.categories)
-}
+  ui.renderProducts(data.products)
 
-// /**
-//  * Returns the data for all products, categories, products in cart etc.
-//  *
-//  * @returns {object} Returns the data about the current state and data of the store.
-//  */
-// async function getCurrentData () {
-//   const res = await fetch('/api/products')
-//   const data = await res.json()
-//   return await data
-// }
-/**
- * Creates and renders the HTML element for each category.
- *
- * @param {object} categories The categories and it's products within each category.
- */
-function createAndRenderCateories (categories) {
-  categories.forEach((category, index) => {
-    const categoryBtn = document.createElement('button')
-    categoryBtn.textContent = category.charAt(0).toUpperCase() + category.split('').slice(1).join('')
-    categoryBtn.setAttribute('data-category', category)
-    categoryBtn.classList.add('categoryBtn')
-
-    categoryBtn.addEventListener('click', (e) => {
-      console.log('Yoou chose this category: ' + e.target.getAttribute('data-category'))
-      updateCategoryStatus(e.target)
-      selectCategory(category)
-    })
-
-    categoryList.appendChild(categoryBtn)
-
-    if (index === 0) {
-      categoryBtn.classList.add('selectedCategory')
-    }
-  })
+  // updateCart(data.orderItems)
+  // updateOrderNumber(data.orderNumber)
+  // updateTotalPrice(data.orderTotalPrice)
+  // createAndRenderCateories(data.categories)
 }
 
 /**
@@ -95,45 +60,12 @@ async function selectCategory (category) {
 }
 
 /**
- * Clear the displayed products.
- */
-function clearDisplayedProducts () {
-  while (productsContainer.firstChild) {
-    productsContainer.removeChild(productsContainer.firstChild)
-  }
-}
-/**
- * Renders the products.
- *
- * @param {object}products The products
- */
-function renderProducts (products) {
-  console.log('THIS ARE PRODUCTS WE GOT IN RENDER PRODUCTS')
-  console.log(products)
-  products.forEach(product => {
-    const productDiv = document.createElement('div')
-    productDiv.setAttribute('data-id', product.id)
-    productDiv.setAttribute('data-name', product.name)
-    productDiv.setAttribute('data-price', product.price.toFixed(2))
-    productDiv.classList.add('product')
-    const name = document.createElement('p')
-    name.textContent = product.name
-    const price = document.createElement('p')
-    price.textContent = product.price.toFixed(2) + '€'
-    productDiv.appendChild(name)
-    productDiv.appendChild(price)
-    productsContainer.appendChild(productDiv)
-  })
-}
-
-/**
  * Updates the displayed orderItems in cart.
  *
  * @param {Array} orderItems An array containing all order items.
  */
 function updateCart (orderItems) {
   clearOrderDisplay()
-  console.log(orderItems)
 
   orderItems.forEach(orderItem => {
     const orderItemElement = createOrderItem(orderItem)
@@ -309,7 +241,6 @@ async function emptyCart () {
   })
 
   const data = await res.json()
-  console.log(data) // CONTROLL LINE
 }
 
 // EVENT LISTENERS
@@ -317,17 +248,13 @@ async function emptyCart () {
 productsContainer.addEventListener('click', (e) => {
   const productElement = e.target.closest('.product')
   if (productElement) {
-    console.log(productElement)
-
     const product = createProductObject(productElement)
     addProductToOrder(product)
   }
 })
 
 resetOrderBtn.addEventListener('click', () => {
-  console.log(orderDisplay.children)
   if (orderDisplay.children.length === 0) {
-    console.log(orderDisplay.children + 'NOLL')
     return
   }
 
@@ -345,7 +272,6 @@ createInvoiceBtn.addEventListener('click', (e) => {
   }
 
   orderButtonsContainer.classList.add('hidden')
-  console.log(orderButtonsContainer)
   invoiceForm.classList.toggle('hidden')
 })
 

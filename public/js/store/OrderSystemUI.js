@@ -18,11 +18,26 @@ export class OrderSystemUI {
   }
 
   /**
+   * Renders the products.
    *
-   * @param products
+   * @param {object} products The products
+   * @param productsContainer
    */
-  renderProducts (products) {
-
+  renderProducts (products, productsContainer) {
+    products.forEach(product => {
+      const productDiv = document.createElement('div')
+      productDiv.setAttribute('data-id', product.id)
+      productDiv.setAttribute('data-name', product.name)
+      productDiv.setAttribute('data-price', product.price.toFixed(2))
+      productDiv.classList.add('product')
+      const name = document.createElement('p')
+      name.textContent = product.name
+      const price = document.createElement('p')
+      price.textContent = product.price.toFixed(2) + '€'
+      productDiv.appendChild(name)
+      productDiv.appendChild(price)
+      productsContainer.appendChild(productDiv)
+    })
   }
 
   /**
@@ -39,5 +54,23 @@ export class OrderSystemUI {
    */
   renderCategories (categories) {
 
+  }
+
+  /**
+   *
+   */
+  updateTotalPrice () {
+
+  }
+
+  /**
+   * Clear the displayed products.
+   *
+   * @param productsContainer
+   */
+  clearDisplayedProducts (productsContainer) {
+    while (productsContainer.firstChild) {
+      productsContainer.removeChild(productsContainer.firstChild)
+    }
   }
 }

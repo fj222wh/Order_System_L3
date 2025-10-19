@@ -1,9 +1,19 @@
 # Order_System_L3
-This project has been created as an assigment for the course 1dv610 at LNU.
+This project has been created as an assigment for the course 1dv610 at LNU. Keep in mind, since it is made for an assigment the code is not fully realiable or trustworthy. The project is still work in progress but the most basic functionality has been implemented.
 
-## Functionality
-- 
 
+## Basic requirements functionality
+- A basic ordersystem to display a productcatalog with producs
+- Add products to the order
+- Calculate the total price of the order dynamically, based on products being removed or added
+- Generate an invoice based on the current order
+- Filter and display products based on category
+
+## Future features
+- Connect the product data to an external data base to make the data permanent
+- Update quantity in cart
+- Create the invoice as a pdf instead of a html-file
+- An admin page where the admin can update, create and delete products in the product catalog
 
 
 ## Start the application
@@ -16,6 +26,18 @@ BASE_URL='/' // The base URL of the application
 NODE_ENV = 'production' // Enviroment
 SESSION_NAME='session'
 SESSION_SECRET='secret'
+```
+
+#### Productcatalog - Data
+Before being able to use the application you need to add data  containing all products. The products should be added to the array `productData` in the file `src/data/productData.js` in the following format:
+
+```js
+  {
+    name: 'Classic Milk Tea',
+    price: 4.5,
+    description: 'Traditional black tea with creamy milk and tapioca pearls',
+    category: 'drinks'
+  }
 ```
 
 ## License

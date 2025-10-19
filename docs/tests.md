@@ -98,7 +98,7 @@ category: 'drink'
 // TODO: Add pictures as examples
 
 
-### 3.3 Add the same product to the order
+### 3.3 Add multiple items of the same product
 **Description:** Add two items of the same product to the order
 
 1. Start the application
