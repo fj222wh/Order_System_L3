@@ -151,7 +151,7 @@ export class ApiController {
    */
   createInvoice (req, res) {
     const order = this.#getOrderFromSession(req)
-    const invoiceHTML = order.createInvoice(req.body.fullname, req.body.email, '€')
+    const invoiceHTML = order.createInvoice(req.body.fullName, req.body.email, '€')
 
     res.json(invoiceHTML)
   }

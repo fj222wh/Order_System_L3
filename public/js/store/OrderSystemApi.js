@@ -101,6 +101,8 @@ export class OrderSystemApi {
       fullName, email
     }
 
+    console.log(data)
+
     const res = await fetch('/api/order/invoice', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

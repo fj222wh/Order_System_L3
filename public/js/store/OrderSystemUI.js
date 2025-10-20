@@ -335,7 +335,7 @@ export class OrderSystemUI {
       this.#orderButtonsContainer.classList.remove('hidden')
       this.#invoiceForm.classList.add('hidden')
       const invoiceEvent = new CustomEvent('createInvoice', {
-        detail: { e, fullname: fullName, email }
+        detail: { e, fullName, email }
       })
       document.dispatchEvent(invoiceEvent)
     })

@@ -1,9 +1,17 @@
 # Developer
-This project is under the MIT license.
+This project is under the MIT license. Anyone is welcome to contribute to this application.
 
-⚠️ **To have in mind:** This project has only been created as a part of an assigment for a school project and is therefore not ready for production.
+⚠️ **To have in mind:** This project has only been created as a part of an assigment for a school project and is therefore not reliable to be used in production.
 
 ## Status
+This ordersystem has implemented the basic functionality:
+- Display products in the order system based on data in the backend
+- Filter products based on category
+- Add products to the order
+- Remove order items from the order
+- Calculate total price of the order
+- Simulate paying for an order
+- Genereate an invoice of the order in HTML
 
 
 ## Known bugs and improvements
