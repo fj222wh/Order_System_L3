@@ -10,7 +10,7 @@ import { OrderSystemUI } from './OrderSystemUI.js'
 export class StoreOrchestrator {
   #productsContainer = document.querySelector('#productsContainer')
   #orderDisplay = document.querySelector('#orderDisplay')
-  #orderTotalPriceDisplay = document.querySelector('#orderTotalPrice')
+  #TotalPriceDisplay = document.querySelector('#orderTotalPrice')
   #orderNumber = document.querySelector('#orderNumber')
   #resetOrderBtn = document.querySelector('#resetButton')
   #createInvoiceBtn = document.querySelector('#createInvoiceBtn')
@@ -35,15 +35,27 @@ export class StoreOrchestrator {
    * Starts the application.
    */
   async start () {
-    this.renderProducts()
+    const data = await this.#api.getData('/api/data')
+    await this.#ui.renderProducts(data.products, this.#productsContainer)
+    console.log(data.categories)
+    await this.#ui.renderCategories(data.categories, this.#categoryList)
+    this.#ui.updateTotalPrice(this.#TotalPriceDisplay, 0)
+
+    this.#addEventListeners()
   }
 
   /**
-   * Renders the products.
    *
    */
-  async renderProducts () {
-    const data = await this.#api.getData('/api/data')
-    await this.#ui.renderProducts(data.products, this.#productsContainer)
+  #addEventListeners () {
+    document.addEventListener('productSelected', (e) => {
+      console.log(e.detail.selectedProduct)
+    })
   }
+
+  // TODO:
+  // Listen to despatch event, selectedCategory
+
+  // updateCategoryStatus(e.target)
+  // selectCategory(category)
 }

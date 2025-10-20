@@ -1,26 +1,15 @@
-/**
- * Fetches data from the backend.
- */
-async function start () {
-  const data = await apiMediator.getCurrentData('/api/data')
-  ui.renderProducts(data.products)
+// /**
+//  * Fetches data from the backend.
+//  */
+// async function start () {
+//   const data = await apiMediator.getCurrentData('/api/data')
+//   ui.renderProducts(data.products)
 
-  // updateCart(data.orderItems)
-  // updateOrderNumber(data.orderNumber)
-  // updateTotalPrice(data.orderTotalPrice)
-  // createAndRenderCateories(data.categories)
-}
-
-/**
- * Updates background color of the category element to simulate it being the active category.
- *
- * @param {HTMLElement} activeCategoryElement The HTML element for the category
- */
-function updateCategoryStatus (activeCategoryElement) {
-  const categoryButtons = document.querySelectorAll('.categoryBtn')
-  categoryButtons.forEach(btn => btn.classList.remove('selectedCategory'))
-  activeCategoryElement.classList.add('selectedCategory')
-}
+//   // updateCart(data.orderItems)
+//   // updateOrderNumber(data.orderNumber)
+//   // updateTotalPrice(data.orderTotalPrice)
+//   // createAndRenderCateories(data.categories)
+// }
 
 /**
  * Select a category, fetch data to get only the products from the chosen category.
@@ -194,15 +183,6 @@ function createProductObject (productElement) {
     name: productElement.getAttribute('data-name'),
     price: Number(productElement.getAttribute('data-price'))
   }
-}
-
-/**
- * Updates the new price.
- *
- * @param {number} newPrice - New Price
- */
-function updateTotalPrice (newPrice) {
-  orderTotalPriceDisplay.textContent = newPrice.toFixed(2)
 }
 
 /**

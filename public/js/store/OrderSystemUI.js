@@ -1,5 +1,3 @@
-import { ApiMediator } from './ApiMediator.js'
-
 /**
  * The class handling the UI of the Order System
  *
@@ -7,16 +5,6 @@ import { ApiMediator } from './ApiMediator.js'
  * @version 1.0.0
  */
 export class OrderSystemUI {
-  #apiMediator
-
-  /**
-   * The constructor of the OrdersystemUI.
-   *
-   */
-  constructor () {
-    this.#apiMediator = new ApiMediator()
-  }
-
   /**
    * Renders the products.
    *
@@ -37,22 +25,73 @@ export class OrderSystemUI {
       productDiv.appendChild(name)
       productDiv.appendChild(price)
       productsContainer.appendChild(productDiv)
+
+      productDiv.addEventListener('click', (e) => {
+        const productElement = e.target.closest('.product')
+
+        if (productElement) {
+          const event = new CustomEvent('productSelected', {
+            detail: {
+              selectedProduct: productElement
+            }
+          })
+          document.dispatchEvent(event)
+        }
+      })
     })
   }
 
   /**
+   * Creates and renders the HTML element for each category.
    *
-   * @param categories
+   * @param {object} categories The categories and it's products within each category.
+   * @param {HTMLElement} categoryContainer The container for the categories
    */
-  renderCategories (categories) {
+  renderCategories (categories, categoryContainer) {
+    categories.forEach((category, index) => {
+      const categoryElement = this.#createCategoryElement(category)
+      categoryContainer.appendChild(categoryElement)
 
+      if (index === 0) {
+        categoryElement.classList.add('selectedCategory')
+      }
+    })
   }
 
   /**
+   * Creates the category HTML element.
    *
+   * @param {string} category The category
+   * @returns {HTMLElement} Returns the category.
    */
-  updateTotalPrice () {
+  #createCategoryElement (category) {
+    const categoryElement = document.createElement('button')
+    categoryElement.textContent = category.charAt(0).toUpperCase() + category.split('').slice(1).join('')
+    categoryElement.setAttribute('data-category', category)
+    categoryElement.classList.add('categoryBtn')
 
+    categoryElement.addEventListener('click', (e) => {
+      console.log('Yoou chose this category: ' + e.target.getAttribute('data-category'))
+
+      const event = new CustomEvent('paid', {
+        detail: {
+          selectCategory: e.target.getAttribute('data-category')
+        }
+      })
+      document.dispatchEvent(event)
+    })
+
+    return categoryElement
+  }
+
+  /**
+   * Updates the new price.
+   *
+   * @param {HTMLElement} totalPriceDisplayElement - The element for displaying the total price.
+   * @param {number} newPrice - The new price
+   */
+  updateTotalPrice (totalPriceDisplayElement, newPrice) {
+    totalPriceDisplayElement.textContent = newPrice.toFixed(2)
   }
 
   /**
@@ -69,7 +108,7 @@ export class OrderSystemUI {
   /**
    * Clear the displayed products.
    *
-   * @param productsContainer
+   * @param {HTMLElement }productsContainer The container for the products.
    */
   clearDisplayedProducts (productsContainer) {
     while (productsContainer.firstChild) {
