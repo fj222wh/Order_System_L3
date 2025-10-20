@@ -8,18 +8,6 @@ import { OrderSystemUI } from './OrderSystemUI.js'
  * @version 1.0.0
  */
 export class StoreOrchestrator {
-  #productsContainer = document.querySelector('#productsContainer')
-  #orderDisplay = document.querySelector('#orderDisplay')
-  #TotalPriceDisplay = document.querySelector('#orderTotalPrice')
-  #orderNumber = document.querySelector('#orderNumber')
-  #resetOrderBtn = document.querySelector('#resetButton')
-  #createInvoiceBtn = document.querySelector('#createInvoiceBtn')
-  #payBtn = document.querySelector('#payBtn')
-  #categoryList = document.querySelector('#categoryList')
-  #invoiceForm = document.querySelector('#createInvoice')
-  #orderButtonsContainer = document.querySelector('#orderButtons')
-  #sendInvoiceToServerBtn = document.querySelector('#createInvoicePostBtn')
-
   #ui
   #api
 
@@ -36,10 +24,11 @@ export class StoreOrchestrator {
    */
   async start () {
     const data = await this.#api.getData()
-    await this.#ui.renderProducts(data.products, this.#productsContainer)
+    this.#ui.renderProducts(data.products)
     console.log(data.categories)
-    await this.#ui.renderCategories(data.categories, this.#categoryList)
-    this.#ui.updateTotalPrice(this.#TotalPriceDisplay, 0)
+    this.#ui.renderCategories(data.categories)
+    this.#ui.updateCart(data.orderItems)
+    this.#ui.updateTotalPrice(data.orderTotalPrice)
 
     this.#addEventListeners()
   }
@@ -54,6 +43,8 @@ export class StoreOrchestrator {
       const updatedData = await this.#api.getOrderData()
       console.log('this is the new Data')
       console.log(updatedData)
+      this.#ui.updateTotalPrice(updatedData.orderTotalPrice)
+      this.#ui.updateCart(updatedData.orderItems)
       // TODO: updateData
     })
   }

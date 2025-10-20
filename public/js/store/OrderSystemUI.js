@@ -5,13 +5,24 @@
  * @version 1.0.0
  */
 export class OrderSystemUI {
+  #productsContainer = document.querySelector('#productsContainer')
+  #orderDisplay = document.querySelector('#orderDisplay')
+  #TotalPriceDisplay = document.querySelector('#orderTotalPrice')
+  #orderNumber = document.querySelector('#orderNumber')
+  #resetOrderBtn = document.querySelector('#resetButton')
+  #createInvoiceBtn = document.querySelector('#createInvoiceBtn')
+  #payBtn = document.querySelector('#payBtn')
+  #categoryList = document.querySelector('#categoryList')
+  #invoiceForm = document.querySelector('#createInvoice')
+  #orderButtonsContainer = document.querySelector('#orderButtons')
+  #sendInvoiceToServerBtn = document.querySelector('#createInvoicePostBtn')
   /**
    * Renders the products.
    *
    * @param {Array} products The products
    * @param {HTMLElement} productsContainer The HTML element containing all of the product
    */
-  renderProducts (products, productsContainer) {
+  renderProducts (products) {
     products.forEach(product => {
       const productDiv = document.createElement('div')
       productDiv.setAttribute('data-id', product.id)
@@ -24,7 +35,7 @@ export class OrderSystemUI {
       price.textContent = product.price.toFixed(2) + '€'
       productDiv.appendChild(name)
       productDiv.appendChild(price)
-      productsContainer.appendChild(productDiv)
+      this.#productsContainer.appendChild(productDiv)
 
       productDiv.addEventListener('click', (e) => {
         const productElement = e.target.closest('.product')
@@ -47,10 +58,10 @@ export class OrderSystemUI {
    * @param {object} categories The categories and it's products within each category.
    * @param {HTMLElement} categoryContainer The container for the categories
    */
-  renderCategories (categories, categoryContainer) {
+  renderCategories (categories) {
     categories.forEach((category, index) => {
       const categoryElement = this.#createCategoryElement(category)
-      categoryContainer.appendChild(categoryElement)
+      this.#categoryList.appendChild(categoryElement)
 
       if (index === 0) {
         categoryElement.classList.add('selectedCategory')
@@ -90,8 +101,8 @@ export class OrderSystemUI {
    * @param {HTMLElement} totalPriceDisplayElement - The element for displaying the total price.
    * @param {number} newPrice - The new price
    */
-  updateTotalPrice (totalPriceDisplayElement, newPrice) {
-    totalPriceDisplayElement.textContent = newPrice.toFixed(2)
+  updateTotalPrice (newPrice) {
+    this.#TotalPriceDisplay.textContent = newPrice.toFixed(2)
   }
 
   /**
@@ -108,12 +119,36 @@ export class OrderSystemUI {
   /**
    * Clear the displayed products.
    *
-   * @param {HTMLElement }productsContainer The container for the products.
    */
-  clearDisplayedProducts (productsContainer) {
-    while (productsContainer.firstChild) {
-      productsContainer.removeChild(productsContainer.firstChild)
+  #clearDisplayedProducts () {
+    while (this.#productsContainer.firstChild) {
+      this.#productsContainer.removeChild(this.#productsContainer.firstChild)
     }
+  }
+
+  /**
+   * Clear the order display.
+   */
+  #clearOrderDisplay () {
+    const parent = document.querySelector('#orderDisplay')
+    while (parent.firstChild) {
+      parent.removeChild(parent.firstChild)
+    }
+  }
+
+  /**
+   * Updates the displayed orderItems in cart.
+   *
+   * @param {Array} orderItems An array containing all order items.
+   */
+  updateCart (orderItems) {
+    this.#clearOrderDisplay()
+
+    orderItems.forEach(orderItem => {
+      const orderItemElement = this.#createOrderItem(orderItem)
+      this.#orderDisplay.appendChild(orderItemElement)
+      this.#orderDisplay.scrollTop = this.#orderDisplay.scrollHeight
+    })
   }
 
   /**
@@ -122,7 +157,7 @@ export class OrderSystemUI {
    * @param {object } orderItem Information about the order item
    * @returns {HTMLElement} Returns the HTML-element for the orderItem
    */
-  createOrderItem (orderItem) {
+  #createOrderItem (orderItem) {
     const orderItemContainerElement = document.createElement('div')
     orderItemContainerElement.setAttribute('data-name', orderItem.name)
     orderItemContainerElement.setAttribute('data-id', orderItem.id)

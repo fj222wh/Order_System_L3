@@ -1,25 +1,4 @@
 /**
- * The script for the store.
- *
- * @author Filippa Johansson
- */
-
-const productsContainer = document.querySelector('#productsContainer')
-const orderDisplay = document.querySelector('#orderDisplay')
-const orderTotalPriceDisplay = document.querySelector('#orderTotalPrice')
-const orderNumber = document.querySelector('#orderNumber')
-const resetOrderBtn = document.querySelector('#resetButton')
-const createInvoiceBtn = document.querySelector('#createInvoiceBtn')
-const payBtn = document.querySelector('#payBtn')
-const categoryList = document.querySelector('#categoryList')
-const invoiceForm = document.querySelector('#createInvoice')
-const orderButtonsContainer = document.querySelector('#orderButtons')
-const sendInvoiceToServerBtn = document.querySelector('#createInvoicePostBtn')
-
-// TODO: Custom events?
-// TODO: Clean up the code, SOC...seperate
-
-/**
  * Fetches data from the backend.
  */
 async function start () {
@@ -55,26 +34,6 @@ async function selectCategory (category) {
 }
 
 /**
- * Updates the displayed orderItems in cart.
- *
- * @param {Array} orderItems An array containing all order items.
- */
-function updateCart (orderItems) {
-  clearOrderDisplay()
-  console.log(orderItems)
-
-  orderItems.forEach(orderItem => {
-    const orderItemElement = createOrderItem(orderItem)
-    orderDisplay.appendChild(orderItemElement)
-    orderDisplay.scrollTop = orderDisplay.scrollHeight
-    orderItemElement.addEventListener('click', (e) => {
-      // TODO: Kontrollera om det är edit knappen...,
-      // om dedt är delete/uppdatera antal
-    })
-  })
-}
-
-/**
  * Delete an order item.
  *
  * @param {HTMLElement} orderItemToDelete The
@@ -98,16 +57,6 @@ async function deleteOrderItem (orderItemToDelete) {
  */
 function updateOrderNumber (number) {
   orderNumber.textContent = 'Order number: #' + number
-}
-
-/**
- * Clear the order display.
- */
-function clearOrderDisplay () {
-  const parent = document.querySelector('#orderDisplay')
-  while (parent.firstChild) {
-    parent.removeChild(parent.firstChild)
-  }
 }
 
 /**
