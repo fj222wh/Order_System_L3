@@ -6,5 +6,6 @@
  */
 
 import { StoreController } from './StoreController.js'
+
 const store = new StoreController('€')
 store.createStoreView()

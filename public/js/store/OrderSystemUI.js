@@ -47,33 +47,52 @@ export class OrderSystemUI {
    */
   renderProducts (products) {
     this.#clearDisplayedProducts()
-
     products.forEach(product => {
-      const productDiv = document.createElement('div')
-      productDiv.setAttribute('data-id', product.id)
-      productDiv.setAttribute('data-name', product.name)
-      productDiv.setAttribute('data-price', product.price.toFixed(2))
-      productDiv.classList.add('product')
-      const name = document.createElement('p')
-      name.textContent = product.name
-      const price = document.createElement('p')
-      price.textContent = product.price.toFixed(2) + this.#currency
-      productDiv.appendChild(name)
-      productDiv.appendChild(price)
-      this.#productsContainer.appendChild(productDiv)
+      const productElement = this.#createProductElement(product)
+      this.#productsContainer.appendChild(productElement)
+      this.#addEventListenerToProductElement(productElement)
+    })
+  }
 
-      productDiv.addEventListener('click', (e) => {
-        const productElement = e.target.closest('.product')
+  /**
+   * Creates the product Element.
+   *
+   * @param {object} product - The product
+   * @returns {HTMLElement} Returns the productElement
+   */
+  #createProductElement (product) {
+    const productElement = document.createElement('div')
+    productElement.setAttribute('data-id', product.id)
+    productElement.setAttribute('data-name', product.name)
+    productElement.setAttribute('data-price', product.price.toFixed(2))
+    productElement.classList.add('product')
+    const name = document.createElement('p')
+    name.textContent = product.name
+    const price = document.createElement('p')
+    price.textContent = product.price.toFixed(2) + this.#currency
+    productElement.appendChild(name)
+    productElement.appendChild(price)
 
-        if (productElement) {
-          const event = new CustomEvent('addProduct', {
-            detail: {
-              selectedProduct: productElement
-            }
-          })
-          document.dispatchEvent(event)
-        }
-      })
+    return productElement
+  }
+
+  /**
+   * Adds event listener to the product element.
+   *
+   * @param {HTMLElement} productElement - The product element.
+   */
+  #addEventListenerToProductElement (productElement) {
+    productElement.addEventListener('click', (e) => {
+      const productElement = e.target.closest('.product')
+
+      if (productElement) {
+        const event = new CustomEvent('addProduct', {
+          detail: {
+            selectedProduct: productElement
+          }
+        })
+        document.dispatchEvent(event)
+      }
     })
   }
 
@@ -126,7 +145,17 @@ export class OrderSystemUI {
     categoryElement.textContent = category.charAt(0).toUpperCase() + category.split('').slice(1).join('')
     categoryElement.setAttribute('data-category', category)
     categoryElement.classList.add('categoryBtn')
+    this.#addEventListenerToCategoryElement(categoryElement)
 
+    return categoryElement
+  }
+
+  /**
+   * Adds the eventlistener to the category element.
+   *
+   * @param {HTMLElement} categoryElement - The category elemet
+   */
+  #addEventListenerToCategoryElement (categoryElement) {
     categoryElement.addEventListener('click', (e) => {
       const category = e.target.getAttribute('data-category')
       this.#updateCategoryStatus(e.target)
@@ -138,8 +167,6 @@ export class OrderSystemUI {
       })
       document.dispatchEvent(event)
     })
-
-    return categoryElement
   }
 
   /**
@@ -275,6 +302,21 @@ export class OrderSystemUI {
     deleteIcon.classList.add('orderItem-options-delete-icon')
     deleteBtn.appendChild(deleteIcon)
 
+    // options.appendChild(increaseBtn)
+    // options.appendChild(decreaseBtn)
+
+    this.#addEventListenerToDeleteBtn(deleteBtn)
+    options.appendChild(deleteBtn)
+
+    return options
+  }
+
+  /**
+   * Adds the event listener to the delete button.
+   *
+   * @param {HTMLElement} deleteBtn - The button to delete to order item
+   */
+  #addEventListenerToDeleteBtn (deleteBtn) {
     deleteBtn.addEventListener('click', (e) => {
       const deleteBtn = e.target.closest('.orderItem-options-delete-btn')
 
@@ -289,12 +331,6 @@ export class OrderSystemUI {
         orderItemToRemove.remove()
       }
     })
-
-    // options.appendChild(increaseBtn)
-    // options.appendChild(decreaseBtn)
-    options.appendChild(deleteBtn)
-
-    return options
   }
 
   /**
