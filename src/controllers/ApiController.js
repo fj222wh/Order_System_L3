@@ -49,6 +49,23 @@ export class ApiController {
   }
 
   /**
+   * Returns data about the order.
+   *
+   * @param {object} req The request object.
+   * @param {object} res The response object.
+   */
+  getOrderData (req, res) {
+    const order = this.#getOrderFromSession(req)
+
+    const data = {
+      orderTotalPrice: order.calculateTotalPrice(),
+      orderItems: order.toJSON()
+    }
+
+    res.json(data)
+  }
+
+  /**
    * Adds a product to the order.
    *
    * @param {object} req The request object.
@@ -62,16 +79,10 @@ export class ApiController {
     const product = allProductsFromCatalog.findProduct(id)
     if (product) {
       order.addOrderItem(product)
+      res.json('Product has been added to the order')
     } else {
       throw new Error('Failed to add the item to the order')
     }
-
-    const data = {
-      orderTotalPrice: order.calculateTotalPrice(),
-      orderItems: order.toJSON()
-    }
-
-    res.json(data)
   }
 
   /**

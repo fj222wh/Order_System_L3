@@ -1,15 +1,46 @@
-// /**
-//  * Fetches data from the backend.
-//  */
-// async function start () {
-//   const data = await apiMediator.getCurrentData('/api/data')
-//   ui.renderProducts(data.products)
+/**
+ * The script for the store.
+ *
+ * @author Filippa Johansson
+ */
 
-//   // updateCart(data.orderItems)
-//   // updateOrderNumber(data.orderNumber)
-//   // updateTotalPrice(data.orderTotalPrice)
-//   // createAndRenderCateories(data.categories)
-// }
+const productsContainer = document.querySelector('#productsContainer')
+const orderDisplay = document.querySelector('#orderDisplay')
+const orderTotalPriceDisplay = document.querySelector('#orderTotalPrice')
+const orderNumber = document.querySelector('#orderNumber')
+const resetOrderBtn = document.querySelector('#resetButton')
+const createInvoiceBtn = document.querySelector('#createInvoiceBtn')
+const payBtn = document.querySelector('#payBtn')
+const categoryList = document.querySelector('#categoryList')
+const invoiceForm = document.querySelector('#createInvoice')
+const orderButtonsContainer = document.querySelector('#orderButtons')
+const sendInvoiceToServerBtn = document.querySelector('#createInvoicePostBtn')
+
+// TODO: Custom events?
+// TODO: Clean up the code, SOC...seperate
+
+/**
+ * Fetches data from the backend.
+ */
+async function start () {
+  const data = await getCurrentData()
+  renderProducts(data.products)
+  updateCart(data.orderItems)
+  updateOrderNumber(data.orderNumber)
+  updateTotalPrice(data.orderTotalPrice)
+  createAndRenderCateories(data.categories)
+}
+
+/**
+ * Updates background color of the category element to simulate it being the active category.
+ *
+ * @param {HTMLElement} activeCategoryElement The HTML element for the category
+ */
+function updateCategoryStatus (activeCategoryElement) {
+  const categoryButtons = document.querySelectorAll('.categoryBtn')
+  categoryButtons.forEach(btn => btn.classList.remove('selectedCategory'))
+  activeCategoryElement.classList.add('selectedCategory')
+}
 
 /**
  * Select a category, fetch data to get only the products from the chosen category.
@@ -30,6 +61,7 @@ async function selectCategory (category) {
  */
 function updateCart (orderItems) {
   clearOrderDisplay()
+  console.log(orderItems)
 
   orderItems.forEach(orderItem => {
     const orderItemElement = createOrderItem(orderItem)
@@ -60,82 +92,6 @@ async function deleteOrderItem (orderItemToDelete) {
 }
 
 /**
- * Creates the order item HTML-element.
- *
- * @param {object } orderItem Information about the order item
- * @returns {HTMLElement} Returns the HTML-element for the orderItem
- */
-function createOrderItem (orderItem) {
-  const orderItemContainerElement = document.createElement('div')
-  orderItemContainerElement.setAttribute('data-name', orderItem.name)
-  orderItemContainerElement.setAttribute('data-id', orderItem.id)
-  orderItemContainerElement.setAttribute('data-price', orderItem.price.toFixed(2))
-  orderItemContainerElement.setAttribute('data-quantity', orderItem.quantity)
-
-  orderItemContainerElement.classList.add('orderItem')
-
-  const orderItemProductElement = document.createElement('div')
-  orderItemProductElement.classList.add('orderItem-product')
-
-  const productName = document.createElement('p')
-  productName.classList.add('orderItem-product-name')
-  productName.textContent = orderItem.name
-  const productPrice = document.createElement('p')
-  productPrice.classList.add('orderItem-product-price')
-  productPrice.textContent = orderItem.price.toFixed(2) + ' €'
-  const productQuantity = document.createElement('p')
-  productQuantity.classList.add('orderItem-product-quantity')
-  productQuantity.textContent = 'x' + orderItem.quantity
-  const optionBtn = document.createElement('img')
-  optionBtn.setAttribute('alt', 'Edit icon')
-  optionBtn.setAttribute('src', '/assets/order_icons/orderItem-options.png')
-  optionBtn.classList.add('orderItem-edit-icon')
-
-  orderItemProductElement.appendChild(productName)
-  orderItemProductElement.appendChild(productPrice)
-  orderItemProductElement.appendChild(productQuantity)
-  orderItemProductElement.appendChild(optionBtn)
-
-  const optionsDiv = createOrderItemOptionsDiv()
-
-  orderItemContainerElement.appendChild(orderItemProductElement)
-  orderItemContainerElement.appendChild(optionsDiv)
-
-  optionBtn.addEventListener('click', (e) => {
-    optionsDiv.classList.toggle('hidden')
-  })
-
-  return orderItemContainerElement
-}
-
-/**
- * Creates the option for the orderItem.
- *
- * @returns {HTMLElement} Returns the options for the order item.
- */
-function createOrderItemOptionsDiv () {
-  const options = document.createElement('div')
-  options.classList.add('hidden')
-  options.classList.add('orderItem-options')
-  const increaseBtn = document.createElement('button')
-  increaseBtn.textContent = '+'
-  const decreaseBtn = document.createElement('button')
-  decreaseBtn.textContent = '-'
-  const deleteBtn = document.createElement('button')
-  const deleteIcon = document.createElement('img')
-  deleteIcon.setAttribute('src', './assets/order_icons/delete.png')
-  deleteBtn.classList.add('orderItem-options-delete-btn')
-  deleteIcon.classList.add('orderItem-options-delete-icon')
-  deleteBtn.appendChild(deleteIcon)
-
-  options.appendChild(increaseBtn)
-  options.appendChild(decreaseBtn)
-  options.appendChild(deleteBtn)
-
-  return options
-}
-
-/**
  * Updates the order number.
  *
  * @param {number} number The order number.
@@ -155,37 +111,6 @@ function clearOrderDisplay () {
 }
 
 /**
- * Adds product to order.
- *
- * @param {object} product The product and its information
- */
-async function addProductToOrder (product) {
-  const res = await fetch('/api/order/add', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(product)
-  })
-
-  const data = await res.json()
-  updateCart(data.orderItems)
-  updateTotalPrice(data.orderTotalPrice)
-}
-
-/**
- * Creates the object.
- *
- * @param {HTMLElement } productElement The element for the product
- * @returns {object} Returns an object with information about the product
- */
-function createProductObject (productElement) {
-  return {
-    id: productElement.getAttribute('data-id'),
-    name: productElement.getAttribute('data-name'),
-    price: Number(productElement.getAttribute('data-price'))
-  }
-}
-
-/**
  * Empties the cart.
  */
 async function emptyCart () {
@@ -196,6 +121,7 @@ async function emptyCart () {
   })
 
   const data = await res.json()
+  console.log(data) // CONTROLL LINE
 }
 
 // EVENT LISTENERS
@@ -203,13 +129,17 @@ async function emptyCart () {
 productsContainer.addEventListener('click', (e) => {
   const productElement = e.target.closest('.product')
   if (productElement) {
+    console.log(productElement)
+
     const product = createProductObject(productElement)
     addProductToOrder(product)
   }
 })
 
 resetOrderBtn.addEventListener('click', () => {
+  console.log(orderDisplay.children)
   if (orderDisplay.children.length === 0) {
+    console.log(orderDisplay.children + 'NOLL')
     return
   }
 
@@ -227,6 +157,7 @@ createInvoiceBtn.addEventListener('click', (e) => {
   }
 
   orderButtonsContainer.classList.add('hidden')
+  console.log(orderButtonsContainer)
   invoiceForm.classList.toggle('hidden')
 })
 
@@ -325,5 +256,3 @@ document.addEventListener('paid', async (e) => {
     resetStateOfSystem(data)
   }, 100)
 })
-
-start()

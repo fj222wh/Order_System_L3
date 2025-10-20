@@ -13,6 +13,7 @@ const controller = new ApiController()
 
 router.get('/data', (req, res) => controller.getData(req, res))
 router.get('/products/:category', (req, res) => controller.getProductsFromCategory(req, res))
+router.get('/order', (req, res) => controller.getOrderData(req, res))
 router.post('/order/add', (req, res) => controller.addProductPost(req, res))
 router.put('/order/empty', (req, res) => controller.emptyCart(req, res))
 

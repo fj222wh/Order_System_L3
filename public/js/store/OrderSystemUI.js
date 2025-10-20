@@ -73,7 +73,7 @@ export class OrderSystemUI {
     categoryElement.addEventListener('click', (e) => {
       console.log('Yoou chose this category: ' + e.target.getAttribute('data-category'))
 
-      const event = new CustomEvent('paid', {
+      const event = new CustomEvent('categorySelected', {
         detail: {
           selectCategory: e.target.getAttribute('data-category')
         }
@@ -114,5 +114,81 @@ export class OrderSystemUI {
     while (productsContainer.firstChild) {
       productsContainer.removeChild(productsContainer.firstChild)
     }
+  }
+
+  /**
+   * Creates the order item HTML-element.
+   *
+   * @param {object } orderItem Information about the order item
+   * @returns {HTMLElement} Returns the HTML-element for the orderItem
+   */
+  createOrderItem (orderItem) {
+    const orderItemContainerElement = document.createElement('div')
+    orderItemContainerElement.setAttribute('data-name', orderItem.name)
+    orderItemContainerElement.setAttribute('data-id', orderItem.id)
+    orderItemContainerElement.setAttribute('data-price', orderItem.price.toFixed(2))
+    orderItemContainerElement.setAttribute('data-quantity', orderItem.quantity)
+
+    orderItemContainerElement.classList.add('orderItem')
+
+    const orderItemProductElement = document.createElement('div')
+    orderItemProductElement.classList.add('orderItem-product')
+
+    const productName = document.createElement('p')
+    productName.classList.add('orderItem-product-name')
+    productName.textContent = orderItem.name
+    const productPrice = document.createElement('p')
+    productPrice.classList.add('orderItem-product-price')
+    productPrice.textContent = orderItem.price.toFixed(2) + ' €'
+    const productQuantity = document.createElement('p')
+    productQuantity.classList.add('orderItem-product-quantity')
+    productQuantity.textContent = 'x' + orderItem.quantity
+    const optionBtn = document.createElement('img')
+    optionBtn.setAttribute('alt', 'Edit icon')
+    optionBtn.setAttribute('src', '/assets/order_icons/orderItem-options.png')
+    optionBtn.classList.add('orderItem-edit-icon')
+
+    orderItemProductElement.appendChild(productName)
+    orderItemProductElement.appendChild(productPrice)
+    orderItemProductElement.appendChild(productQuantity)
+    orderItemProductElement.appendChild(optionBtn)
+
+    const optionsDiv = this.#createOrderItemOptionsDiv()
+
+    orderItemContainerElement.appendChild(orderItemProductElement)
+    orderItemContainerElement.appendChild(optionsDiv)
+
+    optionBtn.addEventListener('click', (e) => {
+      optionsDiv.classList.toggle('hidden')
+    })
+
+    return orderItemContainerElement
+  }
+
+  /**
+   * Creates the option for the orderItem.
+   *
+   * @returns {HTMLElement} Returns the options for the order item.
+   */
+  #createOrderItemOptionsDiv () {
+    const options = document.createElement('div')
+    options.classList.add('hidden')
+    options.classList.add('orderItem-options')
+    // const increaseBtn = document.createElement('button')
+    // increaseBtn.textContent = '+'
+    // const decreaseBtn = document.createElement('button')
+    // decreaseBtn.textContent = '-'
+    const deleteBtn = document.createElement('button')
+    const deleteIcon = document.createElement('img')
+    deleteIcon.setAttribute('src', './assets/order_icons/delete.png')
+    deleteBtn.classList.add('orderItem-options-delete-btn')
+    deleteIcon.classList.add('orderItem-options-delete-icon')
+    deleteBtn.appendChild(deleteIcon)
+
+    // options.appendChild(increaseBtn)
+    // options.appendChild(decreaseBtn)
+    options.appendChild(deleteBtn)
+
+    return options
   }
 }

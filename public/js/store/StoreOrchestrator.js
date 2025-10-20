@@ -35,7 +35,7 @@ export class StoreOrchestrator {
    * Starts the application.
    */
   async start () {
-    const data = await this.#api.getData('/api/data')
+    const data = await this.#api.getData()
     await this.#ui.renderProducts(data.products, this.#productsContainer)
     console.log(data.categories)
     await this.#ui.renderCategories(data.categories, this.#categoryList)
@@ -45,12 +45,31 @@ export class StoreOrchestrator {
   }
 
   /**
-   *
+   * Adds the event listeners.
    */
   #addEventListeners () {
-    document.addEventListener('productSelected', (e) => {
-      console.log(e.detail.selectedProduct)
+    document.addEventListener('productSelected', async (e) => {
+      const productObject = this.#createProductObject(e.detail.selectedProduct)
+      await this.#api.addProduct(productObject)
+      const updatedData = await this.#api.getOrderData()
+      console.log('this is the new Data')
+      console.log(updatedData)
+      // TODO: updateData
     })
+  }
+
+  /**
+   * Creates the object.
+   *
+   * @param {HTMLElement } productElement The element for the product
+   * @returns {object} Returns an object with information about the product
+   */
+  #createProductObject (productElement) {
+    return {
+      id: productElement.getAttribute('data-id'),
+      name: productElement.getAttribute('data-name'),
+      price: Number(productElement.getAttribute('data-price'))
+    }
   }
 
   // TODO:
