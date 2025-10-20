@@ -1,16 +1,4 @@
 /**
- * Fetches data from the backend.
- */
-async function start () {
-  const data = await getCurrentData()
-  renderProducts(data.products)
-  updateCart(data.orderItems)
-  updateOrderNumber(data.orderNumber)
-  updateTotalPrice(data.orderTotalPrice)
-  createAndRenderCateories(data.categories)
-}
-
-/**
  * Updates background color of the category element to simulate it being the active category.
  *
  * @param {HTMLElement} activeCategoryElement The HTML element for the category
@@ -19,18 +7,6 @@ function updateCategoryStatus (activeCategoryElement) {
   const categoryButtons = document.querySelectorAll('.categoryBtn')
   categoryButtons.forEach(btn => btn.classList.remove('selectedCategory'))
   activeCategoryElement.classList.add('selectedCategory')
-}
-
-/**
- * Select a category, fetch data to get only the products from the chosen category.
- *
- * @param {string} category The name of the category
- */
-async function selectCategory (category) {
-  const res = await fetch(`/api/products/${encodeURIComponent(category)}`)
-  const data = await res.json()
-  clearDisplayedProducts()
-  renderProducts(data)
 }
 
 /**
@@ -50,53 +26,6 @@ async function deleteOrderItem (orderItemToDelete) {
   updateTotalPrice(data.totalPrice)
 }
 
-/**
- * Updates the order number.
- *
- * @param {number} number The order number.
- */
-function updateOrderNumber (number) {
-  orderNumber.textContent = 'Order number: #' + number
-}
-
-/**
- * Empties the cart.
- */
-async function emptyCart () {
-  const res = await fetch('/api/order/empty', {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message: 'empty cart' })
-  })
-
-  const data = await res.json()
-  console.log(data) // CONTROLL LINE
-}
-
-// EVENT LISTENERS
-
-productsContainer.addEventListener('click', (e) => {
-  const productElement = e.target.closest('.product')
-  if (productElement) {
-    console.log(productElement)
-
-    const product = createProductObject(productElement)
-    addProductToOrder(product)
-  }
-})
-
-resetOrderBtn.addEventListener('click', () => {
-  console.log(orderDisplay.children)
-  if (orderDisplay.children.length === 0) {
-    console.log(orderDisplay.children + 'NOLL')
-    return
-  }
-
-  emptyCart()
-  clearOrderDisplay()
-  updateTotalPrice(0)
-})
-
 createInvoiceBtn.addEventListener('click', (e) => {
   // Skicka get hämta invoice?
   // Skapa så den kan laddas ner av användare
@@ -108,16 +37,6 @@ createInvoiceBtn.addEventListener('click', (e) => {
   orderButtonsContainer.classList.add('hidden')
   console.log(orderButtonsContainer)
   invoiceForm.classList.toggle('hidden')
-})
-
-payBtn.addEventListener('click', async (e) => {
-  if (cartIsEmpty()) {
-    return
-  }
-
-  const event = new CustomEvent('paid')
-  document.dispatchEvent(event)
-  alert('SIMULATE PAYING')
 })
 
 /**
@@ -133,19 +52,6 @@ async function createNewOrder () {
 }
 
 /**
- * Checks if the cart if empty.
- *
- * @returns {boolean} Returns true if the cart is empty, false if the cart is not empty.
- */
-function cartIsEmpty () {
-  if (orderDisplay.children.length === 0) {
-    return true
-  } else {
-    return false
-  }
-}
-
-/**
  * Rests the state of the ordersystem as it was reseted.
  *
  * @param {object} data The current data
@@ -157,15 +63,6 @@ function resetStateOfSystem (data) {
   updateOrderNumber(data.orderNumber)
   updateCart()
 }
-
-orderDisplay.addEventListener('click', (e) => {
-  const deleteBtn = e.target.closest('.orderItem-options-delete-btn')
-
-  if (deleteBtn) {
-    const orderItemToRemove = deleteBtn.parentElement.parentElement
-    deleteOrderItem(orderItemToRemove)
-  }
-})
 
 sendInvoiceToServerBtn.addEventListener('click', async (e) => {
   // TODO: Send data with information about the customer to the server

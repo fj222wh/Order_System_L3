@@ -1,10 +1,10 @@
 /**
- * Handles the traffic between the front end to fetch data.
+ * Handles fethcing and sending data to the backend server.
  *
  * @author Filippa Johansson
  * @version 1.0.0
  */
-export class ApiMediator {
+export class OrderSystemApi {
   /**
    * Returns the data for all products, categories, products in cart etc.
    *
@@ -38,5 +38,31 @@ export class ApiMediator {
     const res = await fetch('/api/order')
     const data = await res.json()
     return await data
+  }
+
+  /**
+   * Empties the cart.
+   */
+  async emptyCart () {
+    const res = await fetch('/api/order/empty', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'empty cart' })
+    })
+
+    const message = await res.json()
+    console.log(message)
+  }
+
+  /**
+   * Deletes an order item from the order.
+   *
+   * @param {number} productId The product id of the order item to remove
+   */
+  async deleteOrderItem (productId) {
+    await fetch(`/api/order/remove/${encodeURIComponent(productId)}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' }
+    })
   }
 }

@@ -16,6 +16,30 @@ export class OrderSystemUI {
   #invoiceForm = document.querySelector('#createInvoice')
   #orderButtonsContainer = document.querySelector('#orderButtons')
   #sendInvoiceToServerBtn = document.querySelector('#createInvoicePostBtn')
+
+  #currency
+  /**
+   * The constructor.
+   *
+   * @param {string} currency The currency
+   */
+  constructor (currency) {
+    this.setCurrency(currency)
+  }
+
+  /**
+   * Sets the currency.
+   *
+   * @param {string} currency The currency
+   */
+  setCurrency (currency) {
+    if (typeof currency !== 'string') {
+      throw new Error('The currency has to be a string')
+    }
+
+    this.#currency = currency
+  }
+
   /**
    * Renders the products.
    *
@@ -32,7 +56,7 @@ export class OrderSystemUI {
       const name = document.createElement('p')
       name.textContent = product.name
       const price = document.createElement('p')
-      price.textContent = product.price.toFixed(2) + '€'
+      price.textContent = product.price.toFixed(2) + this.#currency
       productDiv.appendChild(name)
       productDiv.appendChild(price)
       this.#productsContainer.appendChild(productDiv)
@@ -106,6 +130,14 @@ export class OrderSystemUI {
   }
 
   /**
+   *
+   * @param number
+   */
+  updateOrderNumber (number) {
+    this.#orderNumber.textContent = 'Order number: #' + number
+  }
+
+  /**
    * Updates background color of the category element to simulate it being the active category.
    *
    * @param {HTMLElement} activeCategoryElement The HTML element for the category
@@ -129,7 +161,7 @@ export class OrderSystemUI {
   /**
    * Clear the order display.
    */
-  #clearOrderDisplay () {
+  clearOrderDisplay () {
     const parent = document.querySelector('#orderDisplay')
     while (parent.firstChild) {
       parent.removeChild(parent.firstChild)
@@ -142,7 +174,7 @@ export class OrderSystemUI {
    * @param {Array} orderItems An array containing all order items.
    */
   updateCart (orderItems) {
-    this.#clearOrderDisplay()
+    this.clearOrderDisplay()
 
     orderItems.forEach(orderItem => {
       const orderItemElement = this.#createOrderItem(orderItem)
@@ -174,7 +206,7 @@ export class OrderSystemUI {
     productName.textContent = orderItem.name
     const productPrice = document.createElement('p')
     productPrice.classList.add('orderItem-product-price')
-    productPrice.textContent = orderItem.price.toFixed(2) + ' €'
+    productPrice.textContent = orderItem.price.toFixed(2) + `${this.#currency}`
     const productQuantity = document.createElement('p')
     productQuantity.classList.add('orderItem-product-quantity')
     productQuantity.textContent = 'x' + orderItem.quantity
@@ -220,10 +252,67 @@ export class OrderSystemUI {
     deleteIcon.classList.add('orderItem-options-delete-icon')
     deleteBtn.appendChild(deleteIcon)
 
+    deleteBtn.addEventListener('click', (e) => {
+      const deleteBtn = e.target.closest('.orderItem-options-delete-btn')
+
+      if (deleteBtn) {
+        const orderItemToRemove = deleteBtn.parentElement.parentElement
+        const delteOrderItemEvent = new CustomEvent('deleteOrderItem', {
+          detail: {
+            id: orderItemToRemove.getAttribute('data-id')
+          }
+        })
+        document.dispatchEvent(delteOrderItemEvent)
+        orderItemToRemove.remove()
+      }
+    })
+
     // options.appendChild(increaseBtn)
     // options.appendChild(decreaseBtn)
     options.appendChild(deleteBtn)
 
     return options
+  }
+
+  /**
+   * Adds the event listeners for dispatching custom events.
+   */
+  dispatchCustomEvents () {
+    this.#resetOrderBtn.addEventListener('click', (e) => {
+      const emptyOrderEvent = new CustomEvent('emptyOrder')
+      document.dispatchEvent(emptyOrderEvent)
+    })
+
+    this.#payBtn.addEventListener('click', (e) => {
+      if (this.#cartIsEmpty() === true) {
+        alert('Your cart is empty. Add items before paying.')
+        return
+      }
+
+      const payEvent = new CustomEvent('payOrder')
+      document.dispatchEvent(payEvent)
+    })
+
+    this.#createInvoiceBtn.addEventListener('click', (event) => {
+      if (this.#cartIsEmpty()) {
+        return
+      }
+
+      const invoiceEvent = new CustomEvent('createInvoice')
+      document.dispatchEvent(invoiceEvent)
+    })
+  }
+
+  /**
+   * Checks if the cart is empty.
+   *
+   * @returns {boolean} Returns a boolean weather the order display is empty or not.
+   */
+  #cartIsEmpty () {
+    if (this.#orderDisplay.children.length === 0) {
+      return true
+    } else {
+      return false
+    }
   }
 }
