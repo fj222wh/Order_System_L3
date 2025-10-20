@@ -74,6 +74,7 @@ export class StoreController {
 
     document.addEventListener('createInvoice', async (event) => {
       this.#createInvoice(event)
+      this.#resetState()
     })
 
     document.addEventListener('categorySelected', async (event) => {
@@ -96,8 +97,9 @@ export class StoreController {
   }
 
   /**
+   * Add a product to cart.
    *
-   * @param event
+   * @param {Event} event - The event- The event
    */
   async #addProduct (event) {
     const productObject = this.#createProductObject(event.detail.selectedProduct)
@@ -106,7 +108,7 @@ export class StoreController {
   }
 
   /**
-   *
+   * Empties the order.
    */
   #emptyOrder () {
     this.#api.emptyCart()
@@ -114,7 +116,7 @@ export class StoreController {
   }
 
   /**
-   *
+   * Resets the state of order.
    */
   #resetState () {
     this.#api.createNewOrder()
@@ -122,8 +124,9 @@ export class StoreController {
   }
 
   /**
+   * Delete an order item.
    *
-   * @param event
+   * @param {Event} event - The event
    */
   #deleteOrderItem (event) {
     this.#api.deleteOrderItem(event.detail.id)
@@ -131,8 +134,9 @@ export class StoreController {
   }
 
   /**
+   * Create the invoice.
    *
-   * @param event
+   * @param {Event} event - The event
    */
   async #createInvoice (event) {
     const invoiceHTML = await this.#api.createInvoice(event.detail.fullName, event.detail.email)
@@ -140,14 +144,12 @@ export class StoreController {
     linkToDownload.href = 'data:text/html;charset=utf-8,' + invoiceHTML
     linkToDownload.download = 'invoice.html'
     linkToDownload.click()
-
-    this.#api.createNewOrder()
-    this.#updateOrderDataToCurrent()
   }
 
   /**
+   * Render products from the selected category.
    *
-   * @param event
+   * @param {Event} event - The event
    */
   async #renderProductsFromCategory (event) {
     const data = await this.#api.getProductsFromCategory(event.detail.selectedCategory)
