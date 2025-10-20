@@ -66,7 +66,7 @@ export class OrderSystemUI {
         const productElement = e.target.closest('.product')
 
         if (productElement) {
-          const event = new CustomEvent('productSelected', {
+          const event = new CustomEvent('addProduct', {
             detail: {
               selectedProduct: productElement
             }

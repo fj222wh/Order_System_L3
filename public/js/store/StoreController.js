@@ -55,42 +55,29 @@ export class StoreController {
    * Adds the event listeners on document to listen on custom events.
    */
   #addEventListeners () {
-    document.addEventListener('productSelected', async (e) => {
-      const productObject = this.#createProductObject(e.detail.selectedProduct)
-      await this.#api.addProduct(productObject)
-      this.#updateOrderDataToCurrent()
+    document.addEventListener('addProduct', async (event) => {
+      this.#addProduct(event)
     })
 
-    document.addEventListener('emptyOrder', (e) => {
-      this.#api.emptyCart()
-      this.#updateOrderDataToCurrent()
+    document.addEventListener('emptyOrder', (event) => {
+      this.#emptyOrder()
     })
 
-    document.addEventListener('payOrder', (e) => {
+    document.addEventListener('payOrder', (event) => {
       alert('Simulate paying')
-      this.#api.createNewOrder()
-      this.#updateOrderDataToCurrent()
+      this.#resetState()
     })
 
-    document.addEventListener('deleteOrderItem', (e) => {
-      this.#api.deleteOrderItem(e.detail.id)
-      this.#updateOrderDataToCurrent()
+    document.addEventListener('deleteOrderItem', (event) => {
+      this.#deleteOrderItem(event)
     })
 
-    document.addEventListener('createInvoice', async (e) => {
-      const invoiceHTML = await this.#api.createInvoice(e.detail.fullName, e.detail.email)
-      const linkToDownload = document.createElement('a')
-      linkToDownload.href = 'data:text/html;charset=utf-8,' + invoiceHTML
-      linkToDownload.download = 'invoice.html'
-      linkToDownload.click()
-
-      this.#api.createNewOrder()
-      this.#updateOrderDataToCurrent()
+    document.addEventListener('createInvoice', async (event) => {
+      this.#createInvoice(event)
     })
 
-    document.addEventListener('categorySelected', async (e) => {
-      const data = await this.#api.getProductsFromCategory(e.detail.selectedCategory)
-      this.#ui.renderProducts(data)
+    document.addEventListener('categorySelected', async (event) => {
+      this.#renderProductsFromCategory(event)
     })
   }
 
@@ -106,5 +93,64 @@ export class StoreController {
       name: productElement.getAttribute('data-name'),
       price: Number(productElement.getAttribute('data-price'))
     }
+  }
+
+  /**
+   *
+   * @param event
+   */
+  async #addProduct (event) {
+    const productObject = this.#createProductObject(event.detail.selectedProduct)
+    await this.#api.addProduct(productObject)
+    this.#updateOrderDataToCurrent()
+  }
+
+  /**
+   *
+   */
+  #emptyOrder () {
+    this.#api.emptyCart()
+    this.#updateOrderDataToCurrent()
+  }
+
+  /**
+   *
+   */
+  #resetState () {
+    this.#api.createNewOrder()
+    this.#updateOrderDataToCurrent()
+  }
+
+  /**
+   *
+   * @param event
+   */
+  #deleteOrderItem (event) {
+    this.#api.deleteOrderItem(event.detail.id)
+    this.#updateOrderDataToCurrent()
+  }
+
+  /**
+   *
+   * @param event
+   */
+  async #createInvoice (event) {
+    const invoiceHTML = await this.#api.createInvoice(event.detail.fullName, event.detail.email)
+    const linkToDownload = document.createElement('a')
+    linkToDownload.href = 'data:text/html;charset=utf-8,' + invoiceHTML
+    linkToDownload.download = 'invoice.html'
+    linkToDownload.click()
+
+    this.#api.createNewOrder()
+    this.#updateOrderDataToCurrent()
+  }
+
+  /**
+   *
+   * @param event
+   */
+  async #renderProductsFromCategory (event) {
+    const data = await this.#api.getProductsFromCategory(event.detail.selectedCategory)
+    this.#ui.renderProducts(data)
   }
 }
