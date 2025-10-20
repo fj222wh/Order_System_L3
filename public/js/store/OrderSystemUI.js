@@ -325,11 +325,17 @@ export class OrderSystemUI {
     })
 
     this.#sendInvoiceToServerBtn.addEventListener('click', (e) => {
+      const fullName = document.querySelector('#createInvoiceFullname').value
+      const email = document.querySelector('#createInvoiceEmail').value
+
+      if (!fullName.trim() || !email.trim()) {
+        return
+      }
+
       this.#orderButtonsContainer.classList.remove('hidden')
       this.#invoiceForm.classList.add('hidden')
-
       const invoiceEvent = new CustomEvent('createInvoice', {
-        details: { e }
+        detail: { e, fullname: fullName, email }
       })
       document.dispatchEvent(invoiceEvent)
     })

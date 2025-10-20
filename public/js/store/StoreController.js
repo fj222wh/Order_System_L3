@@ -77,8 +77,13 @@ export class StoreController {
       this.#updateOrderDataToCurrent()
     })
 
-    document.addEventListener('createInvoice', (e) => {
-      alert('create invoice')
+    document.addEventListener('createInvoice', async (e) => {
+      const invoiceHTML = await this.#api.createInvoice(e.detail.fullName, e.detail.email)
+      const linkToDownload = document.createElement('a')
+      linkToDownload.href = 'data:text/html;charset=utf-8,' + invoiceHTML
+      linkToDownload.download = 'invoice.html'
+      linkToDownload.click()
+
       this.#api.createNewOrder()
       this.#updateOrderDataToCurrent()
     })

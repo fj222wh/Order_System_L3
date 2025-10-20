@@ -81,10 +81,34 @@ export class OrderSystemApi {
 
   /**
    * Creates a new order.
+   *
    */
   async createNewOrder () {
     await fetch('/api/order/create', {
       method: 'POST'
     })
+  }
+
+  /**
+   * Creates the invoice.
+   *
+   * @param {string} fullName - The customer's full name
+   * @param {string} email - The customer's email
+   * @returns {string} Returns a HMTL string
+   */
+  async createInvoice (fullName, email) {
+    const data = {
+      fullName, email
+    }
+
+    const res = await fetch('/api/order/invoice', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+
+    const content = await res.json()
+    const encoded = encodeURIComponent(content)
+    return encoded
   }
 }
