@@ -11,8 +11,7 @@ export class ApiMediator {
    * @param {string} url The url
    * @returns {object} Returns the data about the current state and data of the store.
    */
-  async getCurrentData (url) {
-    // const res = await fetch('/api/data')
+  async getData (url) {
     const res = await fetch(url)
     const data = await res.json()
     return await data

@@ -20,8 +20,8 @@ export class OrderSystemUI {
   /**
    * Renders the products.
    *
-   * @param {object} products The products
-   * @param productsContainer
+   * @param {Array} products The products
+   * @param {HTMLElement} productsContainer The HTML element containing all of the product
    */
   renderProducts (products, productsContainer) {
     products.forEach(product => {
@@ -42,14 +42,6 @@ export class OrderSystemUI {
 
   /**
    *
-   * @param data
-   */
-  #createProduct (data) {
-
-  }
-
-  /**
-   *
    * @param categories
    */
   renderCategories (categories) {
@@ -61,6 +53,17 @@ export class OrderSystemUI {
    */
   updateTotalPrice () {
 
+  }
+
+  /**
+   * Updates background color of the category element to simulate it being the active category.
+   *
+   * @param {HTMLElement} activeCategoryElement The HTML element for the category
+   */
+  updateCategoryStatus (activeCategoryElement) {
+    const categoryButtons = document.querySelectorAll('.categoryBtn')
+    categoryButtons.forEach(btn => btn.classList.remove('selectedCategory'))
+    activeCategoryElement.classList.add('selectedCategory')
   }
 
   /**

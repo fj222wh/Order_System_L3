@@ -57,7 +57,6 @@ export class ApiController {
   addProductPost (req, res) {
     const order = this.#getOrderFromSession(req)
     const body = req.body
-    // TODO: add the product to the session/order storage
 
     const id = Number(body.id)
     const product = allProductsFromCatalog.findProduct(id)
@@ -88,7 +87,7 @@ export class ApiController {
   }
 
   /**
-   * Get all products from a category
+   * Get all products from a category.
    *
    * @param {object} req The request object.
    * @param {object} res The response object.
@@ -117,7 +116,7 @@ export class ApiController {
   }
 
   /**
-   * Removes an order item from the order
+   * Removes an order item from the order.
    *
    * @param {object} req The request object.
    * @param {object} res The response object.
@@ -134,9 +133,10 @@ export class ApiController {
   }
 
   /**
+   * Creates the HTML invoice.
    *
-   * @param req
-   * @param res
+   * @param {object} req The request object.
+   * @param {object} res The response object.
    */
   createInvoice (req, res) {
     const order = this.#getOrderFromSession(req)
