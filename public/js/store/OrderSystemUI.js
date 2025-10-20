@@ -44,7 +44,6 @@ export class OrderSystemUI {
    * Renders the products.
    *
    * @param {Array} products The products
-   * @param {HTMLElement} productsContainer The HTML element containing all of the product
    */
   renderProducts (products) {
     this.#clearDisplayedProducts()
@@ -82,7 +81,6 @@ export class OrderSystemUI {
    * Creates and renders the HTML element for each category.
    *
    * @param {object} categories The categories and it's products within each category.
-   * @param {HTMLElement} categoryContainer The container for the categories
    */
   renderCategories (categories) {
     categories.forEach((category, index) => {
@@ -93,6 +91,17 @@ export class OrderSystemUI {
         categoryElement.classList.add('selectedCategory')
       }
     })
+  }
+
+  /**
+   * Updates the order display.
+   *
+   * @param {Array} updatedData Array containing the data
+   */
+  updateOrderDisplay (updatedData) {
+    this.updateTotalPrice(updatedData.orderTotalPrice)
+    this.updateCart(updatedData.orderItems)
+    this.updateOrderNumber(updatedData.orderNumber)
   }
 
   /**
@@ -136,7 +145,6 @@ export class OrderSystemUI {
   /**
    * Updates the new price.
    *
-   * @param {HTMLElement} totalPriceDisplayElement - The element for displaying the total price.
    * @param {number} newPrice - The new price
    */
   updateTotalPrice (newPrice) {
@@ -144,8 +152,9 @@ export class OrderSystemUI {
   }
 
   /**
+   * Updates the display order number.
    *
-   * @param number
+   * @param {number} number - The order number
    */
   updateOrderNumber (number) {
     this.#orderNumber.textContent = 'Order number: #' + number

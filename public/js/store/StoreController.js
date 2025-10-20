@@ -2,13 +2,20 @@ import { OrderSystemApi } from './OrderSystemApi.js'
 import { OrderSystemUI } from './OrderSystemUI.js'
 
 /**
- * Orchestrating the store
+ * Handling the orchestration between the OrderSystem API and the OrderSystemUI.
  *
  * @author Filippa Johansson
  * @version 1.0.0
  */
 export class StoreController {
+  /**
+   * The class for handling UI
+   */
   #ui
+
+  /**
+   * The class that handles the API
+   */
   #api
 
   /**
@@ -24,7 +31,7 @@ export class StoreController {
   /**
    * Starts the application.
    */
-  async renderStore () {
+  async createStoreView () {
     const data = await this.#api.getData()
     this.#ui.updateOrderNumber(data.orderNumber)
     this.#ui.renderProducts(data.products)
@@ -32,7 +39,6 @@ export class StoreController {
     this.#ui.renderCategories(data.categories)
     this.#ui.updateCart(data.orderItems)
     this.#ui.updateTotalPrice(data.orderTotalPrice)
-
     this.#ui.dispatchCustomEvents()
     this.#addEventListeners()
   }
@@ -41,12 +47,8 @@ export class StoreController {
    * Updates the view to the current data.
    */
   async #updateOrderDataToCurrent () {
-    const updatedData = await this.#api.getOrderData()
-    console.log('this is the new Data')
-    console.log(updatedData)
-    this.#ui.updateTotalPrice(updatedData.orderTotalPrice)
-    this.#ui.updateCart(updatedData.orderItems)
-    this.#ui.updateOrderNumber(updatedData.orderNumber)
+    const data = await this.#api.getOrderData()
+    this.#ui.updateOrderDisplay(data)
   }
 
   /**
@@ -83,8 +85,6 @@ export class StoreController {
 
     document.addEventListener('categorySelected', async (e) => {
       const data = await this.#api.getProductsFromCategory(e.detail.selectedCategory)
-      console.log('DATA FROM CHOSEN CATEGORY')
-      console.log(data)
       this.#ui.renderProducts(data)
     })
   }
@@ -103,6 +103,3 @@ export class StoreController {
     }
   }
 }
-
-const store = new StoreController('kr')
-store.renderStore()
