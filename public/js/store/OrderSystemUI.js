@@ -314,7 +314,7 @@ export class OrderSystemUI {
   /**
    * Adds the event listener to the delete button.
    *
-   * @param {HTMLElement} deleteBtn - The button to delete to order item
+   * @param deleteBtn
    */
   #addEventListenerToDeleteBtn (deleteBtn) {
     deleteBtn.addEventListener('click', (e) => {
