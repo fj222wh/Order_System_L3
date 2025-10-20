@@ -285,7 +285,6 @@ export class OrderSystemUI {
 
     this.#payBtn.addEventListener('click', (e) => {
       if (this.#cartIsEmpty() === true) {
-        alert('Your cart is empty. Add items before paying.')
         return
       }
 
@@ -298,7 +297,17 @@ export class OrderSystemUI {
         return
       }
 
-      const invoiceEvent = new CustomEvent('createInvoice')
+      this.#invoiceForm.classList.remove('hidden')
+      this.#orderButtonsContainer.classList.add('hidden')
+    })
+
+    this.#sendInvoiceToServerBtn.addEventListener('click', (e) => {
+      this.#orderButtonsContainer.classList.remove('hidden')
+      this.#invoiceForm.classList.add('hidden')
+
+      const invoiceEvent = new CustomEvent('createInvoice', {
+        details: { e }
+      })
       document.dispatchEvent(invoiceEvent)
     })
   }

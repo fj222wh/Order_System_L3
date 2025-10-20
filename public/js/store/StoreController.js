@@ -38,14 +38,7 @@ export class StoreController {
   }
 
   /**
-   *
-   */
-  reset () {
-
-  }
-
-  /**
-   *
+   * Updates the view to the current data.
    */
   async #updateOrderDataToCurrent () {
     const updatedData = await this.#api.getOrderData()
@@ -53,6 +46,7 @@ export class StoreController {
     console.log(updatedData)
     this.#ui.updateTotalPrice(updatedData.orderTotalPrice)
     this.#ui.updateCart(updatedData.orderItems)
+    this.#ui.updateOrderNumber(updatedData.orderNumber)
   }
 
   /**
@@ -66,17 +60,24 @@ export class StoreController {
     })
 
     document.addEventListener('emptyOrder', (e) => {
-      this.#ui.clearOrderDisplay()
       this.#api.emptyCart()
-      this.#ui.updateTotalPrice(0)
+      this.#updateOrderDataToCurrent()
     })
 
     document.addEventListener('payOrder', (e) => {
       alert('Simulate paying')
+      this.#api.createNewOrder()
+      this.#updateOrderDataToCurrent()
     })
 
     document.addEventListener('deleteOrderItem', (e) => {
       this.#api.deleteOrderItem(e.detail.id)
+      this.#updateOrderDataToCurrent()
+    })
+
+    document.addEventListener('createInvoice', (e) => {
+      alert('create invoice')
+      this.#api.createNewOrder()
       this.#updateOrderDataToCurrent()
     })
   }

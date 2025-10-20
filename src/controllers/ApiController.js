@@ -7,7 +7,6 @@
 
 import { allProductsFromCatalog, store } from '../data/storeData.js'
 import { Order } from '../logic/Order.js'
-
 /**
  *
  */
@@ -59,7 +58,8 @@ export class ApiController {
 
     const data = {
       orderTotalPrice: order.calculateTotalPrice(),
-      orderItems: order.toJSON()
+      orderItems: order.toJSON(),
+      orderNumber: order.getOrderNumber()
     }
 
     res.json(data)

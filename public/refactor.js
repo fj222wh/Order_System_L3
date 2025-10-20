@@ -9,23 +9,6 @@ function updateCategoryStatus (activeCategoryElement) {
   activeCategoryElement.classList.add('selectedCategory')
 }
 
-/**
- * Delete an order item.
- *
- * @param {HTMLElement} orderItemToDelete The
- */
-async function deleteOrderItem (orderItemToDelete) {
-  orderItemToDelete.remove()
-  const id = orderItemToDelete.getAttribute('data-id')
-  const res = await fetch(`/api/order/remove/${encodeURIComponent(id)}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' }
-  })
-
-  const data = await res.json()
-  updateTotalPrice(data.totalPrice)
-}
-
 createInvoiceBtn.addEventListener('click', (e) => {
   // Skicka get hämta invoice?
   // Skapa så den kan laddas ner av användare

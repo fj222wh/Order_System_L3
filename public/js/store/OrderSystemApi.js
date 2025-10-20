@@ -65,4 +65,13 @@ export class OrderSystemApi {
       headers: { 'Content-Type': 'application/json' }
     })
   }
+
+  /**
+   * Creates a new order.
+   */
+  async createNewOrder () {
+    await fetch('/api/order/create', {
+      method: 'POST'
+    })
+  }
 }
