@@ -80,6 +80,13 @@ export class StoreController {
       this.#api.createNewOrder()
       this.#updateOrderDataToCurrent()
     })
+
+    document.addEventListener('categorySelected', async (e) => {
+      const data = await this.#api.getProductsFromCategory(e.detail.selectedCategory)
+      console.log('DATA FROM CHOSEN CATEGORY')
+      console.log(data)
+      this.#ui.renderProducts(data)
+    })
   }
 
   /**

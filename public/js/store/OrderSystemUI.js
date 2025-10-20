@@ -47,6 +47,8 @@ export class OrderSystemUI {
    * @param {HTMLElement} productsContainer The HTML element containing all of the product
    */
   renderProducts (products) {
+    this.#clearDisplayedProducts()
+
     products.forEach(product => {
       const productDiv = document.createElement('div')
       productDiv.setAttribute('data-id', product.id)
@@ -94,6 +96,17 @@ export class OrderSystemUI {
   }
 
   /**
+   * Updates background color of the category element to simulate it being the active category.
+   *
+   * @param {HTMLElement} activeCategoryElement The HTML element for the category
+   */
+  #updateCategoryStatus (activeCategoryElement) {
+    const categoryButtons = document.querySelectorAll('.categoryBtn')
+    categoryButtons.forEach(btn => btn.classList.remove('selectedCategory'))
+    activeCategoryElement.classList.add('selectedCategory')
+  }
+
+  /**
    * Creates the category HTML element.
    *
    * @param {string} category The category
@@ -106,11 +119,12 @@ export class OrderSystemUI {
     categoryElement.classList.add('categoryBtn')
 
     categoryElement.addEventListener('click', (e) => {
-      console.log('Yoou chose this category: ' + e.target.getAttribute('data-category'))
+      const category = e.target.getAttribute('data-category')
+      this.#updateCategoryStatus(e.target)
 
       const event = new CustomEvent('categorySelected', {
         detail: {
-          selectCategory: e.target.getAttribute('data-category')
+          selectedCategory: category
         }
       })
       document.dispatchEvent(event)

@@ -207,6 +207,7 @@
 .orderItem-edit-icon {
     height: 15px;
     width: 15px;
+    cursor: pointer;
 }
 
 .orderItem-options {

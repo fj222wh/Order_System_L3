@@ -30,6 +30,19 @@ export class OrderSystemApi {
   }
 
   /**
+   * Get products from the chosen category.
+   *
+   * @param {string} category The category
+   * @returns {Array} Returns an array with the data
+   */
+  async getProductsFromCategory (category) {
+    const res = await fetch(`/api/products/${encodeURIComponent(category)}`)
+    const data = res.json()
+
+    return data
+  }
+
+  /**
    * Gets the data about the order.
    *
    * @returns {object} Returns data about the order
