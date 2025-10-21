@@ -2,12 +2,24 @@
 ## Chapter 2 - Names
 I have tried to continue to be careful when giving the classes, variables and function names. The names are sometimes a bit longer, but still readable to give extra information to the context to make it more understandable. Names used within this specific field has been used to make it understandable for most people what's going on in the code.
 
+I chose to use some longer names to make it easier to understand the context, even if the readability got lower.
+
+E.g the function name `renderProductsFromCategory` is a bit longer, but it also gives the reader enough context to understand what the function does without having to read and understand all of the code inside.
+![example of longer names](./images/3_2.png)
+
+
 ## Chapter 3 - Functions
-For this project I have tried to write the code with higher abstraction, but honestly I've been struggling to know how to decouple the classes.
+For this project I have tried to write the code with higher abstraction, but honestly I've been struggling to know how to decouple the classes sometimes, espeecially in the front end.
+![frontend](./images/3.png)
+I tried to divide it into several classes, the OrderSystemApi handles the sending and fetching data to the backend while the OrderSystemUI renders and handles the view, while the StoreController is like the orchestrator which connects these two classes to be able to render data from the backend in the front end, and send data to the backend.
 
 In the backend I thought it was easier to keep the models, controllers, and logic layers seperated but in the front end I honestly struggled with keeping the front.
 
-I've tried to make sure the functions 
+![image of abstraction](./images/3_1.png)
+
+I've tried to write the code with higher abstraction to make it easier to follow the code. E.g here when an order item is being deleted, the code is hid inside these functions instead of having all of the code in the same function. Each subfunction does one thing.
+
+When writing the code I tried thinking about not having to use too many arguments. Most of the time I only use monadic and dyadic functions.
 
 
 ## Chapter 4 - Comments

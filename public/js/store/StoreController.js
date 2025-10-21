@@ -46,7 +46,7 @@ export class StoreController {
   /**
    * Updates the view to the current data.
    */
-  async #updateOrderDataToCurrent () {
+  async #updateOrderData () {
     const data = await this.#api.getOrderData()
     this.#ui.updateOrderDisplay(data)
   }
@@ -104,7 +104,7 @@ export class StoreController {
   async #addProduct (event) {
     const productObject = this.#createProductObject(event.detail.selectedProduct)
     await this.#api.addProduct(productObject)
-    this.#updateOrderDataToCurrent()
+    this.#updateOrderData()
   }
 
   /**
@@ -112,7 +112,7 @@ export class StoreController {
    */
   #emptyOrder () {
     this.#api.emptyCart()
-    this.#updateOrderDataToCurrent()
+    this.#updateOrderData()
   }
 
   /**
@@ -120,7 +120,7 @@ export class StoreController {
    */
   #resetState () {
     this.#api.createNewOrder()
-    this.#updateOrderDataToCurrent()
+    this.#updateOrderData()
   }
 
   /**
@@ -130,7 +130,7 @@ export class StoreController {
    */
   #deleteOrderItem (event) {
     this.#api.deleteOrderItem(event.detail.id)
-    this.#updateOrderDataToCurrent()
+    this.#updateOrderData()
   }
 
   /**

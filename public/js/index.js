@@ -5,7 +5,7 @@
  * @version 1.0.0
  */
 
-import { StoreController } from './StoreController.js'
+import { StoreController } from './store/StoreController.js'
 
 const store = new StoreController('€')
 store.createStoreView()
