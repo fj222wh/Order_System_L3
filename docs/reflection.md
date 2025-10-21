@@ -43,7 +43,7 @@ To keep the indentation correct to enhance readability the extension Prettier ha
 
 
 ## Chapter 6
-Law of Demeter says that a module shouldn't call methods on objects it doesn't create, which isn't a parameter and that 
+Law of Demeter says that a module should only communicate with an object with its a field from its own class, an object created by the function or an object which has been passed in as an argument.
 
 To avoid breaking the law of Dermeter by not calling a method directly on the returned object. Instance I divided it like this to avoid creating a chain of method-calls. I did not do it like this:
 ```js
@@ -62,12 +62,46 @@ In this appplication I have tried to avoid return codes and only throw Exception
 
 However, unfortunately one major improvement that I didn't implement is handling the errors in a try-catch on the front end. Right now I have not implemented displaying the error messages or communicating that some is wrong to the user. The error handling implemented is mainly in the backend where the server errors are logged to the developer.
 ## Chapter 8
+Honestly, I did find it hard to know how to have clean boundaries as they explain in Clean Code. Benefits of having clear boundaries between your application and the module or third-part library you use is that you will not have to worry as much if something in the third-part changes, then you only have to update the adapter.
+
+I did not create any adapter on the backend, I only create instances of the classes from my module from L2. I probably should have kept better boundaries between the code from L2 and the code from L3, but I don't know how I should've made an adapter in this case.
+
+Since I was the one who created the module used for this project I didn't write particular test learning cases for understanding my third-part code. Although jest tests were made when developing and testing the module to make sure it behaves as aspected, but I never created tests for how it should be used in my application.
 
 ## Chapter 9
 Unit tests have not been used when creating the tests for the application. Unit tests were made with jest for the module.
 
-I didn't apply the principles like // TODO: Give example
+**TDD**
+The Three Laws of TDD:
+```
+You may not write production code until you have written a failing unit test
+```
+
+
+```
+You may not write more of a unit test than is sufficient to fail, and not compiling is failing
+````
+
+````
+You may not write more production code than is sufficient to pass the currently failing test
+````
+
+I did not follow these rule when writing the tests for L2 since we hadn't read about these rules yet. I implemented the tests along the way while writing the code to try to see if the methods worked properly. My way of working was not test driven since I lack experience and knowledge in how to do it.
+
+I did the opposite, I wrote the production code first and then the tests but I tried to test the code while writing it.
+
+When creating the tests, I tried to keep the tests clean and check that each test case test one thing. Just like clean code, the tests have to be clean as well with high readability. When writing the test code I tried to keep the functions not too long and with logic names for the context.
+
+**FIRST**
+According to the FIRST rules for testing most of the rules apply to my tests. The tests are fast to run, the tests are made with jest and can be ran by using the command `npm run test`. They are independent of each other, each test-file only test one class and its methods. I tried to not make it coupled, unless one class was dependent on another class. The tests are selfvalidating and they always return true or false to determine whether the test has passed or failed. The test are repeatable and are written in a time close to when the production code was written.
+
 ## Chapter 10
+I tried to keep the classes not too big, and that each class has responsible for one thing. The framework Express has been used in this project where I try to follow the MVC structure. Different classes has been made for the business logic, routers, controllers and the front end. 
+
+When creating the classes I always had encapsulation in and tried to make fields and methods private if they no one outside of the class should have access to them. 
+
+I may have broken the single responsibility principle, especially in the front end. I struggled with the structure and how to organize my classes in the front end since they created all of the HTML-elements dynamically. I think it would had been a lot easier if I hade built webcomponents instead of rendering each element with its attributes by using `document.createElement()` and append other subelements and attributes this way. The class `OrderSystemUI` got a bit too long, but I did not know how to refactor it. I think it is very hard to know how to decouple classes while keeping high cohesion.
+
 ## Chapter 11
 
 ## Summary
