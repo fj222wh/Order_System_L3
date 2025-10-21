@@ -128,8 +128,8 @@ export class StoreController {
    *
    * @param {Event} event - The event
    */
-  #deleteOrderItem (event) {
-    this.#api.deleteOrderItem(event.detail.id)
+  async #deleteOrderItem (event) {
+    await this.#api.deleteOrderItem(event.detail.id)
     this.#updateOrderData()
   }
 
