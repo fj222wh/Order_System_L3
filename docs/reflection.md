@@ -103,6 +103,15 @@ When creating the classes I always had encapsulation in and tried to make fields
 I may have broken the single responsibility principle, especially in the front end. I struggled with the structure and how to organize my classes in the front end since they created all of the HTML-elements dynamically. I think it would had been a lot easier if I hade built webcomponents instead of rendering each element with its attributes by using `document.createElement()` and append other subelements and attributes this way. The class `OrderSystemUI` got a bit too long, but I did not know how to refactor it. I think it is very hard to know how to decouple classes while keeping high cohesion.
 
 ## Chapter 11
+At first I hadn't decoupled the classes with dependency injection, before it looked like this. When creating the instance of StoreControllerView. I created the instances of OrderSystemUI and OrderSystemApi in the constructor which made the coupling hard.
+
+![example_before](./images/11.1.png)
+
+Dependency injection is good to make the code more flexibile, testable and maintainable. When the code has fewer dependencies it will be easier to test the specific part. It's easier to change parts, e.g change the api or the ui to another version, or another api. Everything will still work as long as the api provides the methodes the StoreControllerView expects.
+
+Now with this implementation of the StoreControllerView is more flexibile and the coupling is lower. The dependencies are passed in as arguments to the StoreControllerView.
+
+![example of DI](./images/11.2.png)
 
 ## Summary
 Overall this has been an interesting project, to develop both the module, refactor it and then create the app based on our own module. Personally I felt that it was difficult to implement everything I had wanted during the given time but at least I could manage to provide the basic functionality to simulate how I would want the app to work.
