@@ -7,7 +7,7 @@ import { OrderSystemUI } from './OrderSystemUI.js'
  * @author Filippa Johansson
  * @version 1.0.0
  */
-export class StoreController {
+export class StoreControllerView {
   /**
    * The class for handling UI
    */

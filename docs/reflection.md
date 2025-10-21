@@ -32,7 +32,6 @@ With using JS Doc, it becomes a bit repetitive, I think by reading the name of t
 ![example of js doc](./images/4.png)
 
 
-
 ## Chapter 5 - Formatting
 When writing the code I tried to keep the length of the functions horisontally short if possible.
 
@@ -40,29 +39,30 @@ Vertically, the file sometimes became too long. Most of the times the files are 
 
 Only in one class I struggled with the file-length. In the `StoreController` in the front end, the class which acts as an orchestrator between the class that retrieves and sends data and the UI. I thought it was difficult to know how to divide the class into smaller parts to keep it shorter since a lot of the code is used to create HTML-elements and set their attributes. If I would have used web components instead this issue would have been solved and the files would have been more modular, flexible and shorter but due to time I couldn't refactor and redo the UI.
 
+To keep the indentation correct to enhance readability the extension Prettier has been used along with the eslint from LNU.
+
+
 ## Chapter 6
-Classes have been used to organise objects
+Law of Demeter says that a module shouldn't call methods on objects it doesn't create, which isn't a parameter and that 
 
-Both in the front end and backend. I've tried to write it as OOP as I could.
+To avoid breaking the law of Dermeter by not calling a method directly on the returned object. Instance I divided it like this to avoid creating a chain of method-calls. I did not do it like this:
+```js
+const orderTotalPrice = this.#getOrderFromSession(req).calculateTotalPrice()
+```
+Instead I chose to divide it like this to only reach the public methods on the order-object.
+![example](./images/6.png)
 
-Fields and methods that shouldn't be accessiable outside its class has been set to private to avoid missuse and bugs.
-
-The classes encapsulates values
-
-Law of Demeter says that a module shouldn't know about 
-
-Hybrids
+Both in the front end and backend - I've tried to write it as OOP as I could. Instead of using magic numbers or painted types, I have tried creating classes. In this way it is possible to encapsulate behaviour and attributes. Fields and methods that shouldn't be accessiable outside its class has been set to private to avoid missuse and bugs.
 
 
 ## Chapter 7
-Through out the program exceptions are thrown when something goes wrong. This is mostly implemented on the backend. There is validation in the backend which checks the incoming data, and if it's not the data/type we expected an Exception wll be thrown. 
+Through out the program exceptions are thrown when something goes wrong. This is mostly implemented on the backend. There is validation in the backend which checks the incoming data, and if it's not the data/type we expected an Exception wll be thrown.
 
-In this appplication I have tried to avoid return codes.
+In this appplication I have tried to avoid return codes and only throw Exceptions. I don't return NullObjects, instead if something is not found an exception will be thrown.
 
-I don't return NullObjects, instead if something is not found an exception will be thrown.
-
-However, unfortunately one major improvment that I didn't implement is handling the errors in a try-catch on the front end. Right now I have not implemented displaying the error messages or communicating that some is wrong to the user. The error handling implemented is mainly in the backend where the server errors are logged to the developer.
+However, unfortunately one major improvement that I didn't implement is handling the errors in a try-catch on the front end. Right now I have not implemented displaying the error messages or communicating that some is wrong to the user. The error handling implemented is mainly in the backend where the server errors are logged to the developer.
 ## Chapter 8
+
 ## Chapter 9
 Unit tests have not been used when creating the tests for the application. Unit tests were made with jest for the module.
 

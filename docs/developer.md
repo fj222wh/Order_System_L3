@@ -13,7 +13,6 @@ This ordersystem has implemented the basic functionality:
 - Simulate paying for an order
 - Genereate an invoice of the order in HTML
 
-
 ## Known bugs and improvements
 The version of the current implementation of the code is incomplete and unstable. The code quality has to be checked.
 
