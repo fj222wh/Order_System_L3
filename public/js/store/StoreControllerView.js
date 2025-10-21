@@ -21,11 +21,12 @@ export class StoreControllerView {
   /**
    * The constructor.
    *
-   * @param {string} currency The currency for the UI.
+   * @param {OrderSystemUI} orderSystemUI The class handeling the ui
+   * @param {OrderSystemApi} orderSystemApi The class communicating with the api in the backend
    */
-  constructor (currency) {
-    this.#ui = new OrderSystemUI(currency)
-    this.#api = new OrderSystemApi()
+  constructor (orderSystemUI, orderSystemApi) {
+    this.#ui = orderSystemUI
+    this.#api = orderSystemApi
   }
 
   /**

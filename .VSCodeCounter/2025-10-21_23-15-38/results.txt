@@ -1,0 +1,30 @@
+Date : 2025-10-21 23:15:38
+Directory : /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/logic
+Total : 6 files,  517 codes, 418 comments, 126 blanks, all 1061 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |          6 |        517 |        418 |        126 |      1,061 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                            | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                               |          6 |        517 |        418 |        126 |      1,061 |
++-------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                        | language   | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/logic/InvoiceView.js    | JavaScript |        126 |         27 |         10 |        163 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/logic/ModelInvoice.js   | JavaScript |         75 |         83 |         21 |        179 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/logic/Order.js          | JavaScript |        119 |         94 |         35 |        248 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/logic/Product.js        | JavaScript |         72 |         99 |         22 |        193 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/logic/ProductCatalog.js | JavaScript |         62 |         46 |         18 |        126 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/logic/Store.js          | JavaScript |         63 |         69 |         20 |        152 |
+| Total                                                                                           |            |        517 |        418 |        126 |      1,061 |
++-------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

@@ -1,0 +1,11 @@
+"filename", "language", "JavaScript", "Markdown", "comment", "blank", "total"
+"/Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/js/components/my-orderItem/README.md", "Markdown", 0, 1, 0, 0, 1
+"/Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/js/components/my-orderItem/index.js", "JavaScript", 1, 0, 0, 1, 2
+"/Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/js/components/my-orderItem/my-order-item.css.js", "JavaScript", 16, 0, 0, 2, 18
+"/Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/js/components/my-orderItem/my-order-item.html.js", "JavaScript", 8, 0, 0, 2, 10
+"/Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/js/components/my-orderItem/my-order-item.js", "JavaScript", 19, 0, 23, 8, 50
+"/Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/js/index.js", "JavaScript", 3, 0, 6, 3, 12
+"/Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/js/store/OrderSystemApi.js", "JavaScript", 59, 0, 46, 13, 118
+"/Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/js/store/OrderSystemUI.js", "JavaScript", 241, 0, 118, 50, 409
+"/Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/js/store/StoreControllerView.js", "JavaScript", 82, 0, 58, 19, 159
+"Total", "-", 429, 1, 251, 98, 779

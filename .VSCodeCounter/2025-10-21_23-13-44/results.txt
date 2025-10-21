@@ -1,0 +1,106 @@
+Date : 2025-10-21 23:13:44
+Directory : /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3
+Total : 53 files,  7314 codes, 897 comments, 522 blanks, all 8733 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          3 |      5,122 |          0 |          2 |      5,124 |
+| JavaScript         |         31 |      1,537 |        894 |        323 |      2,754 |
+| Markdown           |          6 |        293 |          0 |        127 |        420 |
+| PostCSS            |          2 |        267 |          0 |         50 |        317 |
+| HTML               |         10 |         92 |          3 |         20 |        115 |
+| JSON with Comments |          1 |          3 |          0 |          0 |          3 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                        | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                           |         53 |      7,314 |        897 |        522 |      8,733 |
+| . (Files)                                                                                                                   |          5 |      5,166 |          0 |         14 |      5,180 |
+| docs                                                                                                                        |          4 |        251 |          0 |        115 |        366 |
+| public                                                                                                                      |         11 |        697 |        251 |        148 |      1,096 |
+| public/css                                                                                                                  |          2 |        267 |          0 |         50 |        317 |
+| public/js                                                                                                                   |          9 |        430 |        251 |         98 |        779 |
+| public/js (Files)                                                                                                           |          1 |          3 |          6 |          3 |         12 |
+| public/js/components                                                                                                        |          5 |         45 |         23 |         13 |         81 |
+| public/js/components/my-orderItem                                                                                           |          5 |         45 |         23 |         13 |         81 |
+| public/js/store                                                                                                             |          3 |        382 |        222 |         82 |        686 |
+| src                                                                                                                         |         33 |      1,200 |        646 |        245 |      2,091 |
+| src (Files)                                                                                                                 |          1 |         45 |         21 |         19 |         85 |
+| src/config                                                                                                                  |          2 |         34 |         25 |         11 |         70 |
+| src/controllers                                                                                                             |          3 |         94 |         96 |         21 |        211 |
+| src/data                                                                                                                    |          2 |        257 |         12 |          7 |        276 |
+| src/logic                                                                                                                   |          6 |        517 |        418 |        126 |      1,061 |
+| src/middleware                                                                                                              |          2 |         47 |         17 |          8 |         72 |
+| src/models                                                                                                                  |          3 |         78 |         32 |         15 |        125 |
+| src/routes                                                                                                                  |          4 |         36 |         22 |         18 |         76 |
+| src/views                                                                                                                   |         10 |         92 |          3 |         20 |        115 |
+| src/views/admin                                                                                                             |          2 |          7 |          0 |          5 |         12 |
+| src/views/errors                                                                                                            |          4 |         19 |          0 |          0 |         19 |
+| src/views/layouts                                                                                                           |          1 |         16 |          3 |          3 |         22 |
+| src/views/partials                                                                                                          |          2 |         11 |          0 |          0 |         11 |
+| src/views/store                                                                                                             |          1 |         39 |          0 |         12 |         51 |
++-----------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                                                    | language           | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/.eslintrc.json                                          | JSON with Comments |          3 |          0 |          0 |          3 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/README.md                                               | Markdown           |         41 |          0 |         12 |         53 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/docs/developer.md                                       | Markdown           |         35 |          0 |         17 |         52 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/docs/reflection.md                                      | Markdown           |         71 |          0 |         48 |        119 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/docs/test-report.md                                     | Markdown           |         15 |          0 |          4 |         19 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/docs/tests.md                                           | Markdown           |        130 |          0 |         46 |        176 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/nodemon.json                                            | JSON               |          3 |          0 |          0 |          3 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/package-lock.json                                       | JSON               |      5,084 |          0 |          1 |      5,085 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/package.json                                            | JSON               |         35 |          0 |          1 |         36 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/css/store.css                                    | PostCSS            |        245 |          0 |         46 |        291 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/css/style.css                                    | PostCSS            |         22 |          0 |          4 |         26 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/js/components/my-orderItem/README.md             | Markdown           |          1 |          0 |          0 |          1 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/js/components/my-orderItem/index.js              | JavaScript         |          1 |          0 |          1 |          2 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/js/components/my-orderItem/my-order-item.css.js  | JavaScript         |         16 |          0 |          2 |         18 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/js/components/my-orderItem/my-order-item.html.js | JavaScript         |          8 |          0 |          2 |         10 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/js/components/my-orderItem/my-order-item.js      | JavaScript         |         19 |         23 |          8 |         50 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/js/index.js                                      | JavaScript         |          3 |          6 |          3 |         12 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/js/store/OrderSystemApi.js                       | JavaScript         |         59 |         46 |         13 |        118 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/js/store/OrderSystemUI.js                        | JavaScript         |        241 |        118 |         50 |        409 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/public/js/store/StoreControllerView.js                  | JavaScript         |         82 |         58 |         19 |        159 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/config/mongoose.js                                  | JavaScript         |         20 |         19 |          8 |         47 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/config/sessionOptions.js                            | JavaScript         |         14 |          6 |          3 |         23 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/controllers/AdminController.js                      | JavaScript         |          8 |         20 |          2 |         30 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/controllers/ApiController.js                        | JavaScript         |         81 |         63 |         18 |        162 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/controllers/StoreController.js                      | JavaScript         |          5 |         13 |          1 |         19 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/data/productData.js                                 | JavaScript         |        248 |          6 |          2 |        256 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/data/storeData.js                                   | JavaScript         |          9 |          6 |          5 |         20 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/logic/InvoiceView.js                                | JavaScript         |        126 |         27 |         10 |        163 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/logic/ModelInvoice.js                               | JavaScript         |         75 |         83 |         21 |        179 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/logic/Order.js                                      | JavaScript         |        119 |         94 |         35 |        248 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/logic/Product.js                                    | JavaScript         |         72 |         99 |         22 |        193 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/logic/ProductCatalog.js                             | JavaScript         |         62 |         46 |         18 |        126 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/logic/Store.js                                      | JavaScript         |         63 |         69 |         20 |        152 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/middleware/errorhandler.js                          | JavaScript         |         24 |         14 |          6 |         44 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/middleware/helmetCSP.js                             | JavaScript         |         23 |          3 |          2 |         28 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/models/OrderModel.js                                | JavaScript         |         33 |          5 |          5 |         43 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/models/ProductModel.js                              | JavaScript         |         29 |          5 |          5 |         39 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/models/baseSchema.js                                | JavaScript         |         16 |         22 |          5 |         43 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/routes/adminRouter.js                               | JavaScript         |          6 |          3 |          4 |         13 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/routes/apiRouter.js                                 | JavaScript         |         12 |          6 |          5 |         23 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/routes/router.js                                    | JavaScript         |         13 |          7 |          5 |         25 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/routes/storeRouter.js                               | JavaScript         |          5 |          6 |          4 |         15 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/server.js                                           | JavaScript         |         45 |         21 |         19 |         85 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/views/admin/index.ejs                               | HTML               |          5 |          0 |          4 |          9 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/views/admin/productcatalog.ejs                      | HTML               |          2 |          0 |          1 |          3 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/views/errors/403.ejs                                | HTML               |          6 |          0 |          0 |          6 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/views/errors/404.ejs                                | HTML               |          6 |          0 |          0 |          6 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/views/errors/500.ejs                                | HTML               |          6 |          0 |          0 |          6 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/views/errors/error.ejs                              | HTML               |          1 |          0 |          0 |          1 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/views/layouts/default.ejs                           | HTML               |         16 |          3 |          3 |         22 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/views/partials/flash.ejs                            | HTML               |          5 |          0 |          0 |          5 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/views/partials/header.ejs                           | HTML               |          6 |          0 |          0 |          6 |
+| /Users/filippa/Universitet/År 2/1dv610/Examinations/Order_System_L3/src/views/store/index.ejs                               | HTML               |         39 |          0 |         12 |         51 |
+| Total                                                                                                                       |                    |      7,314 |        897 |        522 |      8,733 |
++-----------------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

@@ -69,7 +69,7 @@ export class OrderSystemUI {
     const name = document.createElement('p')
     name.textContent = product.name
     const price = document.createElement('p')
-    price.textContent = product.price.toFixed(2) + this.#currency
+    price.textContent = product.price.toFixed(2) + ' ' + this.#currency
     productElement.appendChild(name)
     productElement.appendChild(price)
 
@@ -175,7 +175,7 @@ export class OrderSystemUI {
    * @param {number} newPrice - The new price
    */
   updateTotalPrice (newPrice) {
-    this.#TotalPriceDisplay.textContent = newPrice.toFixed(2)
+    this.#TotalPriceDisplay.textContent = newPrice.toFixed(2) + ' ' + this.#currency
   }
 
   /**
@@ -256,7 +256,7 @@ export class OrderSystemUI {
     productName.textContent = orderItem.name
     const productPrice = document.createElement('p')
     productPrice.classList.add('orderItem-product-price')
-    productPrice.textContent = orderItem.price.toFixed(2) + `${this.#currency}`
+    productPrice.textContent = orderItem.price.toFixed(2) + ' ' + `${this.#currency}`
     const productQuantity = document.createElement('p')
     productQuantity.classList.add('orderItem-product-quantity')
     productQuantity.textContent = 'x' + orderItem.quantity
