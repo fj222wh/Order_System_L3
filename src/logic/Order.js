@@ -3,7 +3,6 @@
  */
 
 import { Product } from './Product.js'
-import { Invoice } from './Invoice.js'
 
 /**
  *
@@ -221,19 +220,6 @@ export class Order {
    */
   clearCart () {
     this.#orderItemsInCart.length = 0
-  }
-
-  /**
-   * Creates the invoice.
-   *
-   * @param {string} name The name
-   * @param {string} email The email
-   * @param {string} currency The currency
-   * @returns {HTMLCollection} Returns HTML
-   */
-  createInvoice (name, email, currency) {
-    const invoice = new Invoice(this, name, email, currency)
-    return invoice.createInvoice()
   }
 
   /**

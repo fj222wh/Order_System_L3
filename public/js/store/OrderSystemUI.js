@@ -314,7 +314,7 @@ export class OrderSystemUI {
   /**
    * Adds the event listener to the delete button.
    *
-   * @param deleteBtn
+   * @param {HTMLElement} deleteBtn The button to delete an order item
    */
   #addEventListenerToDeleteBtn (deleteBtn) {
     deleteBtn.addEventListener('click', (e) => {
@@ -374,7 +374,23 @@ export class OrderSystemUI {
         detail: { e, fullName, email }
       })
       document.dispatchEvent(invoiceEvent)
+
+      this.#clearInvoiceForm()
     })
+  }
+
+  /**
+   * Clears the invoice form.
+   */
+  #clearInvoiceForm () {
+    const fullName = document.querySelector('#createInvoiceFullname')
+    const email = document.querySelector('#createInvoiceEmail')
+    if (fullName) {
+      fullName.value = ''
+    }
+    if (email) {
+      email.value = ''
+    }
   }
 
   /**

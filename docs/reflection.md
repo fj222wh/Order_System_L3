@@ -3,7 +3,11 @@
 I have tried to continue to be careful when giving the classes, variables and function names. The names are sometimes a bit longer, but still readable to give extra information to the context to make it more understandable. Names used within this specific field has been used to make it understandable for most people what's going on in the code.
 
 ## Chapter 3 - Functions
+For this project I have tried to write the code with higher abstraction, but honestly I've been struggling to know how to decouple the classes.
 
+In the backend I thought it was easier to keep the models, controllers, and logic layers seperated but in the front end I honestly struggled with keeping the front.
+
+I've tried to make sure the functions 
 
 
 ## Chapter 4 - Comments
@@ -20,7 +24,7 @@ Console.logs has been removed, trying to tidy up the code even tho lots of conso
 ## Chapter 11
 
 ## Summary
-Overall this has been an interesting project, to develop both the module, refactor it and then create the app based on our own module. Personally I felt that it was difficult to implement everything I had wanted during the given time but at least I could manage to provide the basic functionality to simulate how I would want the app to work. 
+Overall this has been an interesting project, to develop both the module, refactor it and then create the app based on our own module. Personally I felt that it was difficult to implement everything I had wanted during the given time but at least I could manage to provide the basic functionality to simulate how I would want the app to work.
 
 Due to lack of time I chose to not implement and deploy the database, that is why some things are hardcoded.
 

@@ -7,6 +7,8 @@
 
 import { allProductsFromCatalog, store } from '../data/storeData.js'
 import { Order } from '../logic/Order.js'
+import { ModelInvoice } from '../logic/ModelInvoice.js'
+import { InvoiceView } from '../logic/InvoiceView.js'
 /**
  *
  */
@@ -151,8 +153,9 @@ export class ApiController {
    */
   createInvoice (req, res) {
     const order = this.#getOrderFromSession(req)
-    const invoiceHTML = order.createInvoice(req.body.fullName, req.body.email, '€')
-
+    const invoiceModel = new ModelInvoice(order, req.body.fullName, req.body.email, '€')
+    const view = new InvoiceView(invoiceModel)
+    const invoiceHTML = view.createInvoice()
     res.json(invoiceHTML)
   }
 }

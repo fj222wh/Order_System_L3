@@ -128,7 +128,7 @@ export class Store {
   }
 
   /**
-   * Sorts and returns only the active orders.
+   * Filter and return only the active orders.
    *
    * @returns {Array} Returns an array with the active orders
    */
