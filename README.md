@@ -1,5 +1,7 @@
 # Order_System_L3
-This project has been created as an assigment for the course 1dv610 at LNU. Keep in mind, since it is made for an assigment the code is not fully realiable or trustworthy. The project is still work in progress but the most basic functionality has been implemented.
+This project has been created as an assigment for the course 1dv610 at LNU. Keep in mind, since it is made for an assigment the code is not fully realiable or trustworthy.
+
+The order system is not fully implemented but the basic functionality works to provide a prototype of how and ordersystem could look like.
 
 
 ## Basic requirements functionality
@@ -38,6 +40,11 @@ Before being able to use the application you need to add data  containing all pr
     description: 'Traditional black tea with creamy milk and tapioca pearls',
     category: 'drinks'
   }
+```
+
+To run the application in development:
+```bash
+npm run dev
 ```
 
 ## License

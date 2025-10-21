@@ -40,9 +40,9 @@ Commit frequently and in small increments to make the workflow easier to follow 
 
 
 ## Testing
-During the work process the testing of the test cases has been made simultaneously. All test cases can be found [here](tests.md)
+During the work process the testing of the test cases has been made simultaneously. All test cases can be found [here](tests.md).
 
-When adding more functionality, implement new test cases as well
+When adding more functionality, implement new test cases.
 
 ### Test status
 Test status can be found [here](test-report.md)
