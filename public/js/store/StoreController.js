@@ -73,7 +73,7 @@ export class StoreController {
     })
 
     document.addEventListener('createInvoice', async (event) => {
-      this.#createInvoice(event)
+      await this.#createInvoice(event)
       this.#resetState()
     })
 
@@ -110,16 +110,16 @@ export class StoreController {
   /**
    * Empties the order.
    */
-  #emptyOrder () {
-    this.#api.emptyCart()
+  async #emptyOrder () {
+    await this.#api.emptyCart()
     this.#updateOrderData()
   }
 
   /**
    * Resets the state of order.
    */
-  #resetState () {
-    this.#api.createNewOrder()
+  async #resetState () {
+    await this.#api.createNewOrder()
     this.#updateOrderData()
   }
 
