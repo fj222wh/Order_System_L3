@@ -27,6 +27,12 @@ JSDoc has been used as the standard for this project together with the linter fr
 
 Console.logs has been removed, trying to tidy up the code even tho lots of console.logs have been used during development.
 
+With using JS Doc, it becomes a bit repetitive, I think by reading the name of the name of the function and the parameter you would already understand what the function does without the JS Doc. However I chose to follow the JS Doc and lint standard because it will be more clear for other developers working with this code when they can have everything documented clearly. The JS Doc also help the UI in VS Code because we get more information when hovering over the functions and objects.
+
+![example of js doc](./images/4.png)
+
+
+
 ## Chapter 5
 ## Chapter 6
 ## Chapter 7
