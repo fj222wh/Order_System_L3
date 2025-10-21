@@ -98,7 +98,8 @@ export class OrderSystemApi {
    */
   async createInvoice (fullName, email) {
     const data = {
-      fullName, email
+      fullName,
+      email
     }
 
     console.log(data)
