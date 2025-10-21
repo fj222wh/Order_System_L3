@@ -33,9 +33,31 @@ With using JS Doc, it becomes a bit repetitive, I think by reading the name of t
 
 
 
-## Chapter 5
+## Chapter 5 - Formatting
+When writing the code I tried to keep the length of the functions horisontally short if possible.
+
+Vertically, the file sometimes became too long. Most of the times the files are not over 200 lines and they have been seperated to each focus on one task, therefore the files were rarely too long.
+
+Only in one class I struggled with the file-length. In the `StoreController` in the front end, the class which acts as an orchestrator between the class that retrieves and sends data and the UI. I thought it was difficult to know how to divide the class into smaller parts to keep it shorter since a lot of the code is used to create HTML-elements and set their attributes. If I would have used web components instead this issue would have been solved and the files would have been more modular, flexible and shorter but due to time I couldn't refactor and redo the UI.
+
 ## Chapter 6
+Classes have been used to
+
+Both in the front end and backend. I've tried to write it as OOP as I could.
+
+Fields and methods that shouldn't be accessiable outside its class has been set to private to avoid missuse and bugs.
+
+The classes encapsulates values
+
+Law of Demeter says that a module shouldn't know about 
+
+Hybrids
+
+
 ## Chapter 7
+Through out the program exceptions are thrown when something goes wrong. This is mostly implemented on the backend. There is validation in the backend which checks the incoming data, and if it's not the data/type we expected an Exception wll be thrown. 
+
+In this appplication I have tried to avoid return codes.
 ## Chapter 8
 ## Chapter 9
 ## Chapter 10
